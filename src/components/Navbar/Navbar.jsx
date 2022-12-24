@@ -14,7 +14,7 @@ export default function Navbar() {
                 <div className="container-fluid">
                 <div className="navbar-brand d-flex" style={{fontWeight: "500", color: 'black'}}>
             <a href="/home" style={iconstyle}>
-              <i className="fab fa-stack-overflow"></i>&nbsp;Doubt<b>Out</b>
+              <i className="fab fa-stack-overflow"></i>&nbsp;<i>Doubt</i><b>Out</b>
             </a>
           </div>
          
@@ -29,7 +29,7 @@ export default function Navbar() {
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{color: 'black'}}>
                                     <li><a className="dropdown-item" href="/">Community Forum</a></li>
-                                    <li><a className="dropdown-item" href="/">Code Editor</a></li>
+                                    <li><a className="dropdown-item" href="/editor">Code Editor</a></li>
                                     <li><hr className="dropdown-divider"/></li>
                                     <li><a className="dropdown-item" href="/">FAQ</a></li>
                                 </ul>
@@ -49,26 +49,13 @@ export default function Navbar() {
            
         </div>
                         <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" Style={{bsSscrollHheight: "100px"}}>
-                            <li className="nav-item" Style={{color: 'black'}}>
-                                <a className="nav-link active" aria-current="page" href="/" Style={{color: 'black'}}>Link</a>
-                            </li>
-                     
-                            <li className="nav-item dropdown" >
-                                <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{color: 'black'}}>
-                                    Link
-                                </a>
-                                <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" Style={{color: 'black'}}>
-                                    <li><a className="dropdown-item" href="/">Action</a></li>
-                                    <li><a className="dropdown-item" href="/">Another action</a></li>
-                                    <li><hr className="dropdown-divider"/></li>
-                                    <li><a className="dropdown-item" href="/">Something else here</a></li>
-                                </ul>
-                            </li>
+                        <li class="nav-item" style={{margin:'15px '}}>
+        <a class="nav-link mr-2" href="/editor" style={{color: 'black'}}><button className='btn btn-outline dark'>Code-Editor</button></a>
+      </li>
                           
                         </ul>
-                        <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
+                        <button className='btn btn-white mr-2' href="/"><i className="fa fa-home"></i></button>
                         <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
-
                         <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
                         
 
