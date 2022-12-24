@@ -9,29 +9,29 @@ var well = {
 export default function Navbar() {
   return (
     <div>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-light" style={well}>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style={well}>
         
                 <div className="container-fluid">
-                <div class="navbar-brand d-flex" style={{fontWeight: "100", color: 'black'}}>
+                <div className="navbar-brand d-flex" style={{fontWeight: "500", color: 'black'}}>
             <a href="/home" style={iconstyle}>
-              <i class="fab fa-stack-overflow"></i>&nbsp;Doubt<b>Out</b>
+              <i className="fab fa-stack-overflow"></i>&nbsp;Doubt<b>Out</b>
             </a>
           </div>
          
-                <a href="#" className="navbar-brand">
+                <a href="/" className="navbar-brand">
                 
               
             </a>
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{bsSscrollHheight: "100px"}}>
             <li className="nav-item dropdown" >
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{color: 'black'}}>
+                                <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{color: 'black'}}>
                                     Products
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{color: 'black'}}>
-                                    <li><a className="dropdown-item" href="#">Community Forum</a></li>
-                                    <li><a className="dropdown-item" href="#">Code Editor</a></li>
+                                    <li><a className="dropdown-item" href="/">Community Forum</a></li>
+                                    <li><a className="dropdown-item" href="/">Code Editor</a></li>
                                     <li><hr className="dropdown-divider"/></li>
-                                    <li><a className="dropdown-item" href="#">FAQ</a></li>
+                                    <li><a className="dropdown-item" href="/">FAQ</a></li>
                                 </ul>
                             </li>
                 </ul>
@@ -45,31 +45,31 @@ export default function Navbar() {
                             <button className="btn btn-outline-success" type="submit">Search</button>
                             
                     </form>
-                        <div class="searchbar">
+                        <div className="searchbar">
            
         </div>
-                        <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{bsSscrollHheight: "100px"}}>
-                            <li className="nav-item" style={{color: 'black'}}>
-                                <a className="nav-link active" aria-current="page" href="#" style={{color: 'black'}}>Link</a>
+                        <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" Style={{bsSscrollHheight: "100px"}}>
+                            <li className="nav-item" Style={{color: 'black'}}>
+                                <a className="nav-link active" aria-current="page" href="/" Style={{color: 'black'}}>Link</a>
                             </li>
                      
                             <li className="nav-item dropdown" >
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{color: 'black'}}>
+                                <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{color: 'black'}}>
                                     Link
                                 </a>
-                                <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{color: 'black'}}>
-                                    <li><a className="dropdown-item" href="#">Action</a></li>
-                                    <li><a className="dropdown-item" href="#">Another action</a></li>
+                                <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" Style={{color: 'black'}}>
+                                    <li><a className="dropdown-item" href="/">Action</a></li>
+                                    <li><a className="dropdown-item" href="/">Another action</a></li>
                                     <li><hr className="dropdown-divider"/></li>
-                                    <li><a className="dropdown-item" href="#">Something else here</a></li>
+                                    <li><a className="dropdown-item" href="/">Something else here</a></li>
                                 </ul>
                             </li>
                           
                         </ul>
-                        <button className='btn btn-white mr-2'><i class="fa fa-home"></i></button>
-                        <button className='btn btn-white  mr-2'><i class="fa fa-question" aria-hidden="true"></i></button>
+                        <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
+                        <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
 
-                        <button className='btn btn-white mr-2'><i class="fa fa-trophy"></i></button>
+                        <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
                         
 
                         <img src={require('./doubt.jpg')}   height="60" width="130" alt="CoolBrand"/>
