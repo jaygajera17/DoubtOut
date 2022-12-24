@@ -12,7 +12,7 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-light" style={well}>
         
                 <div className="container-fluid">
-                <div class="navbar-brand d-flex" style={{fontWeight: "500", color: 'black'}}>
+                <div class="navbar-brand d-flex" style={{fontWeight: "100", color: 'black'}}>
             <a href="/home" style={iconstyle}>
               <i class="fab fa-stack-overflow"></i>&nbsp;Doubt<b>Out</b>
             </a>
@@ -40,7 +40,7 @@ export default function Navbar() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarScroll" >
-                    <form className="d-flex" style={{width:700}}>
+                    <form className="d-flex" style={{width:500}}>
                             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                             <button className="btn btn-outline-success" type="submit">Search</button>
                             
