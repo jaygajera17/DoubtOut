@@ -6,22 +6,22 @@ var well = {
     marginleft: "10px",
     textDecoration: "none"
   } 
+  var title={
+    color: "Green",
+  }
 export default function Navbar() {
   return (
     <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style={well}>
-        
+    <img src={require('./Doubt2.jpg')}   height="30" width="30" alt="image" />
                 <div className="container-fluid">
                 <div className="navbar-brand d-flex" style={{fontWeight: "500", color: 'black'}}>
             <a href="/home" style={iconstyle}>
-              <i className="fab fa-stack-overflow"></i>&nbsp;<i>Doubt</i><b>Out</b>
+             &nbsp;<i style={title}>Doubt</i><b>Out</b>
             </a>
-          </div>
+    </div>
          
-                <a href="/" className="navbar-brand">
                 
-              
-            </a>
             <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{bsSscrollHheight: "100px"}}>
             <li className="nav-item dropdown" >
                                 <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{color: 'black'}}>
@@ -49,7 +49,7 @@ export default function Navbar() {
            
         </div>
                         <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" Style={{bsSscrollHheight: "100px"}}>
-                        <li class="nav-item" style={{margin:'15px '}}>
+                        <li class="nav-item" style={{margin:'15px'}}>
         <a class="nav-link mr-2" href="/editor" style={{color: 'black'}}><button className='btn btn-outline dark'>Code-Editor</button></a>
       </li>
                           
