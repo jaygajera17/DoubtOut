@@ -1,4 +1,4 @@
-import Navbar from "../Navbar/Navbar";
+// import Navbar from "../Navbar/Navbar";
 // import Editor from "../Editor/Editor";
 import React from 'react'
 
@@ -6,8 +6,8 @@ function Homepage()
 {
     return (
         <div>
-            <Navbar/>
-            
+            {/* <Navbar/> */}
+            <p>Hello</p>
         </div>
     )
 }
