@@ -12,6 +12,7 @@ function App() {
 
         <Route path = "/" element = {<Homepage/>}/>
         <Route path = "/editor" element = {<Editor/>}/>
+        <Route path = "/login" element = {<Editor/>}/>
       </Routes>
      </BrowserRouter>
     </div>

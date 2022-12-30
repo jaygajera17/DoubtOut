@@ -1,19 +1,20 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 var well = {
-    boxShadow: "0px 4px 0px 0px #f0f0f0"
+    boxShadow: "0px 0px 0px 0px #f0f0f0"
   }
   var iconstyle={
     marginleft: "10px",
     textDecoration: "none"
   } 
   var title={
-    color: "Green",
+    color: "lightgreen",
   }
 export default function Navbar() {
   return (
     <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style={well}>
-    <img src={require('./Doubt2.jpg')}   height="30" width="30" alt="image" />
+    {/* <img src={require('./Doubt2.jpg')}   height="30" width="30" alt="image" /> */}
                 <div className="container-fluid">
                 <div className="navbar-brand d-flex" style={{fontWeight: "500", color: 'black'}}>
             <a href="/home" style={iconstyle}>
@@ -49,9 +50,16 @@ export default function Navbar() {
            
         </div>
                         <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" Style={{bsSscrollHheight: "100px"}}>
-                        <li class="nav-item" style={{margin:'15px'}}>
-        <a class="nav-link mr-2" href="/editor" style={{color: 'black'}}><button className='btn btn-outline dark'>Code-Editor</button></a>
+                        <li class="nav-item">
+        <a class="nav-link mr" href="/editor" style={{color: 'black'}}><button className='btn btn-outline dark'>Code-Editor</button></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link"><NavLink  to="/login" style={{color: 'black'}}><button className='btn btn-outline-primary'>Login</button></NavLink></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link "><NavLink  to="/register" style={{color: 'black'}}><button className='btn btn-primary'>Register</button></NavLink></a>
+      </li>
+      
                           
                         </ul>
                         <button className='btn btn-white mr-2' href="/"><i className="fa fa-home"></i></button>
@@ -59,7 +67,7 @@ export default function Navbar() {
                         <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
                         
 
-                        <img src={require('./doubt.jpg')}   height="60" width="130" alt="CoolBrand"/>
+                        {/* <img src={require('./doubt.jpg')}   height="60" width="130" alt="CoolBrand"/> */}
                     </div>
                 </div>
             </nav>
