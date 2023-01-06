@@ -36,7 +36,25 @@ export default function Editor(props) {
 
         <div Style="background-color:#f8f9f9; height:100%; margin-top:10vh; z-index:1;">
 
-            <div className="container" Style="width:70%; display:block; margin:auto;">
+
+            <div className="container mb-5" Style="width:70%; display:block; margin:auto;">
+                <div class="card mt-5" Style="background-color:hsl(206,100%,97%);">
+                    <div class="card-header">
+                        <h3><b>Ask a Public Question</b></h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Writing a Good Question</h5>
+                        <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p>
+                        <h5>Steps</h5>
+                        <ul>
+                            <li>Summarize your problem in a one-line title.</li>
+                            <li>Describe your problem in more detail.</li>
+                            <li>Describe what you tried and what you expected to happen.</li>
+                            <li>Add “tags” which help surface your question to members of the community.</li>
+                        </ul>
+                    </div>
+                </div>
+
                 <form onSubmit={handleSubmit} method='post'>
 
                     <div class="card mb-3 mt-5">
@@ -74,7 +92,7 @@ export default function Editor(props) {
                 </form>
             </div>
 
-            {/* <div>{html}</div> */}
+            <div>{html}</div>
         </div>
     )
 }
