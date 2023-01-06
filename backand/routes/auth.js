@@ -2,6 +2,7 @@ const express = require('express');
 const LocalStorage = require('node-localStorage').LocalStorage;
 var localStorage = new LocalStorage('./scratch');
 const User = require("../models/User");
+const Question = require("../models/Question");
 
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
