@@ -8,7 +8,8 @@ var iconstyle = {
   textDecoration: "none"
 }
 var title = {
-  color: "lightgreen",
+  // color: "lightgreen",
+  color: "#0D6EFD",
 }
 export default function Navbar() {
   return (
@@ -29,7 +30,7 @@ export default function Navbar() {
                 Products
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{ color: 'black' }}>
-                <li><a className="dropdown-item" href="/">Community Forum</a></li>
+                <li><NavLink className="dropdown-item" to="/questions">Questions</NavLink></li>
                 <li><a className="dropdown-item" href="/editor">Code Editor</a></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><a className="dropdown-item" href="/">FAQ</a></li>

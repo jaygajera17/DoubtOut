@@ -19,6 +19,10 @@ const QuestionSchema = new Schema({
     tags:{
         type:String,
         required:true,
+    },
+    postedBy:{
+        type:String,
+        required:true
     }
 })
 

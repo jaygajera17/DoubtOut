@@ -20,6 +20,7 @@ router.post('/addquestion', async(req, res)=>{
             title: req.body.title,
             question: req.body.question,
             tags : req.body.tags,
+            postedBy: 'darshit',
         })
 
         res.json({"Success" : "Added Query Successfully", "status":true})
@@ -27,6 +28,35 @@ router.post('/addquestion', async(req, res)=>{
     catch(error){
         console.log(error.message);
         res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post('/fetchquestions', async(req, res)=>{
+    try{
+        const questions = await Question.find({user : "63ae7ece9d17649ec3278fb8"});
+        res.json(questions);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal server error");
+    }
+})
+router.post('/fetchQueById/:id', async(req, res)=>{
+
+    try{
+        const question = await Question.findById(req.params.id);
+
+        if(!question)
+        {
+            return res.status(404).send("Question not Found");
+
+        }
+
+        res.json(question);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
     }
 })
 module.exports = router

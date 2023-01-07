@@ -2,13 +2,11 @@
 // import Editor from "../Editor/Editor";
 import React from 'react'
 
-function Homepage()
-{
+function Homepage() {
     return (
-        <div>
-            {/* <Navbar/> */}
-            <p>Hello</p>
-        </div>
+       <></>
+
+
     )
 }
 
