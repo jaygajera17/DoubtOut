@@ -47,8 +47,8 @@ export default function Content(props) {
     }, [])
 
     return (
-        <div Style="height:100%; margin-top:13vh; z-index:1; background-color:white">
-            <div className="container" Style="width:70%;display:block; margin:auto;">
+        <div Style="height:100vh; margin-top:13vh; z-index:1; background-color:white">
+            <div className="container" Style="height:100vh;width:70%;display:block; margin:auto;">
                 <h1>{question.title}</h1>
                 <div className='mt-5'>{html}</div>
                 <hr style={{

@@ -77,7 +77,12 @@ export default function Questions() {
                 </div>
 
                 <div class="d-flex flex-column flex-shrink-0 p-3 col-md-7" Style="background-color:white;">
-                    <h1 className='p-4'>All Questions</h1>
+                    <div className="d-flex d-flex-row align-items-center">
+                        <h1 className='mx-4'>All Questions</h1>
+                        
+                        <NavLink to="/editor" className="btn btn-primary mx-4" Style="position:absolute; right:0px;">Ask Question</NavLink>
+                    </div>
+
 
                     {questions.length > 0 && (
                         <ul>

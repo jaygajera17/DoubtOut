@@ -54,18 +54,20 @@ export default function Navbar() {
               <li class="nav-item">
                 <a className="nav-link mr" href="/editor" style={{ color: 'black' }}><button className='btn btn-outline dark'>&lt;/&gt;</button></a>
               </li>
+
+            </ul>
+            <button className='btn btn-white mr-2' href="/"><i className="fa fa-home"></i></button>
+            <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
+            <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
+
+            <ul className="navbar-nav " Style={{ bsSscrollHheight: "100px" }}>
               <li class="nav-item">
                 <NavLink className="nav-link" to="/login" style={{ color: 'black' }}><button className='btn btn-outline-primary'>Login</button></NavLink>
               </li>
               <li class="nav-item">
                 <NavLink className="nav-link" to="/register" style={{ color: 'black' }}><button className='btn btn-primary'>Register</button></NavLink>
               </li>
-
-
             </ul>
-            <button className='btn btn-white mr-2' href="/"><i className="fa fa-home"></i></button>
-            <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
-            <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
 
 
             {/* <img src={require('./doubt.jpg')}   height="60" width="130" alt="CoolBrand"/> */}

@@ -114,7 +114,7 @@ export default function Editor(props) {
                         </div>
                     </div>
 
-                    <button type='submit' className="btn btn-primary mt-5">Ask Question</button>
+                    <button type='submit' className="btn btn-primary mt-5 mb-5">Ask Question</button>
                 </form>
             </div>
 
