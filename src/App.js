@@ -5,6 +5,7 @@ import Editor from './components/Editor/Editor';
 import Homepage from './components/Homepage/Homepage';
 import Navbar from './components/Navbar/Navbar';
 import Questions from './components/Questions/Questions';
+import Content from './components/Questions/Content';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path = "/editor" element = {<Editor/>}/>
         <Route path = "/login" element = {<Editor/>}/>
         <Route path="/questions" element = {<Questions />}></Route>
+        <Route path="/question/:type" element = {<Content />}></Route>
       </Routes>
      </BrowserRouter>
     </div>

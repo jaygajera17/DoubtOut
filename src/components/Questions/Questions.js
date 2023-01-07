@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
+import { NavLink } from 'react-router-dom';
+import parse from 'html-react-parser';
 export default function Questions() {
 
     const [questions, setQuestions] = useState([])
@@ -80,23 +81,29 @@ export default function Questions() {
 
                     {questions.length > 0 && (
                         <ul>
-                        {questions.map(question => (
-                                
-                                    <div class="card mt-1">
+                            {questions.map(question => (
 
-                                        <div class="card-body">
-                                            <h5 class="card-title" Style="color:#0074CC">{question.title}</h5>
-                                            <p>{question.tags}</p>
-                                            <small className='d-flex flex-row-reverse'>Posted By : {question.postedBy}</small>
-                                            {/* <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
+                                <div class="card mt-1">
 
-                                        </div>
+                                    <div class="card-body">
+                                        <NavLink to={{ pathname: `/question/${question._id}` }} className="card-title" Style="text-decoration:none;color:#0074CC"><h4>{question.title}</h4></NavLink>
+                                        <small Style="font-size:1px;">{parse(question.question)[0]}</small>
+                                        {/* {(() => {
+                                            var msg = parse(question.question);
+
+                                            return (<><small className='fs-8'>{msg[0]}</small></>);
+                                        })()} */}
+                                        <div className='mt-3'>{question.tags.split(" ").map(tag => <small className='mx-2 px-2 py-1' Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;">{tag}</small>)}</div>
+                                        <small className='d-flex flex-row-reverse'>Posted By : {question.postedBy}</small>
+                                        {/* <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
+
                                     </div>
-                                
+                                </div>
+
                             ))}
-                        </ul>    
+                        </ul>
                     )}
-                  
+
 
 
                 </div>
