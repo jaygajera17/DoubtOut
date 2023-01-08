@@ -33,7 +33,7 @@ router.post('/addquestion', async(req, res)=>{
 
 router.post('/fetchquestions', async(req, res)=>{
     try{
-        const questions = await Question.find({user : "63ae7ece9d17649ec3278fb8"});
+        const questions = await Question.find();
         res.json(questions);
     }
     catch(e){
