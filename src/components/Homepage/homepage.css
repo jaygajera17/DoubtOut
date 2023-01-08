@@ -1,0 +1,27 @@
+.verdicts {
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+    height: 30%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    margin-right: auto;
+}
+.verdicts p {
+    width: 200px;
+    text-align: center;
+    color: rgb(38, 79, 191);
+    font-weight: 400;
+}
+.verdicts p strong {
+    color: #ca5c34;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.verdicts a {
+    align-self: flex-end;
+}
+.verdicts .button {
+    margin-top: 50px;
+}
