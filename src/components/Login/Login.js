@@ -11,7 +11,7 @@ import Heading from '../heading/heading'
 // 		// console.log(req.body);
 // 		event.preventDefault()
 
-// 		const response = await fetch('http://localhost:9002/resourceShare/user/login', {
+// 		const response = await fetch('http://localhost:9002/user/login', {
 // 			method: 'POST',
 // 			headers: {
 // 				'Content-Type': 'application/json',
