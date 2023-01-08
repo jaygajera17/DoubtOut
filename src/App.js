@@ -22,7 +22,7 @@ function App() {
         <Route path="/questions" element = {<Questions />}></Route>
         <Route path="/question/:type" element = {<Content />}></Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
      </BrowserRouter>
     </div>
   );

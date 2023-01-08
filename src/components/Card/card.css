@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
 
 body {
-  background-color:#EFEBE9;
+  /* background-color:#EFEBE9; */
   box-sizing: border-box;
 }
 h1, h2 {
@@ -14,7 +14,7 @@ h2 {
   font-style: italic;
   font-size: 15px;
 }
-.card {
+.card1 {
   background: linear-gradient(-80deg, #2eeed7 30%, rgba(0, 0, 0, 0) 30%)
     no-repeat,
     linear-gradient(75deg, #96cdee 45%, rgba(70, 34, 188, 0) 30%) no-repeat,

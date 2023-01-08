@@ -1,10 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-var iconstyle = {
-    marginleft: "10px",
-    textDecoration: "none",
-}
+// var iconstyle = {
+//     marginleft: "10px",
+//     textDecoration: "none",
+// }
 var title = {
     // color: "lightgreen",
     // color: "#0D6EFD",
