@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Questions from './components/Questions/Questions';
 import Content from './components/Questions/Content';
+import Login from './components/Login/Login';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path = "/" element = {<Homepage/>}/>
      
         <Route path = "/editor" element = {<Editor/>}/>
-        <Route path = "/login" element = {<Editor/>}/>
+        <Route path = "/login" element = {<Login/>}/>
         <Route path="/questions" element = {<Questions />}></Route>
         <Route path="/question/:type" element = {<Content />}></Route>
       </Routes>

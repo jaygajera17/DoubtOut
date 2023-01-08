@@ -25,3 +25,9 @@
 .verdicts .button {
     margin-top: 50px;
 }
+@media screen and (max-width: 400px) {
+    .col-25, .col-75, .verdicts p ,.verdicts p strong {
+      width: 100%;
+      margin-top: 0;
+    }
+  }

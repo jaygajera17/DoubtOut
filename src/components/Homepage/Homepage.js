@@ -13,13 +13,16 @@ var color1={
     
 }
 
+
 function Homepage() {
     return (
         <>
+         
     <div style={color1}>
         <div style={margin}>
        <Heading />
        </div>
+       
        <div className='row'>
        <Card 
         description=" A public platform building the definitive collection of coding questions & answers" 
@@ -31,6 +34,7 @@ function Homepage() {
         src="https://cdn.sstatic.net/Img/home/illo-teams.svg?v=7e543f14fcc0"
         title="For Experts"
         />
+    
        </div>
        
        <div class="verdicts">

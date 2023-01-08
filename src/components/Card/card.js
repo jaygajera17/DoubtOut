@@ -4,7 +4,7 @@ import './card.css';
 export default function Card(props) {
   return (
     <>
-     <div className="card">
+     <div className="card1">
           <div className="card__image">
             <img src={props.src} style={{height:"300px",backgroundColor:""}} />
           </div>

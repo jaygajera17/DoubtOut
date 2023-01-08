@@ -14,7 +14,7 @@ var title = {
 export default function Navbar() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; position:fixed;top:0; z-index:5; width:100%;">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; position:fixed;top:0; z-index:9999; width:100%;">
         {/* <img src={require('./Doubt2.jpg')}   height="30" width="30" alt="image" /> */}
         <div className="container-fluid">
           <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black' }}>
