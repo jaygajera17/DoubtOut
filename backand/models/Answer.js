@@ -26,15 +26,10 @@ const AnswerSchema = new Schema({
         required: true
     },
 
-    upvotes:{
+    votes:{
         type:Number,
         required:true
     },
-
-    downvotes:{
-        type:Number,
-        required:true
-    }
 })
 
 const answer = mongoose.model('answer', AnswerSchema);

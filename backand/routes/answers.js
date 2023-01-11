@@ -1,6 +1,8 @@
 const express = require('express');
+const answer = require('../models/Answer');
 
 const Answer = require("../models/Answer");
+const { route } = require('./questions');
 
 const router = express.Router();
 
@@ -37,4 +39,61 @@ router.post("/fetchanswer/:id", async(req, res)=>{
     }
 })
 
+router.post("/findNumberOfAns", async(req, res)=>{
+    try{
+        const answers = await Answer.find();
+
+        let obj = {};
+
+        answers.map(answer => {
+
+            if(obj[answer.questionid] == null)
+            {
+                obj[answer.questionid] = 1;
+            }
+            else{
+                obj[answer.questionid] += 1;
+            }
+            
+        })
+
+        res.json(obj);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/upvote/:id", async(req, res)=>{
+    try{
+        const answer = await Answer.findById(req.params.id);
+
+        const vote = answer["votes"] + 1;     
+        
+        const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, {$set: {"votes": 1}});
+        res.json(vote);
+    }
+
+    catch(e)
+    {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/downvote/:id", async(req, res)=>{
+    try{
+        const answer = await Answer.findById(req.params.id);
+
+        const vote = answer["votes"] - 1;        
+        res.json(vote);
+    }
+
+    catch(e)
+    {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
 module.exports = router

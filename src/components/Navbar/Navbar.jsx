@@ -56,7 +56,7 @@ export default function Navbar() {
               </li>
 
             </ul>
-            <button className='btn btn-white mr-2' href="/"><i className="fa fa-home"></i></button>
+            <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
             <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
             <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
 

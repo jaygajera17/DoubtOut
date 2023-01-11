@@ -11,6 +11,7 @@ export default function Content(props) {
     const [html, setHtml] = useState("");
     const [state, setState] = useState(false);
     const [answers, setAnswer] = useState([]);
+    const [vote, setVotes] = useState(0);
 
     const config = {
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
@@ -73,14 +74,31 @@ export default function Content(props) {
             window.scrollTo(0, 0)
         }
 
+
+    }
+
+    const upvote = async (e, id)=>{
+
+        e.preventDefault();
+        const response = await fetch(`http://localhost:5000/api/answer/upvote/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        let json = await response.json();
+        console.log(json);
+        setVotes(json);
         
+
     }
 
     useEffect(() => {
         fetchQuestion(params.type);
         fetchAnswers(params.type);
         // convertToHTML();
-    }, [state])
+    }, [state, vote])
 
     return (
         <div Style="height:100vh; margin-top:13vh; z-index:1; background-color:white">
@@ -99,6 +117,7 @@ export default function Content(props) {
                 }
             )()}
             <div className="container" Style="height:100vh;width:70%;display:block; margin:auto;">
+
                 <h1>{question.title}</h1>
                 <div className='mt-5'>{html}</div>
                 <hr style={{
@@ -114,12 +133,21 @@ export default function Content(props) {
                         {answers.map(ans => (
                             <div className="mt-1">
 
+                                <div className="d-flex flex-row">
+                                    <div class="d-flex flex-column col-md-2 mt-0 mx-0">
+                                        <button className='btn btn-white' onClick={(e)=> upvote(e, ans._id)}><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
+                                        <div className='mx-5'>{vote}</div>
+                                        <button className='btn btn-white'><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
+                                        
+                                    </div>
+                                    <div class="d-flex flex-column flex-shrink-0 col-md-9 mt-4 mx-0">
+                                        <p>{parse(ans.answer)}</p>
 
 
-                                <p>{parse(ans.answer)}</p>
+                                        <small className='d-flex flex-row-reverse'>Posted By : {ans.postedBy}</small>
+                                    </div>
+                                </div>
 
-
-                                <small className='d-flex flex-row-reverse'>Posted By : {ans.postedBy}</small>
                                 {/* <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
 
                                 <hr style={{
