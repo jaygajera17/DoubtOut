@@ -20,6 +20,7 @@ function App() {
      
         <Route path = "/editor" element = {<Editor/>}/>
         <Route path = "/login" element = {<Login/>}/>
+        <Route path = "/register" element = {<register/>}/>
         <Route path="/questions" element = {<Questions />}></Route>
         <Route path="/question/:type" element = {<Content />}></Route>
       </Routes>

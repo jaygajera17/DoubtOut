@@ -70,8 +70,8 @@
     height: 400px;
     border-radius: 10px;
     transform: translate(-50%,-50%);
-    background: rgba(255,255,255,0.04);
-    box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+    background: rgba(76, 70, 246, 0.04);
+    box-shadow: -1px 4px 28px 0px rgba(171, 178, 240, 0.75);
   }
   .content header{
     color: white;
@@ -93,6 +93,16 @@
     line-height: 45px;
   }
   .field input{
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    font-family: 'Poppins',sans-serif;
+  }
+  .field button{
     height: 100%;
     width: 100%;
     background: transparent;

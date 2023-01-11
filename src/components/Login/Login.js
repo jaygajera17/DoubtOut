@@ -1,67 +1,84 @@
 import { useState } from 'react'
 // import { countDocuments } from '../../../Backend/models/userModel'
 import  './Login.css'
-import Heading from '../heading/heading'
+
+import { useEffect } from 'react'
  function Login() {
-// 	const [email, setEmail] = useState('')
-// 	const [password, setPassword] = useState('')
-
-// 	async function loginUser(event) {
-
-// 		// console.log(req.body);
-// 		event.preventDefault()
-
-// 		const response = await fetch('http://localhost:9002/user/login', {
-// 			method: 'POST',
-// 			headers: {
-// 				'Content-Type': 'application/json',
-				
-// 			},
-// 			body: JSON.stringify({
-// 				email,
-// 				password,
-// 			}),
-// 		})
-
-// 		const data = await response.json()
-
-// 		if (data.status==="success") {
-// 			localStorage.setItem('token', data.token)
-// 			alert('Login successful')
-// 			window.location.href = '/dashboard'
-// 		} else {
-// 			alert('Please check your username and password')
-// 		}
-// 	}
+  const [credentials, setCredentials] = useState({ email: "", password: "" })
+  
+  const isLoggedin=()=>{
+    if(localStorage.getItem('user')){
+      return true
+    }
+    else{
+      return false
+    }
+  }
 	
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: credentials.email, password: credentials.password }),
+      });
+      const json = await response.json()
+    
+      console.log(json);
+      console.log(json.success);
+      if (json.success) {
+        localStorage.setItem('token', json.token);
+        localStorage.setItem('user', json.user);
+        localStorage.setItem('email', json.email);
+        alert('Login successful');
+      }
+      else{
+        alert('Invalid Credentials');
+      }
+  }
+  const onChange = (e) => {
+
+    setCredentials({ ...credentials, [e.target.name]: e.target.value })
+    console.log(credentials.email);
+    console.log(credentials.password);
+}
+
+  useEffect(() => {
+    isLoggedin();
+  }, [])
 
 	return (
 		<div>
         <div style={{marginTop:'80px'}}>
     {/* <Heading/> */}
+
   </div>	
+  
   <body>
-    <div class="bg-img">
-      <div class="content">
+    <div className="bg-img">
+      <div className="content">
         <header style={{color:'black'}}>Login Form</header>
-        <form>
-          <div class="field">
-            <span class="fa fa-user"></span>
-            <input type="text"  required placeholder="Email or Phone"/>
+        <form onSubmit={handleSubmit} method='post'>
+          <div className="field">
+            <span className="fa fa-user"></span>
+            <input type="email" onChange={onChange} name='email' required placeholder="Email or username"/>
           </div>
-          <div class="field space">
-            <span class="fa fa-lock"></span>
-            <input type="password"  class="pass-key" required placeholder="Password"/>
+          <div className="field space">
+            <span className="fa fa-lock"></span>
+            <input type="password" onChange={onChange} name='password' className="pass-key" required placeholder="Password"/>
           </div>
-          <div class="pass">
-            <a href="#">Forgot Password?</a>
+          <div className="pass">
+            <p>Forgot Password?</p>
           </div>
-          <div class="field">
-            <input  type="submit"
-                    value="Login" />
+          <div className="field">
+            <button type="submit"
+                    value="Login"  >Login </button>
           </div>
         </form>
-        <div class="signup">Don't have account?
+        <div className="signup">Don't have account?
           <a href="/">Signup Now</a>
         </div>
       </div>

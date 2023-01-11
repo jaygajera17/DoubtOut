@@ -71,4 +71,54 @@ router.post('/createuser', [
 
 })
 
+router.post('/login', [
+    body('email', 'Enter a valid email').isEmail(),
+    body('password', 'Enter a password it can not be blank').exists(),
+], async (req, res) => {
+
+    const error = validationResult(req);
+
+    if (!error.isEmpty()) {
+        return res.status(400).json({ error: error.array() });
+    }
+
+    // Using Destructuring method of javascript
+    const { email, password } = req.body;
+
+    try {
+        let user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({ error: "Please Enter Correct login Credentials" });
+        }
+
+        const passwordCompare = await bcrypt.compare(password, user.password);
+        // console.log(password);
+        // console.log(user.password);
+        // console.log(passwordCompare);
+        if (!passwordCompare) {
+            return res.status(400).json({ error: "enter Correct login Credentials" });
+        }
+
+        const data = {
+            user: {
+                id: user.id
+            }
+        }
+
+        const authToken = jwt.sign(data, JWT_SECRET);
+        //res.json({authToken});
+        localStorage.setItem('token', authToken);
+        localStorage.setItem('userType', user.type);
+        req.body.authtoken = authToken;
+        req.body.userType = user.type;
+
+        return res.status(200).json({ 'success': req.body.authtoken, 'userType': user.type, 'email': user.email });
+    }
+    catch (error) {
+        console.error(error.message);
+        res.status(400).json({ error: "Internal server error" });
+    }
+})
+
 module.exports = router
