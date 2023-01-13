@@ -7,7 +7,7 @@ import { useEffect } from 'react'
   const [credentials, setCredentials] = useState({ email: "", password: "" })
   
   const isLoggedin=()=>{
-    if(localStorage.getItem('user')){
+    if(localStorage.getItem('username')){
       return true
     }
     else{
@@ -27,12 +27,7 @@ import { useEffect } from 'react'
       });
       const json = await response.json()
     
-      console.log(json);
-      console.log(json.success);
-      if (json.success) {
-        localStorage.setItem('token', json.token);
-        localStorage.setItem('user', json.user);
-        localStorage.setItem('email', json.email);
+      if (json.success != null) {
         alert('Login successful');
       }
       else{

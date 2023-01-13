@@ -93,9 +93,7 @@ router.post('/login', [
         }
 
         const passwordCompare = await bcrypt.compare(password, user.password);
-        // console.log(password);
-        // console.log(user.password);
-        // console.log(passwordCompare);
+      
         if (!passwordCompare) {
             return res.status(400).json({ error: "enter Correct login Credentials" });
         }
@@ -109,11 +107,12 @@ router.post('/login', [
         const authToken = jwt.sign(data, JWT_SECRET);
         //res.json({authToken});
         localStorage.setItem('token', authToken);
-        localStorage.setItem('userType', user.type);
+        localStorage.setItem('username', user.username);
+      
         req.body.authtoken = authToken;
-        req.body.userType = user.type;
+        // req.body.userType = user.type;
 
-        return res.status(200).json({ 'success': req.body.authtoken, 'userType': user.type, 'email': user.email });
+        return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username });
     }
     catch (error) {
         console.error(error.message);
