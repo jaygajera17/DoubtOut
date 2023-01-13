@@ -6,92 +6,101 @@ const { route } = require('./questions');
 
 const router = express.Router();
 
-router.post('/addanswer/:id', async(req, res)=>{
-    try{
+router.post('/addanswer/:id', async (req, res) => {
+    try {
 
         let answer = await Answer.create({
-            questionid : req.params.id,
+            questionid: req.params.id,
             answer: req.body.answer,
             postedId: req.body.postedId,
-            postedBy : req.body.postedBy,
-            upvotes: req.body.upvotes,
-            downvotes: req.body.downvotes
+            postedBy: req.body.postedBy,
+            votes: req.body.votes
         })
 
-        res.json({"Success" : "Added Answer Successfully", "status":true})
+        res.json({ "Success": "Added Answer Successfully", "status": true })
     }
-    catch(error){
+    catch (error) {
         console.log(error.message);
         res.status(400).send("Internal Server Error");
     }
 })
 
-router.post("/fetchanswer/:id", async(req, res)=>{
-    try{
-        const answers = await Answer.find({questionid : req.params.id});
+router.post("/fetchanswer/:id", async (req, res) => {
+    try {
+        const answers = await Answer.find({ questionid: req.params.id });
         res.json(answers);
     }
 
-    catch(e)
-    {
+    catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
     }
 })
 
-router.post("/findNumberOfAns", async(req, res)=>{
-    try{
+router.post("/findNumberOfAns", async (req, res) => {
+    try {
         const answers = await Answer.find();
 
         let obj = {};
 
         answers.map(answer => {
 
-            if(obj[answer.questionid] == null)
-            {
+            if (obj[answer.questionid] == null) {
                 obj[answer.questionid] = 1;
             }
-            else{
+            else {
                 obj[answer.questionid] += 1;
             }
-            
+
         })
 
         res.json(obj);
     }
-    catch(e){
+    catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
     }
 })
 
-router.post("/upvote/:id", async(req, res)=>{
-    try{
+router.post("/upvote/:id", async (req, res) => {
+    try {
         const answer = await Answer.findById(req.params.id);
 
-        const vote = answer["votes"] + 1;     
-        
-        const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, {$set: {"votes": 1}});
-        res.json(vote);
+        const vote = answer["votes"] + 1;
+
+        const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, { $set: { "votes": vote } });
+
+        res.json({"status": "upvoted"});
     }
 
-    catch(e)
-    {
+    catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
     }
 })
 
-router.post("/downvote/:id", async(req, res)=>{
-    try{
+router.post("/fetchVotes", async (req, res) => {
+    const allAnswers = await Answer.find();
+    const obj = {};
+
+    allAnswers.map(ans => {
+        obj[ans._id] = ans.votes;
+    })
+    res.json(obj);
+})
+
+router.post("/downvote/:id", async (req, res) => {
+    try {
         const answer = await Answer.findById(req.params.id);
 
-        const vote = answer["votes"] - 1;        
-        res.json(vote);
+        const vote = answer["votes"] - 1;
+
+        const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, { $set: { "votes": vote } });
+
+        res.json({"status": "downvoted"});
     }
 
-    catch(e)
-    {
+    catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
     }
