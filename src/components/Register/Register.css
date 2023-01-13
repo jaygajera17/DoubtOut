@@ -57,23 +57,23 @@
     width: 100%;
     background: rgba(246, 245, 245, 0.7);
   }
-  .content{
+  .contentR{
     position: absolute;
     z-index: -1;
-    margin-top: 80px;
+    margin-top: 60px;
     top: 50%;
     left: 50%;
     z-index: 999;
     text-align: center;
     padding: 60px 32px;
     width: 400px;
-    height: 430px;
+    height: 520px;
     border-radius: 10px;
     transform: translate(-50%,-50%);
     background: rgba(76, 70, 246, 0.04);
     box-shadow: -1px 4px 28px 0px rgba(171, 178, 240, 0.75);
   }
-  .content header{
+  .contentR header{
     color: white;
     font-size: 33px;
     font-weight: 600;
