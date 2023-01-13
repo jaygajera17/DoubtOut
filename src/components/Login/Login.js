@@ -60,7 +60,7 @@ import { useEffect } from 'react'
   <body>
     <div className="bg-img">
       <div className="content">
-        <header style={{color:'black'}}>Login Form</header>
+        <header style={{color:'black'}}>Login</header>
         <form onSubmit={handleSubmit} method='post'>
           <div className="field">
             <span className="fa fa-user"></span>

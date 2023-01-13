@@ -8,7 +8,7 @@ import Footer from './components/Footer/Footer';
 import Questions from './components/Questions/Questions';
 import Content from './components/Questions/Content';
 import Login from './components/Login/Login';
-
+import Register from './components/Register/Register';
 function App() {
   return (
     <div>
@@ -20,7 +20,7 @@ function App() {
      
         <Route path = "/editor" element = {<Editor/>}/>
         <Route path = "/login" element = {<Login/>}/>
-        <Route path = "/register" element = {<register/>}/>
+        <Route path = "/register" element = {<Register/>}/>
         <Route path="/questions" element = {<Questions />}></Route>
         <Route path="/question/:type" element = {<Content />}></Route>
       </Routes>

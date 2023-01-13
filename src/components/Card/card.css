@@ -15,13 +15,7 @@ h2 {
   font-size: 15px;
 }
 .card1 {
-  background: linear-gradient(-80deg, #2eeed7 30%, rgba(0, 0, 0, 0) 30%)
-    no-repeat,
-    linear-gradient(75deg, #96cdee 45%, rgba(70, 34, 188, 0) 30%) no-repeat,
-    linear-gradient(10deg, rgba(0, 0, 0, 0) 70%, #2eeed7  70%)
-    no-repeat,
-    linear-gradient(60deg, rgba(0, 0, 0, 0) 40%, #5ee9d9 70%) no-repeat,
-    linear-gradient(0deg, #2eeed7, #2eeed7);
+  background-color: aliceblue;
   margin: 50px auto;
   max-width: 500px;
   text-align: center;
