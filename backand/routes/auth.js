@@ -100,7 +100,8 @@ router.post('/login', [
 
         const data = {
             user: {
-                id: user.id
+                id: user.id,
+                username:user.username
             }
         }
 

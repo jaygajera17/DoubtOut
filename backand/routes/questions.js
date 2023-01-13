@@ -5,22 +5,23 @@ const Question = require("../models/Question");
 
 // const { body, validationResult } = require('express-validator');
 // const bcrypt = require('bcryptjs');
-// // const fetchuser = require('../middleware/fetchuser');
+const fetchuser = require('../middleware/fetchuser');
 // var jwt = require('jsonwebtoken');
 
 // const JWT_SECRET = 'Darshitisagoodboy';
 
 const router = express.Router();
 
-router.post('/addquestion', async(req, res)=>{
+router.post('/addquestion', fetchuser, async(req, res)=>{
     try{
 
+
         let question = await Question.create({
-            user : "63ae7ece9d17649ec3278fb8",
+            user : req.user.id,
             title: req.body.title,
             question: req.body.question,
             tags : req.body.tags,
-            postedBy: 'darshit',
+            postedBy: req.user.username,
         })
 
         res.json({"Success" : "Added Query Successfully", "status":true})

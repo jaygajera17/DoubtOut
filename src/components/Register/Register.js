@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import './Register.css'
  function Register() {
@@ -67,7 +67,7 @@ import './Register.css'
           </div>
           
           <div className="pass">
-            <a>Forgot Password?</a>
+            <a href='/'>Forgot Password?</a>
           </div>
           <div className="field">
           <button type="submit"
