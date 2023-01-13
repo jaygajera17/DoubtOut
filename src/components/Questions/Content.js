@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import parse from "html-react-parser";
 import JoditEditor from "jodit-react";
 
+
 export default function Content(props) {
     const editor = useRef(null);
     const params = useParams();
@@ -11,7 +12,8 @@ export default function Content(props) {
     const [html, setHtml] = useState("");
     const [state, setState] = useState(false);
     const [answers, setAnswer] = useState([]);
-    const [vote, setVotes] = useState(0);
+    const [vote, setVotes] = useState({});
+    const [voteStatus, setVoteStatus] = useState({});
 
     const config = {
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
@@ -31,7 +33,7 @@ export default function Content(props) {
             setHtml(parse(data.question));
         })
 
-        console.log(question);
+        
 
 
     }
@@ -63,11 +65,11 @@ export default function Content(props) {
                 'Content-Type': 'application/json'
             },
 
-            body: JSON.stringify({ answer: value, postedId: '63ae78ac00418318bfbfc2a8', postedBy: 'JayGajera', upvotes: 0, downvotes: 0 }),
+            body: JSON.stringify({ answer: value, postedId: '63ae78ac00418318bfbfc2a8', postedBy: 'JayGajera', votes: 0 }),
         });
 
         const json = await response.json()
-        console.log(json);
+        
 
         if (json["status"] === true) {
             setState(true);
@@ -88,17 +90,49 @@ export default function Content(props) {
         });
 
         let json = await response.json();
-        console.log(json);
-        setVotes(json);
+       
+        setVoteStatus(json);
         
+
+    }
+
+    const downvote = async(e, id)=>{
+        e.preventDefault();
+        const response = await fetch(`http://localhost:5000/api/answer/downvote/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        let json = await response.json();
+       
+        setVoteStatus(json);
+    }
+
+    const fetchVotes = async () =>{
+    
+        const response = await fetch(`http://localhost:5000/api/answer/fetchVotes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        let json = await response.json();
+       
+        setVotes(json);
+
+
 
     }
 
     useEffect(() => {
         fetchQuestion(params.type);
         fetchAnswers(params.type);
+        fetchVotes();
         // convertToHTML();
-    }, [state, vote])
+    }, [state, voteStatus])
 
     return (
         <div Style="height:100vh; margin-top:13vh; z-index:1; background-color:white">
@@ -131,16 +165,16 @@ export default function Content(props) {
                 {answers.length > 0 && (
                     <div className='mt-5'>
                         {answers.map(ans => (
-                            <div className="mt-1">
+                            <div className="">
 
                                 <div className="d-flex flex-row">
-                                    <div class="d-flex flex-column col-md-2 mt-0 mx-0">
-                                        <button className='btn btn-white' onClick={(e)=> upvote(e, ans._id)}><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
-                                        <div className='mx-5'>{vote}</div>
-                                        <button className='btn btn-white'><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
+                                    <div class="d-flex flex-column col-md-0 mt-0 mx-0">
+                                        <button className='btn btn-white' onClick={(e)=> upvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
+                                        <div className='mx-3'>{vote[ans._id]}</div>
+                                        <button className='btn btn-white' onClick={(e) => downvote(e, ans._id)}  Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
                                         
                                     </div>
-                                    <div class="d-flex flex-column flex-shrink-0 col-md-9 mt-4 mx-0">
+                                    <div class="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                                         <p>{parse(ans.answer)}</p>
 
 
