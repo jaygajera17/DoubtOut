@@ -23,6 +23,11 @@ const QuestionSchema = new Schema({
     postedBy:{
         type:String,
         required:true
+    },
+
+    date:{
+        type:Date,
+        default:Date.now
     }
 })
 

@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import parse from "html-react-parser";
 import JoditEditor from "jodit-react";
-
+import { useNavigate } from 'react-router-dom';
 
 export default function Content(props) {
+
+    const navigate = useNavigate();
     const editor = useRef(null);
     const params = useParams();
     const [value, setValue] = useState("");
@@ -20,9 +22,8 @@ export default function Content(props) {
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
     };
 
-    const isLoggedIn = ()=>{
-        if(localStorage.getItem('username') !== null)
-        {
+    const isLoggedIn = () => {
+        if (localStorage.getItem('username') !== null) {
             setloginstatus(true);
         }
     }
@@ -40,7 +41,7 @@ export default function Content(props) {
             setHtml(parse(data.question));
         })
 
-        
+
 
 
     }
@@ -76,7 +77,7 @@ export default function Content(props) {
         });
 
         const json = await response.json()
-        
+
 
         if (json["status"] === true) {
             setState(true);
@@ -86,39 +87,52 @@ export default function Content(props) {
 
     }
 
-    const upvote = async (e, id)=>{
+    const upvote = async (e, id) => {
 
-        e.preventDefault();
-        const response = await fetch(`http://localhost:5000/api/answer/upvote/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        });
+        if (localStorage.getItem("username") !== null) {
 
-        let json = await response.json();
-       
-        setVoteStatus(json);
-        
+
+            e.preventDefault();
+            const response = await fetch(`http://localhost:5000/api/answer/upvote/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            let json = await response.json();
+
+            setVoteStatus(json);
+        }
+        else {
+            navigate("/login");
+        }
 
     }
 
-    const downvote = async(e, id)=>{
-        e.preventDefault();
-        const response = await fetch(`http://localhost:5000/api/answer/downvote/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        });
+    const downvote = async (e, id) => {
 
-        let json = await response.json();
-       
-        setVoteStatus(json);
+        if (localStorage.getItem("username") !== null) {
+            e.preventDefault();
+            const response = await fetch(`http://localhost:5000/api/answer/downvote/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            let json = await response.json();
+
+            setVoteStatus(json);
+        }
+        else{
+            navigate("/login");
+        }
+
     }
 
-    const fetchVotes = async () =>{
-    
+    const fetchVotes = async () => {
+
         const response = await fetch(`http://localhost:5000/api/answer/fetchVotes`, {
             method: 'POST',
             headers: {
@@ -127,7 +141,7 @@ export default function Content(props) {
         });
 
         let json = await response.json();
-       
+
         setVotes(json);
 
 
@@ -177,10 +191,10 @@ export default function Content(props) {
 
                                 <div className="d-flex flex-row">
                                     <div class="d-flex flex-column col-md-0 mt-0 mx-0">
-                                        <button className='btn btn-white' onClick={(e)=> upvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
+                                        <button className='btn btn-white' onClick={(e) => upvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
                                         <div className='mx-3'>{vote[ans._id]}</div>
-                                        <button className='btn btn-white' onClick={(e) => downvote(e, ans._id)}  Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
-                                        
+                                        <button className='btn btn-white' onClick={(e) => downvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
+                                        <button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;"></i></button>
                                     </div>
                                     <div class="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                                         <p>{parse(ans.answer)}</p>
@@ -218,8 +232,8 @@ export default function Content(props) {
 
                     {
                         loginstatus === true ? (<button type='submit' className="btn btn-primary mt-5 mb-3">Post Your Answer</button>) : <></>
-                    }            
-                    
+                    }
+
                 </form>
             </div>
         </div>

@@ -154,7 +154,8 @@ export default function Questions() {
                                             return (<><small className='fs-8'>{msg[0]}</small></>);
                                         })()} */}
                                                 <div className='mt-3'>{question.tags.split(" ").map(tag => <small className='mx-2 px-2 py-1' Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;">{tag}</small>)}</div>
-                                                <small className='d-flex flex-row-reverse'>Posted By : {question.postedBy}</small>
+                                                <small className='d-flex flex-row-reverse'> asked {question.date.slice(0, 10)} at {question.date.slice(12, 16)} <p Style="color:#0074CC">{question.postedBy}&nbsp;</p></small>
+                                                
                                                 {/* <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
                                             </div>
                                         </div>
