@@ -11,9 +11,9 @@ import './Register.css'
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(credentials.name);
-        console.log(credentials.email);
-        console.log(credentials.password);
+        // console.log(credentials.name);
+        // console.log(credentials.email);
+        // console.log(credentials.password);
        
     //   if(credentials.password != credentials.passwordConfirm){alert("re enter password")};
         const response = await fetch('http://localhost:5000/api/auth/createuser', {
