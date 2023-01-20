@@ -30,6 +30,8 @@ export default function Navbar() {
 
     setLoginStatus(false);
 
+    window.location.reload(true);
+
     // navigate("/");
 
 

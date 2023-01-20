@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
+import { useNavigate } from 'react-router-dom';
 export default function Questions() {
 
+    const navigate = useNavigate();
     const [questions, setQuestions] = useState([])
     const [noOfAns, setnoOfAns] = useState({});
 
@@ -32,6 +34,19 @@ export default function Questions() {
         
     }
 
+    const askQue = () => {
+
+        if(localStorage.getItem("username") !== null)
+        {
+            navigate("/editor");
+        }
+        else
+        {
+            navigate("/login");
+        }
+
+
+    }
     useEffect(() => {
         fetchAllQuestions();
         FindFrequencyOfAns();
@@ -98,7 +113,7 @@ export default function Questions() {
                     <div className="d-flex d-flex-row align-items-center">
                         <h1 className='mx-4'>All Questions</h1>
 
-                        <NavLink to="/editor" className="btn btn-primary mx-4" Style="position:absolute; right:0px;">Ask Question</NavLink>
+                        <button  className="btn btn-primary mx-4" Style="position:absolute; right:0px;" onClick={askQue}>Ask Question</button>
                     </div>
 
 
