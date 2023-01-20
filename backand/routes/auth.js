@@ -51,6 +51,7 @@ router.post('/createuser', [
         const data = {
             user: {
                 id: user.id,
+                username: user.username
             }
         }
 
@@ -58,8 +59,8 @@ router.post('/createuser', [
         const authtaken = jwt.sign(data, JWT_SECRET);
        
         localStorage.setItem('token', authtaken);
-        localStorage.setItem('userType', req.body.type);
-        res.json({ 'success': authtaken, 'userType': req.body.type, 'email': req.body.email });
+        localStorage.setItem('username', req.body.username);
+        res.json({ 'success': authtaken, 'username': req.body.username });
         // res.json({autotaken});
     }
     catch (err) {
@@ -100,7 +101,8 @@ router.post('/login', [
 
         const data = {
             user: {
-                id: user.id
+                id: user.id,
+                username:user.username
             }
         }
 

@@ -1,19 +1,20 @@
 const express = require('express');
 const answer = require('../models/Answer');
 
+const fetchuser = require('../middleware/fetchuser');
 const Answer = require("../models/Answer");
 const { route } = require('./questions');
 
 const router = express.Router();
 
-router.post('/addanswer/:id', async (req, res) => {
+router.post('/addanswer/:id',fetchuser, async (req, res) => {
     try {
 
         let answer = await Answer.create({
             questionid: req.params.id,
             answer: req.body.answer,
-            postedId: req.body.postedId,
-            postedBy: req.body.postedBy,
+            postedId: req.user.id,
+            postedBy: req.user.username,
             votes: req.body.votes
         })
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 // var well = {
 //   boxShadow: "0px 0px 10px 0px #f0f0f0"
 // }
@@ -12,6 +13,34 @@ var title = {
   color: "#0D6EFD",
 }
 export default function Navbar() {
+
+  const [loginStatus, setLoginStatus] = useState(false);
+ 
+  const isLoggedin = () => {
+    if (localStorage.getItem('username') !== null) {
+      
+      setLoginStatus(true);
+    }
+  }
+
+  const logout = () => {
+   
+    localStorage.removeItem('username');
+
+
+    setLoginStatus(false);
+
+    window.location.reload(true);
+
+    // navigate("/");
+
+
+}
+
+  useEffect(() => {
+    isLoggedin();
+  }, [loginStatus])
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; position:fixed;top:0; z-index:9999; width:100%;">
@@ -56,17 +85,31 @@ export default function Navbar() {
               </li>
 
             </ul>
+
+            <p className='btn btn-white mr-2'>{localStorage.getItem("username")}</p>
             <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
             <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
             <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
 
             <ul className="navbar-nav " Style={{ bsSscrollHheight: "100px" }}>
-              <li class="nav-item">
-                <NavLink className="nav-link" to="/login" style={{ color: 'black' }}><button className='btn btn-outline-primary'>Login</button></NavLink>
-              </li>
-              <li class="nav-item">
-                <NavLink className="nav-link" to="/register" style={{ color: 'black' }}><button className='btn btn-primary'>Register</button></NavLink>
-              </li>
+
+              {loginStatus === true
+
+                ?
+                (
+                  <li class="nav-item">
+                    <button className='btn btn-outline-primary' onClick={logout}>Logout</button>
+                  </li>
+                )
+                :
+                (<><li class="nav-item">
+                  <NavLink className="nav-link" to="/login" style={{ color: 'black' }}><button className='btn btn-outline-primary'>Login</button></NavLink>
+                </li>
+                  <li class="nav-item">
+                    <NavLink className="nav-link" to="/register" style={{ color: 'black' }}><button className='btn btn-primary'>Register</button></NavLink>
+                  </li></>)
+              }
+
             </ul>
 
 

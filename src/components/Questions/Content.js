@@ -14,11 +14,18 @@ export default function Content(props) {
     const [answers, setAnswer] = useState([]);
     const [vote, setVotes] = useState({});
     const [voteStatus, setVoteStatus] = useState({});
+    const [loginstatus, setloginstatus] = useState(false);
 
     const config = {
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
     };
 
+    const isLoggedIn = ()=>{
+        if(localStorage.getItem('username') !== null)
+        {
+            setloginstatus(true);
+        }
+    }
     const fetchQuestion = async (id) => {
 
         await fetch(`http://localhost:5000/api/question/fetchQueById/${id}`, {
@@ -128,6 +135,7 @@ export default function Content(props) {
     }
 
     useEffect(() => {
+        isLoggedIn();
         fetchQuestion(params.type);
         fetchAnswers(params.type);
         fetchVotes();
@@ -208,7 +216,10 @@ export default function Content(props) {
 
                     />
 
-                    <button type='submit' className="btn btn-primary mt-5 mb-3">Post Your Answer</button>
+                    {
+                        loginstatus === true ? (<button type='submit' className="btn btn-primary mt-5 mb-3">Post Your Answer</button>) : <></>
+                    }            
+                    
                 </form>
             </div>
         </div>
