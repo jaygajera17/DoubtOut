@@ -86,7 +86,7 @@ export default function Navbar() {
 
             </ul>
 
-            <p className='btn btn-white mr-2'>{localStorage.getItem("username")}</p>
+            <NavLink to='/profile' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>
             <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
             <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
             <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>

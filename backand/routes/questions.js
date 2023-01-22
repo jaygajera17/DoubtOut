@@ -2,7 +2,7 @@ const express = require('express');
 // const LocalStorage = require('node-localStorage').LocalStorage;
 // var localStorage = new LocalStorage('./scratch');
 const Question = require("../models/Question");
-
+const User = require("../models/User");
 // const { body, validationResult } = require('express-validator');
 // const bcrypt = require('bcryptjs');
 const fetchuser = require('../middleware/fetchuser');
@@ -54,6 +54,26 @@ router.post('/fetchQueById/:id', async(req, res)=>{
         }
 
         res.json(question);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+router.post('/fetchUserQuestions/:username', async(req, res)=>{
+    try{
+        let user = await User.findOne({username : req.params.username});
+
+        const questions = await Question.find({user : user._id});
+
+        if(!questions)
+        {
+            return res.status(404).send("Question not Found");
+
+        }
+
+        res.json(questions);
     }
     catch(e){
         console.log(e.message);

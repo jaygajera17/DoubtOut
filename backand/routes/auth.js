@@ -60,7 +60,7 @@ router.post('/createuser', [
        
         localStorage.setItem('token', authtaken);
         localStorage.setItem('username', req.body.username);
-        res.json({ 'success': authtaken, 'username': req.body.username });
+        res.json({ 'success': authtaken, 'username': req.body.username});
         // res.json({autotaken});
     }
     catch (err) {
