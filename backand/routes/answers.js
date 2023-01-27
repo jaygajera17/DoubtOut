@@ -106,4 +106,16 @@ router.post("/downvote/:id", async (req, res) => {
         res.status(400).send("Internal Server Error");
     }
 })
+
+router.post("/acceptanswer/:id", async(req, res)=>{
+    try{
+        const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, {$set : {"status": "Accepted"}});
+        res.json({"status": "Accepted"});
+    }
+
+    catch(e){
+        console.log(e.message);
+        res.status(400).send("Internal Server error");
+    }
+})
 module.exports = router
