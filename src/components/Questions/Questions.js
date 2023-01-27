@@ -7,6 +7,7 @@ export default function Questions() {
     const navigate = useNavigate();
     const [questions, setQuestions] = useState([])
     const [noOfAns, setnoOfAns] = useState({});
+    
 
     const fetchAllQuestions = async () => {
         await fetch("http://localhost:5000/api/question/fetchquestions", {
@@ -34,6 +35,8 @@ export default function Questions() {
         
     }
 
+    
+
     const askQue = () => {
 
         if(localStorage.getItem("username") !== null)
@@ -50,6 +53,7 @@ export default function Questions() {
     useEffect(() => {
         fetchAllQuestions();
         FindFrequencyOfAns();
+        
     }, [])
     return (
         <div Style="height:100%; margin-top:13vh; z-index:1; background-color:white">
@@ -133,7 +137,7 @@ export default function Questions() {
                                                 {(
                                                     ()=>{
                                                         if(question._id in noOfAns){
-                                                            return (<>{noOfAns[question._id]} Answers</>);
+                                                            return (<div>{noOfAns[question._id]} Answers</div>);
                                                         }
                                                         else{
                                                             return (<>0 Answers</>);

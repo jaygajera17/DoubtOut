@@ -9,6 +9,7 @@ export default function Profile() {
 
     const [questions, setQuestions] = useState([]);
     const [noOfAns, setnoOfAns] = useState({});
+    const [points, setPoints] = useState(0);
 
     const fetchAllQuestions = async () => {
 
@@ -38,9 +39,22 @@ export default function Profile() {
         
     }
 
+    const Points = async ()=>{
+        const response = await fetch("http://localhost:5000/api/answer/points",{
+            method : "POST",
+            headers : {
+                'Content-Type': "application/json"
+            }
+        })
+
+        const json = await response.json();
+        setPoints(json["points"]);
+    }
+
     useEffect(()=>{
         fetchAllQuestions();
         FindFrequencyOfAns();
+        Points();
     }, [])
 
     return (
@@ -48,7 +62,7 @@ export default function Profile() {
             <div class="d-flex flex-column flex-shrink-0 p-3 col-md-7" Style="background-color:white;">
                 <div className="d-flex d-flex-row align-items-center">
                     <h1 className='mx-4'>All Questions</h1>
-
+                    <div>Points {points}</div>
                     <button className="btn btn-primary mx-4" Style="position:absolute; right:0px;" >Ask Question</button>
                 </div>
 

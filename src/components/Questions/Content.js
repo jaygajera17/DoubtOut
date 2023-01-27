@@ -125,7 +125,7 @@ export default function Content(props) {
 
             setVoteStatus(json);
         }
-        else{
+        else {
             navigate("/login");
         }
 
@@ -194,7 +194,13 @@ export default function Content(props) {
                                         <button className='btn btn-white' onClick={(e) => upvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
                                         <div className='mx-3'>{vote[ans._id]}</div>
                                         <button className='btn btn-white' onClick={(e) => downvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
-                                        <button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;"></i></button>
+                                        {(
+                                            () => {
+                                                if (ans.status === "Accepted") {
+                                                    return (<><button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;color:lightgreen;"></i></button></>)
+                                                }
+                                            }
+                                        )()}
                                     </div>
                                     <div class="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                                         <p>{parse(ans.answer)}</p>

@@ -5,6 +5,9 @@ const fetchuser = require('../middleware/fetchuser');
 const Answer = require("../models/Answer");
 const { route } = require('./questions');
 
+const LocalStorage = require('node-localStorage').LocalStorage;
+var localStorage = new LocalStorage('./scratch');
+
 const router = express.Router();
 
 router.post('/addanswer/:id',fetchuser, async (req, res) => {
@@ -118,4 +121,29 @@ router.post("/acceptanswer/:id", async(req, res)=>{
         res.status(400).send("Internal Server error");
     }
 })
+
+router.post("/points", async(req, res)=>{
+    try{
+        let username = localStorage.getItem("username");
+
+        let answers = await Answer.find({"postedBy" : username});
+
+        let count = 0;
+
+        answers.map(answer => {
+            if(answer.status === "Accepted")
+            {
+                count += 1;
+            }
+        })
+
+        count = count * 5;
+        res.json({"points" : count});
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
 module.exports = router
