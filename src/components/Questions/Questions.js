@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { useNavigate } from 'react-router-dom';
+
+import Sidebar  from '../Sidebar/Sidebar';
+
 export default function Questions() {
 
     const navigate = useNavigate();
@@ -58,7 +61,7 @@ export default function Questions() {
     return (
         <div Style="height:100%; margin-top:13vh; z-index:1; background-color:white">
             <div class="d-flex flex-row">
-                <div class="d-flex flex-column flex-shrink-0 p-3 col-md-2">
+                {/* <div class="d-flex flex-column flex-shrink-0 p-3 col-md-2">
                     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                         <svg class="bi me-2" width="40" height="32"><use ></use></svg>
                         <span class="fs-4">Sidebar</span>
@@ -111,7 +114,8 @@ export default function Questions() {
                         </ul>
                     </div>
 
-                </div>
+                </div> */}
+                <Sidebar/>
 
                 <div class="d-flex flex-column flex-shrink-0 p-3 col-md-7" Style="background-color:white;">
                     <div className="d-flex d-flex-row align-items-center">
