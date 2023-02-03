@@ -1,0 +1,91 @@
+.stack-index {
+    display: flex;
+    min-height: 85vh;
+    min-width:  fit-content;
+}
+
+.stack-index-content {
+    display:flex;
+    width: 100%;
+    justify-content: center;
+}
+
+
+
+
+/* sidebar.js file css */
+.sidebar{
+    display:flex;
+    padding: 20px 0px 10px 10px;
+    height: 100%;
+    flex: 0.5;
+    max-width: 200px;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar-container{
+    margin: 10px 0;
+    display:flex;
+    width:100%;
+}
+.sidebar-options {
+   display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+.sidebar-option {
+    display: flex;
+     flex-direction: column;
+     margin: 10px 0;
+     font-size: 14px;
+ }
+
+ a{
+    text-decoration: none;
+    color: #000;
+ }
+
+ a:hover {
+    color:#000;
+ }
+
+ .sidebar-option >p {
+    color:#000;
+    font-size: 14px;
+ }
+
+ .link{
+    display: flex;
+    flex-direction: column;
+ }
+
+ .link-tag{
+    display: flex;
+     align-content: center;
+    padding: 5px 0;
+    width: 100%
+ }
+
+ .link-tag:hover{
+    border-right: 5px solid #0D6EFD;
+ }
+
+ .link-tag > .MuiSvgIcon-root{
+    font-size: 18px;
+    margin-right: 5px;
+    color: #0D6EFD;
+ }
+
+ .tags{
+    display: flex;
+    flex-direction: column;
+    color:#000;
+    margin: 0px 20px;
+ }
+ .tags>p{
+
+    margin: 5px 0;
+ }
+ .tags > p:hover{
+    color: #000;
+ }
