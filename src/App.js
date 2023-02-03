@@ -9,6 +9,8 @@ import Questions from './components/Questions/Questions';
 import Content from './components/Questions/Content';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import Profile from './components/Profile/Profile';
+import UserQuestionContent from './components/Profile/Content';
 function App() {
   return (
     <div>
@@ -23,6 +25,8 @@ function App() {
         <Route path = "/register" element = {<Register/>}/>
         <Route path="/questions" element = {<Questions />}></Route>
         <Route path="/question/:type" element = {<Content />}></Route>
+        <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
       </Routes>
       {/* <Footer /> */}
      </BrowserRouter>

@@ -30,6 +30,11 @@ const AnswerSchema = new Schema({
         type:Number,
         required:true
     },
+
+    status:{
+        type:String,
+        default: "Not Accepted"
+    }
 })
 
 const answer = mongoose.model('answer', AnswerSchema);

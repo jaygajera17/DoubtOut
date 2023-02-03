@@ -7,6 +7,7 @@ export default function Questions() {
     const navigate = useNavigate();
     const [questions, setQuestions] = useState([])
     const [noOfAns, setnoOfAns] = useState({});
+    
 
     const fetchAllQuestions = async () => {
         await fetch("http://localhost:5000/api/question/fetchquestions", {
@@ -34,6 +35,8 @@ export default function Questions() {
         
     }
 
+    
+
     const askQue = () => {
 
         if(localStorage.getItem("username") !== null)
@@ -50,6 +53,7 @@ export default function Questions() {
     useEffect(() => {
         fetchAllQuestions();
         FindFrequencyOfAns();
+        
     }, [])
     return (
         <div Style="height:100%; margin-top:13vh; z-index:1; background-color:white">
@@ -133,7 +137,7 @@ export default function Questions() {
                                                 {(
                                                     ()=>{
                                                         if(question._id in noOfAns){
-                                                            return (<>{noOfAns[question._id]} Answers</>);
+                                                            return (<div>{noOfAns[question._id]} Answers</div>);
                                                         }
                                                         else{
                                                             return (<>0 Answers</>);
@@ -154,7 +158,8 @@ export default function Questions() {
                                             return (<><small className='fs-8'>{msg[0]}</small></>);
                                         })()} */}
                                                 <div className='mt-3'>{question.tags.split(" ").map(tag => <small className='mx-2 px-2 py-1' Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;">{tag}</small>)}</div>
-                                                <small className='d-flex flex-row-reverse'>Posted By : {question.postedBy}</small>
+                                                <small className='d-flex flex-row-reverse'> asked {question.date.slice(0, 10)} at {question.date.slice(12, 16)} <p Style="color:#0074CC">{question.postedBy}&nbsp;</p></small>
+                                                
                                                 {/* <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
                                             </div>
                                         </div>
