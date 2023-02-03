@@ -44,7 +44,7 @@ export default function Navbar() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; position:fixed;top:0; z-index:9999; width:100%;">
-        <img src={require('../../Assets/icon.png')}    width="120px" alt="image" />
+        <img src={require('../../Assets/icon.png')}    width="100px" alt="image" />
         <div className="container-fluid">
           {/* <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black' }}>
             <a href="/" style={iconstyle}>

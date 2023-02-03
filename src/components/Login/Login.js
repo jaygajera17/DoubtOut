@@ -59,7 +59,9 @@ function Login() {
   return (
 
     <div>
+      
       <div style={{ marginTop: '80px' }}>
+        
       {(
         () => {
           if (state === true) {
@@ -79,10 +81,12 @@ function Login() {
       </div>
 
       <body>
+     
+            <div className="bg-img">
 
-        <div className="bg-img">
           <div className="content">
-            <header style={{ color: 'black' }}>Login</header>
+           
+            <header style={{ color: 'black' }}> Login</header>
             <form onSubmit={handleSubmit} method='post'>
               <div className="field">
                 <span className="fa fa-user"></span>

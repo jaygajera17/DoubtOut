@@ -3,18 +3,21 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 import './Register.css'
- function Register() {
-    const navigate = useNavigate();
-    const [credentials, setCredentials] = useState({name: "", email: "", password : ""})
-    const onChange = (e) => {
-        setCredentials({...credentials, [e.target.name]: e.target.value})
-    }
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(credentials.name);
-        console.log(credentials.email);
-        console.log(credentials.password);
-       
+function Register() {
+  const navigate = useNavigate();
+  const [credentials, setCredentials] = useState({ name: "", email: "", password: "" })
+  const [state, setState] = useState(false);
+
+
+  const onChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value })
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(credentials.name);
+    console.log(credentials.email);
+    console.log(credentials.password);
+
     //   if(credentials.password != credentials.passwordConfirm){alert("re enter password")};
     const response = await fetch('http://localhost:5000/api/auth/createuser', {
       method: 'POST',
