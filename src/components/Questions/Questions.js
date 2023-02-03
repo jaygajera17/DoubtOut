@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { useNavigate } from 'react-router-dom';
-import '../Sidebar/Sidebar.css';
 import Sidebar  from '../Sidebar/Sidebar';
 
 export default function Questions() {
