@@ -1,0 +1,49 @@
+.stack-index{
+    display: flex;
+    min-height: 85vh;
+    min-width: fit-content;
+}
+
+.stack-index-content{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.main{
+    display: flex;
+    padding: 30px 10px;
+    flex: 0.75;
+    flex-direction: column;
+}
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.main-top{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+
+.main-top > h2{
+    font-weight: 400;
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+button{
+    padding: 10px;
+    background-color: #0095ff;
+    color: #fff;
+    border: 2px solid #007cd446;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
