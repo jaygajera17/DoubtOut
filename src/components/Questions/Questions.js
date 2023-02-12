@@ -128,9 +128,9 @@ export default function Questions() {
 
                     <div class="d-flex flex-column flex-shrink-0 p-3 col-md-7" Style="background-color:white;">
                         <div className="d-flex d-flex-row align-items-center">
-                            <h1 className='mx-4'>All Questions</h1>
+                            <h1 className='mx-4'>see here All Questions</h1>
 
-                            <button className="btn btn-primary mx-4" Style="position:absolute; right:0px;" onClick={askQue}>Ask Question</button>
+                            <button className="btn btn-primary mx-4" Style="position:absolute; right:0px;" onClick={askQue}>See Here Ask Question</button>
                         </div>
 
 
