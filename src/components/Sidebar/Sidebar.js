@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.css';
-import { Public, Star, Stars, Work } from '@mui/icons-material';
+import { Public, Stars, Work } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom'
 export default function Sidebar() {
     return (
