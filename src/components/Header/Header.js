@@ -11,18 +11,18 @@ export default function Header() {
                 <NavLink><button>Ask Question</button></NavLink>
             </div>
 
-            <div className='main-dec'>
+            <div className='main-desc'>
                 <p>All question stat</p>
                 <div className="main-filter">
                     <div className="main-tabs">
                         <div className="main-tab">
-                            <NavLink>Newest</NavLink>
+                            <NavLink className="tab">Newest</NavLink>
                         </div>
                         <div className="main-tab">
                             <NavLink>Active</NavLink>
                         </div>
                         <div className="main-tab">
-                            <NavLink>More</NavLink>
+                            <NavLink Style="color: rgb(125, 119, 119);">More</NavLink>
                         </div>
                     </div>
 
