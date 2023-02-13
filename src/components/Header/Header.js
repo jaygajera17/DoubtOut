@@ -10,7 +10,7 @@ export default function Header() {
         <div className="main-container">
             <div className="main-top">
                 <h2>All Questions</h2>
-                <NavLink><button>Ask Question</button></NavLink>
+                <NavLink to="/editor"><button>Ask Question</button></NavLink>
             </div>
 
             <div className='main-desc'>

@@ -24,7 +24,7 @@ function AllQuestions()
                 </div>
 
                 <div className="question-answer">
-                    <Link>question title.</Link>
+                    <Link to = '/viewQuestion'>question title.</Link>
                     <div style = {{width:"90%",}}>
                         <div>This is an answer of the question.</div>
                     </div>
