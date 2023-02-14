@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
-
 import Sidebar from '../Sidebar/Sidebar';
+import './questions.css';
 
 export default function Questions() {
 
@@ -39,8 +39,6 @@ export default function Questions() {
 
     }
 
-
-
     const askQue = () => {
 
         if (localStorage.getItem("username") !== null) {
@@ -57,6 +55,7 @@ export default function Questions() {
         FindFrequencyOfAns();
 
     }, [])
+
     return (
         <>
 
@@ -119,18 +118,17 @@ export default function Questions() {
                 </div> */}
 
                     <div className="stack-index">
-                        <div className="stack-index-content">
+                        <div className="stack-index-content" >
                             <Sidebar />
-                            <Header></Header>
+                            <Header />
                         </div>
                     </div>
 
-
                     <div class="d-flex flex-column flex-shrink-0 p-3 col-md-7" Style="background-color:white;">
                         <div className="d-flex d-flex-row align-items-center">
-                            <h1 className='mx-4'>All Questions</h1>
+                            <h1 className='mx-4'>see here All Questions</h1>
 
-                            <button className="btn btn-primary mx-4" Style="position:absolute; right:0px;" onClick={askQue}>Ask Question</button>
+                            <button className="btn btn-primary mx-4" Style="position:absolute; right:0px;" onClick={askQue}>See Here Ask Question</button>
                         </div>
 
 
@@ -167,7 +165,6 @@ export default function Questions() {
                                                     <small Style="font-size:1px;">{parse(question.question)[0]}</small>
                                                     {/* {(() => {
                                             var msg = parse(question.question);
-
                                             return (<><small className='fs-8'>{msg[0]}</small></>);
                                         })()} */}
                                                     <div className='mt-3'>{question.tags.split(" ").map(tag => <small className='mx-2 px-2 py-1' Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;">{tag}</small>)}</div>
@@ -187,7 +184,8 @@ export default function Questions() {
 
                     </div>
                 </div>
-            </div>
+
+                </div>
         </>
 
     )
