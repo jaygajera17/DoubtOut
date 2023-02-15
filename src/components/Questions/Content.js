@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom';
 import parse from "html-react-parser";
 import JoditEditor from "jodit-react";
 import { useNavigate } from 'react-router-dom';
+import { Avatar } from '@mui/material';
+import { Bookmark, History, HistoryEdu, HistorySharp } from '@mui/icons-material';
+import { Public, Star, Stars, Work } from '@mui/icons-material';
+
 
 export default function Content(props) {
 
@@ -17,7 +21,7 @@ export default function Content(props) {
     const [vote, setVotes] = useState({});
     const [voteStatus, setVoteStatus] = useState({});
     const [loginstatus, setloginstatus] = useState(false);
-
+    const [show,setShow] = useState(false);
     const config = {
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
     };
@@ -197,16 +201,35 @@ export default function Content(props) {
                                         {(
                                             () => {
                                                 if (ans.status === "Accepted") {
-                                                    return (<><button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;color:lightgreen;"></i></button></>)
+                                                    return (<><button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;color:lightgreen;"></i></button></>) 
                                                 }
                                             }
                                         )()}
+                                  <div className='mx-2'>
+                                        <HistorySharp/>
+                                        <Bookmark />
+                                        </div>
                                     </div>
                                     <div class="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                                         <p>{parse(ans.answer)}</p>
 
+                                         <div className='auth-detail'>
+                                        <small >Posted By : <Avatar /> {ans.postedBy}</small>
+                                        </div>
+                                    </div>
+                                    <div className="comments">
+                                        <div className='comment'>
+                                            <p>This is comment - <span> User name </span> </p>
+                                        </div>
+                                        <p onClick={()=> setShow(!show)}> add a comment</p>
+                                        {
+                                            show && (<div className='title'>
+                                                <textarea type = "text" placeholder="add your comment..." rows={5} style={{
 
-                                        <small className='d-flex flex-row-reverse'>Posted By : {ans.postedBy}</small>
+                                                }}> </textarea>
+                                                <button> Add Comment </button>
+                                                </div>
+                                                )}
                                     </div>
                                 </div>
 
