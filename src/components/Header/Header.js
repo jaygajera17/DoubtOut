@@ -37,11 +37,6 @@ export default function Header() {
             <div className="questions">
                 <div className="question">
                     <AllQuestions/>
-                    <AllQuestions/>
-                    <AllQuestions/>
-                    <AllQuestions/>
-                    <AllQuestions/>
-                    <AllQuestions/>
                 </div>
                  
             </div>

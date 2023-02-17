@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
 import './questions.css';
+import { FilterList } from '@mui/icons-material';
+import '../Header/header.css';
 
 export default function Questions() {
 
@@ -120,10 +122,104 @@ export default function Questions() {
                     <div className="stack-index">
                         <div className="stack-index-content" >
                             <Sidebar />
-                            <Header />
+
+
+                            <div className="main">
+                                <div className="main-container">
+                                    <div className="main-top">
+                                        <h2>All Questions</h2>
+                                        <NavLink to="/editor"><button>Ask Question</button></NavLink>
+                                    </div>
+
+                                    <div className='main-desc'>
+                                        <p>All question stat</p>
+                                        <div className="main-filter">
+                                            <div className="main-tabs">
+                                                <div className="main-tab">
+                                                    <NavLink className="tab">Newest</NavLink>
+                                                </div>
+                                                <div className="main-tab">
+                                                    <NavLink>Active</NavLink>
+                                                </div>
+                                                <div className="main-tab">
+                                                    <NavLink Style="color: rgb(125, 119, 119);">More</NavLink>
+                                                </div>
+                                            </div>
+
+                                            <div className="main-filter-item">
+                                                <FilterList style={{ fontSize: '21px' }} />
+                                                <p className="filter-text">Filter</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="questions">
+                                        <div className="question">
+                                            {questions.length > 0 && (
+                                                <ul>
+                                                    {questions.map(question => (
+                                                        <div className="all-questions">
+                                                            <div className="all-questions-container">
+                                                                <div className="all-questions-left">
+                                                                    <div className="all-options">
+                                                                        <div className="all-option">
+                                                                            <p>0</p>
+                                                                            <span>votes</span>
+                                                                        </div>
+                                                                        <div className="all-option">
+
+                                                                            {(
+                                                                                () => {
+                                                                                    if (question._id in noOfAns) {
+                                                                                        return (<p>{noOfAns[question._id]}</p>);
+                                                                                    }
+                                                                                    else {
+                                                                                        return (<>0</>);
+                                                                                    }
+                                                                                }
+                                                                            )()}
+                                                                            <span>Answers</span>
+                                                                        </div>
+                                                                        <div className="all-option">
+                                                                            <small>0 views</small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div className="question-answer">
+                                                                    <NavLink to={{ pathname: `/question/${question._id}` }} className="card-title" Style="text-decoration:none;color:#0074CC"><h4>{question.title}</h4></NavLink>
+                                                                    <div style={{ width: "90%", }}>
+                                                                        <small Style="font-size:1px;">{parse(question.question)[0]}</small>
+                                                                    </div>
+                                                                    {/* <div style={{ display: "flex" }}>
+                                                                        <span className="question-tags">react</span>
+                                                                        <span className="question-tags">frontend</span>
+                                                                        <span className="question-tags">development</span>
+                                                                    </div> */}
+                                                                    <div className='mt-3'>{question.tags.split(" ").map(tag => <span className='question-tags' Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;">{tag}</span>)}</div>
+                                                                    <div className="author">
+                                                                        {/* <small> asked {question.date.slice(0, 10)} at {question.date.slice(12, 16)} </small>
+                                                                        <div className="author-details">
+                                                                          
+                                                                            <p>{question.postedBy}</p>
+                                                                        </div> */}
+                                                                        <small className='d-flex flex-row-reverse'>asked {question.date.slice(0, 10)} at {question.date.slice(12, 16)} <p Style="color:#0074CC">{question.postedBy} &nbsp;</p></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </ul>
+                                            )}
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-
+                    {/* 
                     <div class="d-flex flex-column flex-shrink-0 p-3 col-md-7" Style="background-color:white;">
                         <div className="d-flex d-flex-row align-items-center">
                             <h1 className='mx-4'>see here All Questions</h1>
@@ -163,14 +259,9 @@ export default function Questions() {
                                                 <div class="d-flex flex-column flex-shrink-0 col-md-10">
                                                     <NavLink to={{ pathname: `/question/${question._id}` }} className="card-title" Style="text-decoration:none;color:#0074CC"><h4>{question.title}</h4></NavLink>
                                                     <small Style="font-size:1px;">{parse(question.question)[0]}</small>
-                                                    {/* {(() => {
-                                            var msg = parse(question.question);
-                                            return (<><small className='fs-8'>{msg[0]}</small></>);
-                                        })()} */}
+                                                 
                                                     <div className='mt-3'>{question.tags.split(" ").map(tag => <small className='mx-2 px-2 py-1' Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;">{tag}</small>)}</div>
                                                     <small className='d-flex flex-row-reverse'> asked {question.date.slice(0, 10)} at {question.date.slice(12, 16)} <p Style="color:#0074CC">{question.postedBy}&nbsp;</p></small>
-
-                                                    {/* <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -182,10 +273,50 @@ export default function Questions() {
 
 
 
+                    </div> */}
+
+                    <div className="all-questions">
+                        <div className="all-questions-container">
+                            <div className="all-questions-left">
+                                <div className="all-options">
+                                    <div className="all-option">
+                                        <p>0</p>
+                                        <span>votes</span>
+                                    </div>
+                                    <div className="all-option">
+                                        <p>0</p>
+                                        <span>Answers</span>
+                                    </div>
+                                    <div className="all-option">
+                                        <small>0 views</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="question-answer">
+                                <NavLink to='/viewQuestion'>question title.</NavLink>
+                                <div style={{ width: "90%", }}>
+                                    <div>This is an answer of the question.</div>
+                                </div>
+                                <div style={{ display: "flex" }}>
+                                    <span className="question-tags">react</span>
+                                    <span className="question-tags">frontend</span>
+                                    <span className="question-tags">development</span>
+                                </div>
+                                <div className="author">
+                                    <small>Timestamp</small>
+                                    <div className="author-details">
+                                        {/* <Avatar/> */}
+                                        <p>user name</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                </div>
+
+            </div>
         </>
 
     )
