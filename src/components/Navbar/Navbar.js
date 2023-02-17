@@ -1,6 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import NotificationBox from './NotificationBox'
 import { useState, useEffect } from 'react'
+import './Navbar.css'
 // var well = {
 //   boxShadow: "0px 0px 10px 0px #f0f0f0"
 // }
@@ -15,16 +17,17 @@ var title = {
 export default function Navbar() {
 
   const [loginStatus, setLoginStatus] = useState(false);
- 
+  const [show, setShow] = useState(false);
+
   const isLoggedin = () => {
     if (localStorage.getItem('username') !== null) {
-      
+
       setLoginStatus(true);
     }
   }
 
   const logout = () => {
-   
+
     localStorage.removeItem('username');
 
 
@@ -35,7 +38,7 @@ export default function Navbar() {
     // navigate("/");
 
 
-}
+  }
 
   useEffect(() => {
     isLoggedin();
@@ -88,6 +91,9 @@ export default function Navbar() {
 
             <NavLink to='/profile' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>
             <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
+
+            <button className='btn btn-white  mr-2' onClick={() => setShow(!show)}><i className="fas fa-bell"></i></button>
+            
             <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
             <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
 
@@ -117,7 +123,18 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-
+      {
+              show && (
+                <div className="title">
+                  <NotificationBox 
+        description="Here all notifications will be displayed." 
+      
+        title="For Notifications" className="box"
+        /> 
+                  {/* <textarea className="notification" type="text" placeholder="Add Your comment.." rows={10} cols={6}></textarea> */}
+                </div>
+              )
+            }
     </div>
   )
 }
