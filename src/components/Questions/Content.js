@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Bookmark } from "@mui/icons-material";
 import { History } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
-import '../ViewQuestion/MainQuestion.css'
+import './content.css'
 import Sidebar from '../Sidebar/Sidebar';
 
 export default function Content(props) {
