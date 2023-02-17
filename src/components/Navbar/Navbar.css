@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+
+.title{
+    width:25%;
+     position: absolute;
+     top: 40px;
+     right: 20px;
+     z-index: 1;
+}
+
+body {
+  box-sizing: border-box;
+}
+h1, h2 {
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+  text-align: left;
+}
+h2 {
+  color: #9E9E9E;
+  font-style: italic;
+  font-size: 15px;
+}
+.card2 {
+  background-color: #eee;
+  margin: 50px auto;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  height: 50vh;
+}
+.card__copy {
+  padding: 20px;
+}
