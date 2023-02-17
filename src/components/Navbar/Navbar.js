@@ -125,7 +125,7 @@ export default function Navbar() {
       </nav>
       {
               show && (
-                <div className="title">
+                <div className="title1">
                   <NotificationBox 
         description="Here all notifications will be displayed." 
       

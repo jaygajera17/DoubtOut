@@ -76,3 +76,21 @@
     font-size:small;
     color:#0151f0d8;
 }
+
+/* css of filter pop-up and card  */
+.card3 {
+    background-color: #eee;
+    margin: 50px auto;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 10px;
+    height: 22vh;
+  }
+
+  .filter_main{
+     width:10%;
+     position: absolute;
+     top: 190px;
+     right: 35px;
+     z-index: 1;
+  }
