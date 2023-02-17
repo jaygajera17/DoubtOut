@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { FilterList } from '@mui/icons-material';
 import './header.css';
-import AllQuestions from '../AllQuestions/AllQuestions';
+
 
 export default function Header() {
   return (
@@ -36,7 +36,7 @@ export default function Header() {
             </div>
             <div className="questions">
                 <div className="question">
-                    <AllQuestions/>
+                  
                 </div>
                  
             </div>
