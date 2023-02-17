@@ -32,3 +32,9 @@ h2 {
 .card__copy {
   padding: 20px;
 }
+
+
+.dropdown:hover .dropdown-menu{
+  display: block;
+  border-style:none;
+  }

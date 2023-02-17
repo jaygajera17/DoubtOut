@@ -49,7 +49,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; position:fixed;top:0; z-index:9999; width:100%;">
         {/* <img src={require('./Doubt2.jpg')}   height="30" width="30" alt="image" /> */}
         <div className="container-fluid">
-          <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black' }}>
+          <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black' ,paddingTop:"10px"}}>
             <a href="/" style={iconstyle}>
               &nbsp;<i style={title}>Doubt</i><b>Out</b>
             </a>
@@ -58,7 +58,7 @@ export default function Navbar() {
 
           <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ bsSscrollHheight: "100px" }}>
             <li className="nav-item dropdown" >
-              <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'black' }}>
+              <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button"  aria-expanded="false" style={{ color: 'black' }}>
                 Products
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{ color: 'black' }}>
