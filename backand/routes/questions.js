@@ -22,6 +22,7 @@ router.post('/addquestion', fetchuser, async(req, res)=>{
             question: req.body.question,
             tags : req.body.tags,
             postedBy: req.user.username,
+            votes: 0
         })
 
         res.json({"Success" : "Added Query Successfully", "status":true})
@@ -80,4 +81,55 @@ router.post('/fetchUserQuestions/:username', async(req, res)=>{
         res.status(500).send("Internal Server Error");
     }
 })
+
+router.post("/upvote/:id", async (req, res) => {
+    try {
+        const question = await Question.findById(req.params.id);
+
+        const vote = question["votes"] + 1;
+
+        const updatedAnswer = await Question.findByIdAndUpdate(req.params.id, { $set: { "votes": vote } });
+
+        res.json({"status": "upvoted"});
+    }
+
+    catch (e) {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/downvote/:id", async (req, res) => {
+    try {
+        const question = await Question.findById(req.params.id);
+
+        const vote = question["votes"] - 1;
+
+        const updatedAnswer = await Question.findByIdAndUpdate(req.params.id, { $set: { "votes": vote } });
+
+        res.json({"status": "downvoted"});
+    }
+
+    catch (e) {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/fetchVotes/:id", async (req, res) => {
+    const question = await Question.findById(req.params.id);
+   
+    res.json(question.votes);
+})
+
+router.post("/fetchallVotes", async (req, res) => {
+    const allQuestion = await Question.find();
+    const obj = {};
+
+    allQuestion.map(que => {
+        obj[que._id] = que.votes;
+    })
+    res.json(obj);
+})
+
 module.exports = router

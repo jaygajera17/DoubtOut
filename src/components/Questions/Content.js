@@ -9,6 +9,7 @@ import { Avatar } from "@mui/material";
 import './content.css'
 import Sidebar from '../Sidebar/Sidebar';
 
+
 export default function Content(props) {
 
     const navigate = useNavigate();
@@ -23,6 +24,8 @@ export default function Content(props) {
     const [voteStatus, setVoteStatus] = useState({});
     const [loginstatus, setloginstatus] = useState(false);
     const [show, setShow] = useState(false);
+    const [quevoteStatus, setqueVoteStatus] = useState({});
+    const [queVote, setQueVote] = useState();
 
     const config = {
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
@@ -93,6 +96,24 @@ export default function Content(props) {
 
     }
 
+    const upvoteQue = async(e, id)=>{
+
+        if(localStorage.getItem("username") !== null)
+        {
+            e.preventDefault();
+
+            const response = await fetch(`http://localhost:5000/api/question/upvote/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            let json = await response.json();
+            setqueVoteStatus(json);
+        }
+    }
+
     const upvote = async (e, id) => {
 
         if (localStorage.getItem("username") !== null) {
@@ -116,6 +137,24 @@ export default function Content(props) {
 
     }
 
+    const downvoteQue = async(e, id)=>{
+        if (localStorage.getItem("username") !== null) {
+            e.preventDefault();
+            const response = await fetch(`http://localhost:5000/api/question/downvote/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            let json = await response.json();
+
+            setqueVoteStatus(json);
+        }
+        else {
+            navigate("/login");
+        }
+    }
     const downvote = async (e, id) => {
 
         if (localStorage.getItem("username") !== null) {
@@ -154,13 +193,29 @@ export default function Content(props) {
 
     }
 
+    const fetchQueVotes = async(id)=>{
+
+        
+        const response = await fetch(`http://localhost:5000/api/question/fetchVotes/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        let json = await response.json();
+
+        setQueVote(json);
+    }
+
     useEffect(() => {
         isLoggedIn();
         fetchQuestion(params.type);
         fetchAnswers(params.type);
         fetchVotes();
+        fetchQueVotes(question._id);
         // convertToHTML();
-    }, [state, voteStatus])
+    }, [state, voteStatus, quevoteStatus,question])
 
     return (
         <div Style="height:100vh; margin-top:10vh; z-index:1; background-color:white">
@@ -199,9 +254,9 @@ export default function Content(props) {
                                 <div className="question-container">
                                     <div className="question-left">
                                         <div className="all-options">
-                                            <p className="arrow"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></p>
-                                            <p className="arrow">0</p>
-                                            <p className="arrow"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></p>
+                                            <p className="arrow" onClick={(e) => upvoteQue(e, question._id)}><i className="fa fa-caret-up" Style="font-size: 35px;"></i></p>
+                                            <p className="arrow">{queVote}</p>
+                                            <p className="arrow" onClick={(e) => downvoteQue(e, question._id)}><i className="fa fa-caret-down" Style="font-size: 35px;"></i></p>
                                             <Bookmark></Bookmark>
                                             <History></History>
                                         </div>
