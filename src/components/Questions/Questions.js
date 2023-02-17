@@ -12,6 +12,7 @@ export default function Questions() {
     const navigate = useNavigate();
     const [questions, setQuestions] = useState([])
     const [noOfAns, setnoOfAns] = useState({});
+    const [vote, setVotes]  = useState({});
 
     //for pop-up of filter...
     const [showFilter, setShowFilter] = useState(false);
@@ -53,9 +54,24 @@ export default function Questions() {
 
 
     }
+
+    const fetchVotes = async()=>{
+
+        const response = await fetch(`http://localhost:5000/api/question/fetchallVotes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        let json = await response.json();
+        setVotes(json);
+
+    }
     useEffect(() => {
         fetchAllQuestions();
         FindFrequencyOfAns();
+        fetchVotes();
 
     }, [])
 
@@ -126,7 +142,7 @@ export default function Questions() {
                                                                 <div className="all-questions-left">
                                                                     <div className="all-options">
                                                                         <div className="all-option">
-                                                                            <p>0</p>
+                                                                            <p>{vote[question._id]}</p>
                                                                             <span>votes</span>
                                                                         </div>
                                                                         <div className="all-option">
