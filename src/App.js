@@ -11,7 +11,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import UserQuestionContent from './components/Profile/Content';
-
+import Admin from './components/Admin/user';
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
         <Route path="/question/:type" element = {<Content />}></Route>
         <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/admin' element={<Admin />}></Route>
       </Routes>
       {/* <Footer /> */}
      </BrowserRouter>

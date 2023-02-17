@@ -53,7 +53,6 @@ router.post('/fetchQueById/:id', async(req, res)=>{
             return res.status(404).send("Question not Found");
 
         }
-
         res.json(question);
     }
     catch(e){
