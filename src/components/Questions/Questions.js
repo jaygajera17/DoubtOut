@@ -14,6 +14,8 @@ export default function Questions() {
     const [noOfAns, setnoOfAns] = useState({});
     const [vote, setVotes]  = useState({});
 
+    //for pop-up of filter...
+    const [showFilter, setShowFilter] = useState(false);
 
     const fetchAllQuestions = async () => {
         await fetch("http://localhost:5000/api/question/fetchquestions", {
@@ -79,7 +81,7 @@ export default function Questions() {
 
             <div Style="height:100%; margin-top:13vh; z-index:1; background-color:white">
                 <div class="">
-                
+
 
                     <div className="stack-index">
                         <div className="stack-index-content" >
@@ -108,10 +110,26 @@ export default function Questions() {
                                                 </div>
                                             </div>
 
-                                            <div className="main-filter-item">
+                                            {/* filter functionality */}
+                                            <div className="main-filter-item" onClick={() => 
+                                                setShowFilter(!showFilter)
+                                            }>
                                                 <FilterList style={{ fontSize: '21px' }} />
                                                 <p className="filter-text">Filter</p>
                                             </div>
+                                            
+                                            {
+                                                showFilter && (
+                                                    <div className="filter_main">
+                                                        <div className="card3">
+                                                            <p>tag</p>
+                                                            <p>answered</p>
+                                                            <p>unanswered</p>
+                                                            <p>4</p>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                     <div className="questions">
