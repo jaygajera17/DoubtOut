@@ -27,6 +27,8 @@ export default function Content(props) {
     const [quevoteStatus, setqueVoteStatus] = useState({});
     const [queVote, setQueVote] = useState();
 
+    const [comment, setComment] = useState({});
+
     const config = {
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
     };
@@ -96,10 +98,9 @@ export default function Content(props) {
 
     }
 
-    const upvoteQue = async(e, id)=>{
+    const upvoteQue = async (e, id) => {
 
-        if(localStorage.getItem("username") !== null)
-        {
+        if (localStorage.getItem("username") !== null) {
             e.preventDefault();
 
             const response = await fetch(`http://localhost:5000/api/question/upvote/${id}`, {
@@ -137,7 +138,7 @@ export default function Content(props) {
 
     }
 
-    const downvoteQue = async(e, id)=>{
+    const downvoteQue = async (e, id) => {
         if (localStorage.getItem("username") !== null) {
             e.preventDefault();
             const response = await fetch(`http://localhost:5000/api/question/downvote/${id}`, {
@@ -193,9 +194,9 @@ export default function Content(props) {
 
     }
 
-    const fetchQueVotes = async(id)=>{
+    const fetchQueVotes = async (id) => {
 
-        
+
         const response = await fetch(`http://localhost:5000/api/question/fetchVotes/${id}`, {
             method: 'POST',
             headers: {
@@ -208,6 +209,23 @@ export default function Content(props) {
         setQueVote(json);
     }
 
+    const onChange = (e) => {
+        setComment({ ...comment, [e.target.name]: e.target.value })
+    }
+
+    const addComment = async (e, id) => {
+        e.preventDefault();
+
+        const response = await fetch(`http://localhost:5000/api/comment/addcomment/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ comment: comment.comment, qid: question._id }),
+        });
+        const json = await response.json()
+    }
+
     useEffect(() => {
         isLoggedIn();
         fetchQuestion(params.type);
@@ -215,7 +233,7 @@ export default function Content(props) {
         fetchVotes();
         fetchQueVotes(question._id);
         // convertToHTML();
-    }, [state, voteStatus, quevoteStatus,question])
+    }, [state, voteStatus, quevoteStatus, question])
 
     return (
         <div Style="height:100vh; margin-top:10vh; z-index:1; background-color:white">
@@ -270,23 +288,7 @@ export default function Content(props) {
                                                 <p>author name</p>
                                             </div>
                                         </div>
-                                        <div className="comments">
-                                            <div className="comment">
-                                                <p>This is comment..
-                                                    <span>username</span>
-                                                    <small>Timestamp</small>
-                                                </p>
-                                            </div>
-                                            <p onClick={() => setShow(!show)}>Add a comment</p>
-                                            {
-                                                show && (
-                                                    <div className="title">
-                                                        <textarea type="text" placeholder="Add Your comment.." rows={5}></textarea>
-                                                        <button>Add comment</button>
-                                                    </div>
-                                                )
-                                            }
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -324,6 +326,25 @@ export default function Content(props) {
                                                                 <Avatar></Avatar>
                                                                 <p>author name</p>
                                                             </div>
+                                                        </div>
+                                                        <div className="comments">
+                                                            <div className="comment">
+                                                                <p>This is comment..
+                                                                    <span>username</span>
+                                                                    <small>Timestamp</small>
+                                                                </p>
+                                                            </div>
+                                                            <p onClick={() => setShow(!show)}>Add a comment</p>
+                                                            {
+                                                                show && (
+                                                                    <div className="title">
+                                                                        <form onSubmit={(e)=> addComment(e, ans._id)} method = "POST">
+                                                                        <textarea type="text" placeholder="Add Your comment.." rows={5} onChange={onChange} name="comment"></textarea>
+                                                                        <button type="submit">Add comment</button>
+                                                                        </form>
+                                                                    </div>
+                                                                )
+                                                            }
                                                         </div>
                                                     </div>
 
