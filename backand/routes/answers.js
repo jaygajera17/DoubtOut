@@ -9,11 +9,13 @@ const LocalStorage = require('node-localStorage').LocalStorage;
 var localStorage = new LocalStorage('./scratch');
 
 const router = express.Router();
+const mongoose = require('mongoose')
 
 router.post('/addanswer/:id',fetchuser, async (req, res) => {
     try {
 
-        let answer = await Answer.create({
+        // console.log(req.params.id);
+        let newanswer = await Answer.create({
             questionid: req.params.id,
             answer: req.body.answer,
             postedId: req.user.id,

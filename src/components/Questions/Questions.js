@@ -43,17 +43,17 @@ export default function Questions() {
 
     }
 
-    const askQue = () => {
+    // const askQue = () => {
 
-        if (localStorage.getItem("username") !== null) {
-            navigate("/editor");
-        }
-        else {
-            navigate("/login");
-        }
+    //     if (localStorage.getItem("username") !== null) {
+    //         navigate("/editor");
+    //     }
+    //     else {
+    //         navigate("/login");
+    //     }
 
 
-    }
+    // }
 
     const fetchVotes = async()=>{
 

@@ -1,14 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import parse from "html-react-parser";
 import JoditEditor from "jodit-react";
 import { useNavigate } from 'react-router-dom';
-import { Bookmark } from "@mui/icons-material";
-import { History } from "@mui/icons-material";
-import { Avatar } from "@mui/material";
-import './content.css'
-import Sidebar from '../Sidebar/Sidebar';
-
 
 export default function Content(props) {
 
@@ -23,11 +17,9 @@ export default function Content(props) {
     const [vote, setVotes] = useState({});
     const [voteStatus, setVoteStatus] = useState({});
     const [loginstatus, setloginstatus] = useState(false);
-    const [show, setShow] = useState(false);
     const [quevoteStatus, setqueVoteStatus] = useState({});
     const [queVote, setQueVote] = useState();
 
-    const [comment, setComment] = useState({});
 
     const config = {
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
@@ -84,7 +76,7 @@ export default function Content(props) {
                 'Content-Type': 'application/json'
             },
 
-            body: JSON.stringify({ answer: value, votes: 0 }),
+            body: JSON.stringify({ answer: value, postedId: '63ae78ac00418318bfbfc2a8', postedBy: 'JayGajera', votes: 0 }),
         });
 
         const json = await response.json()
@@ -115,6 +107,25 @@ export default function Content(props) {
         }
     }
 
+    const downvoteQue = async (e, id) => {
+        if (localStorage.getItem("username") !== null) {
+            e.preventDefault();
+            const response = await fetch(`http://localhost:5000/api/question/downvote/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            let json = await response.json();
+
+            setqueVoteStatus(json);
+        }
+        else {
+            navigate("/login");
+        }
+    }
+
     const upvote = async (e, id) => {
 
         if (localStorage.getItem("username") !== null) {
@@ -138,24 +149,6 @@ export default function Content(props) {
 
     }
 
-    const downvoteQue = async (e, id) => {
-        if (localStorage.getItem("username") !== null) {
-            e.preventDefault();
-            const response = await fetch(`http://localhost:5000/api/question/downvote/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
-
-            let json = await response.json();
-
-            setqueVoteStatus(json);
-        }
-        else {
-            navigate("/login");
-        }
-    }
     const downvote = async (e, id) => {
 
         if (localStorage.getItem("username") !== null) {
@@ -209,34 +202,18 @@ export default function Content(props) {
         setQueVote(json);
     }
 
-    const onChange = (e) => {
-        setComment({ ...comment, [e.target.name]: e.target.value })
-    }
-
-    const addComment = async (e, id) => {
-        e.preventDefault();
-
-        const response = await fetch(`http://localhost:5000/api/comment/addcomment/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ comment: comment.comment, qid: question._id }),
-        });
-        const json = await response.json()
-    }
 
     useEffect(() => {
         isLoggedIn();
         fetchQuestion(params.type);
         fetchAnswers(params.type);
         fetchVotes();
-        fetchQueVotes(question._id);
+        fetchQueVotes(params.type);
         // convertToHTML();
     }, [state, voteStatus, quevoteStatus, question])
 
     return (
-        <div Style="height:100vh; margin-top:10vh; z-index:1; background-color:white">
+        <div Style="height:100vh; margin-top:13vh; z-index:1; background-color:white">
             {(
                 () => {
                     if (state === true) {
@@ -251,158 +228,21 @@ export default function Content(props) {
                     }
                 }
             )()}
-            <div className="stack-index">
-                <div className="stack-index-content" >
-                    <Sidebar />
+            <div className="container" Style="height:100vh;width:70%;display:block; margin:auto;">
 
-                    <div className="main" id="main2">
-                        <div className="main-container">
-                            <div className="main-top">
-                                <h2 className="main-question">{question.title}</h2>
-                                <NavLink to="/editor"><button>Ask Question</button></NavLink>
-                            </div>
-                            <div className="main-desc">
-                                <div className="info">
-                                    <p>Timestamp</p>
-                                    <p>Active<span>today</span></p>
-                                    <p>Viewd<span>10 times</span></p>
-                                </div>
-                            </div>
-                            <div className="question">
-                                <div className="question-container">
-                                    <div className="question-left">
-                                        <div className="all-options">
-                                            <p className="arrow" onClick={(e) => upvoteQue(e, question._id)}><i className="fa fa-caret-up" Style="font-size: 35px;"></i></p>
-                                            <p className="arrow">{queVote}</p>
-                                            <p className="arrow" onClick={(e) => downvoteQue(e, question._id)}><i className="fa fa-caret-down" Style="font-size: 35px;"></i></p>
-                                            <Bookmark></Bookmark>
-                                            <History></History>
-                                        </div>
-                                    </div>
-                                    <div className="question-body">
-                                        <p>{html}</p>
-                                        <div className="author">
-                                            <small>asked "Timestamp"</small>
-                                            <div className="auth-details">
-                                                <Avatar></Avatar>
-                                                <p>author name</p>
-                                            </div>
-                                        </div>
+                <div className="d-flex flex-row">
+                    <div className="d-flex flex-column col-md-0 mt-0 mx-0">
+                        <button className='btn btn-white' onClick={(e) => upvoteQue(e, question._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
+                        <div className='mx-3'>{queVote}</div>
+                        <button className='btn btn-white' onClick={(e) => downvoteQue(e, question._id)} Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
 
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="all-answer">
-                                <h4>{answers.length}  Answers</h4>
-
-                                {answers.length > 0 && (
-                                    <ul>
-                                        {answers.map(ans => (
-                                            <>
-                                                <div className="all-answer-container">
-                                                    <div className="question-left">
-                                                        <div className="all-options">
-                                                            {/* <p className="arrow"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></p> */}
-                                                            <p className='arrow btn btn-white' onClick={(e) => upvote(e, ans._id)} ><i className="fa fa-caret-up" Style="font-size: 35px;"></i></p>
-                                                            <p className='arrow'>{vote[ans._id]}</p>
-                                                            <p className='arrow btn btn-white' onClick={(e) => downvote(e, ans._id)}><i className="fa fa-caret-down" Style="font-size: 35px;"></i></p>
-                                                            {(
-                                                                () => {
-                                                                    if (ans.status === "Accepted") {
-                                                                        return (<><button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;color:lightgreen;"></i></button></>)
-                                                                    }
-                                                                }
-                                                            )()}
-                                                            {/* <p className="arrow"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></p> */}
-                                                            <Bookmark></Bookmark>
-                                                            <History></History>
-                                                        </div>
-                                                    </div>
-                                                    <div className="question-body">
-                                                        <p>{parse(ans.answer)}</p>
-                                                        <div className="author">
-                                                            <small>asked "Timestamp"</small>
-                                                            <div className="auth-details">
-                                                                <Avatar></Avatar>
-                                                                <p>author name</p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="comments">
-                                                            <div className="comment">
-                                                                <p>This is comment..
-                                                                    <span>username</span>
-                                                                    <small>Timestamp</small>
-                                                                </p>
-                                                            </div>
-                                                            <p onClick={() => setShow(!show)}>Add a comment</p>
-                                                            {
-                                                                show && (
-                                                                    <div className="title">
-                                                                        <form onSubmit={(e)=> addComment(e, ans._id)} method = "POST">
-                                                                        <textarea type="text" placeholder="Add Your comment.." rows={5} onChange={onChange} name="comment"></textarea>
-                                                                        <button type="submit">Add comment</button>
-                                                                        </form>
-                                                                    </div>
-                                                                )
-                                                            }
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <hr style={{
-                                                    background: "black",
-                                                    height: "2px",
-                                                    border: "none",
-                                                }}
-                                                /><hr />
-                                            </>
-                                        ))}
-                                    </ul>
-                                )}
-
-                            </div>
-
-                        </div>
-                        <div className="main-answer">
-                            <h3>Your Answer</h3>
-                            <form onSubmit={(e) => handleSubmit(e, question._id)} method='POST'>
-                                <JoditEditor
-                                    // ref={editor}
-                                    // value={props.initialValue}
-                                    config={config}
-                                    tabIndex={1}
-                                //   onBlur={(newContent) => getValue(newContent)}
-                                // onChange={(newContent) => getValue(newContent)}
-                                />
-                                {
-                                    loginstatus === true ? (<button type='submit' className="btn btn-primary mt-5 mb-3" style={{ maxWidth: "fit-content" }}>Post Your Answer</button>) : <></>
-                                }
-                            </form>
-                        </div>
-                        {/* <button style={{ maxWidth: "fit-content" }}>Post Your Answer</button> */}
 
                     </div>
+                    <div class="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
+                        <h1>{question.title}</h1>
+                        <div className='mt-5'>{html}</div>
+                    </div>
                 </div>
-            </div>
-
-            {/* {(
-                () => {
-                    if (state === true) {
-
-                        return (<>
-                            <div class="alert alert-success alert-dismissible" role="alert">
-                                Your Answer is Posted <strong>Successfully</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        </>)
-
-                    }
-                }
-            )()} */}
-            {/* <div className="container" Style="height:100vh;width:70%;display:block; margin:auto;">
-
-                <h1>{question.title}</h1>
-                <div className='mt-5'>{html}</div>
                 <hr style={{
                     background: "black",
                     height: "2px",
@@ -424,39 +264,20 @@ export default function Content(props) {
                                         {(
                                             () => {
                                                 if (ans.status === "Accepted") {
-                                                    return (<><button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;color:lightgreen;"></i></button></>) 
+                                                    return (<><button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;color:lightgreen;"></i></button></>)
                                                 }
                                             }
                                         )()}
-                                  <div className='mx-2'>
-                                        <HistorySharp/>
-                                        <Bookmark />
-                                        </div>
                                     </div>
                                     <div class="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                                         <p>{parse(ans.answer)}</p>
 
-                                         <div className='auth-detail'>
-                                        <small >Posted By : <Avatar /> {ans.postedBy}</small>
-                                        </div>
-                                    </div>
-                                    <div className="comments">
-                                        <div className='comment'>
-                                            <p>This is comment - <span> User name </span> </p>
-                                        </div>
-                                        <p onClick={()=> setShow(!show)}> add a comment</p>
-                                        {
-                                            show && (<div className='title'>
-                                                <textarea type = "text" placeholder="add your comment..." rows={5} style={{
 
-                                                }}> </textarea>
-                                                <button> Add Comment </button>
-                                                </div>
-                                                )}
+                                        <small className='d-flex flex-row-reverse'>Posted By : {ans.postedBy}</small>
                                     </div>
                                 </div>
 
-                                
+                                {/* <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
 
                                 <hr style={{
                                     background: "#959595",
@@ -487,7 +308,7 @@ export default function Content(props) {
                     }
 
                 </form>
-            </div> */}
-        </div >
+            </div>
+        </div>
     )
 }

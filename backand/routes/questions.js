@@ -6,6 +6,8 @@ const User = require("../models/User");
 // const { body, validationResult } = require('express-validator');
 // const bcrypt = require('bcryptjs');
 const fetchuser = require('../middleware/fetchuser');
+const mongoose = require('mongoose')
+
 // var jwt = require('jsonwebtoken');
 
 // const JWT_SECRET = 'Darshitisagoodboy';
@@ -46,13 +48,17 @@ router.post('/fetchquestions', async(req, res)=>{
 router.post('/fetchQueById/:id', async(req, res)=>{
 
     try{
-        const question = await Question.findById(req.params.id);
+        
+        
+        
+        let question = await Question.findOne({_id : req.params.id});
+        // question=question[0]
 
         if(!question)
         {
             return res.status(404).send("Question not Found");
-
         }
+        // console.log()
         res.json(question);
     }
     catch(e){
