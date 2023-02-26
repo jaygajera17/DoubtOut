@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef , useMemo} from 'react';
 import { useParams } from 'react-router-dom';
 import parse from "html-react-parser";
 import JoditEditor from "jodit-react";
@@ -21,9 +21,10 @@ export default function Content(props) {
     const [queVote, setQueVote] = useState();
 
 
-    const config = {
+    const config = useMemo(() => ({
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
-    };
+    }), []);
+    
 
     const isLoggedIn = () => {
         if (localStorage.getItem('username') !== null) {
@@ -62,8 +63,8 @@ export default function Content(props) {
         })
     }
 
-    const getValue = (value) => {
-        setValue(value);
+    const getValue = (newvalue) => {
+        setValue(newvalue);
     };
 
 
@@ -84,6 +85,7 @@ export default function Content(props) {
 
         if (json["status"] === true) {
             setState(true);
+            setValue("");
             window.scrollTo(0, 0)
         }
 
@@ -298,10 +300,11 @@ export default function Content(props) {
                         config={config}
                         tabIndex={1}
                         value={value}
-                        onBlur={(newContent) => getValue(newContent)}
-                    // onChange={(newContent) => getValue(newContent)}
+                        // onBlur={(newContent) => getValue(newContent)}
+                        onChange={(newContent) => getValue(newContent)}
 
                     />
+
 
                     {
                         loginstatus === true ? (<button type='submit' className="btn btn-primary mt-5 mb-3">Post Your Answer</button>) : <></>
