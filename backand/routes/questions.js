@@ -45,6 +45,17 @@ router.post('/fetchquestions', async(req, res)=>{
         res.status(500).send("Internal server error");
     }
 })
+
+router.post('/fetchQueByHigherVotes', async (req,res)=>{
+    try{
+        const questions = await Question.find({}).sort({votes : -1});
+        res.json(questions);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal server error");
+    }
+})
 router.post('/fetchQueById/:id', async(req, res)=>{
 
     try{

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
-import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import './questions.css';
 import { FilterList } from '@mui/icons-material';
@@ -9,7 +8,7 @@ import '../Header/header.css';
 
 export default function Questions() {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [questions, setQuestions] = useState([])
     const [noOfAns, setnoOfAns] = useState({});
     const [vote, setVotes]  = useState({});
@@ -68,6 +67,18 @@ export default function Questions() {
         setVotes(json);
 
     }
+
+    const sortByVotes = async () => {
+        await fetch("http://localhost:5000/api/question/fetchQueByHigherVotes", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return response.json();
+        }).then(data => setQuestions(data))
+    }
+
     useEffect(() => {
         fetchAllQuestions();
         FindFrequencyOfAns();
@@ -103,7 +114,7 @@ export default function Questions() {
                                                     <NavLink className="tab">Newest</NavLink>
                                                 </div>
                                                 <div className="main-tab">
-                                                    <NavLink>Active</NavLink>
+                                                    <NavLink onClick={sortByVotes}>Votes</NavLink>
                                                 </div>
                                                 <div className="main-tab">
                                                     <NavLink Style="color: rgb(125, 119, 119);">More</NavLink>
@@ -111,8 +122,12 @@ export default function Questions() {
                                             </div>
 
                                             {/* filter functionality */}
-                                            <div className="main-filter-item" onClick={() => 
-                                                setShowFilter(!showFilter)
+                                            <div className="main-filter-item" onClick={(e) => 
+                                               { 
+                                                e.persist();
+                                                setShowFilter(!showFilter);
+                                                 
+                                               }
                                             }>
                                                 <FilterList style={{ fontSize: '21px' }} />
                                                 <p className="filter-text">Filter</p>

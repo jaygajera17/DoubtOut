@@ -20,7 +20,7 @@ router.post('/addanswer/:id',fetchuser, async (req, res) => {
             answer: req.body.answer,
             postedId: req.user.id,
             postedBy: req.user.username,
-            votes: req.body.votes
+            votes: 0
         })
 
         res.json({ "Success": "Added Answer Successfully", "status": true })
