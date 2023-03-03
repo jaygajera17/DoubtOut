@@ -16,6 +16,7 @@
     "html-react-parser": "^3.0.4",
     "jodit-react": "^1.3.32",
     "jquery": "^3.6.3",
+    "mongodb": "^2.2.16",
     "node-localstorage": "^2.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
