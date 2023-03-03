@@ -15,11 +15,8 @@ app.use(cors());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/question", require("./routes/questions"));
 app.use("/api/answer", require("./routes/answers"));
-<<<<<<< HEAD
 app.use("/api/comment", require("./routes/comment"));
-=======
 app.use("/api/admin", require("./routes/admin"));
->>>>>>> 0a775c38d76425c9df680d09ff5b8773be9004d4
 
 
 
