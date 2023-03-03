@@ -12,13 +12,9 @@ import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import UserQuestionContent from './components/Profile/Content';
 import Admin from './components/Admin/user';
-<<<<<<< HEAD
 import Chart from './components/charts/Chart';
 import MyQuestions from './components/MyQuestions/MyQuestions';
 import MyAnswers from './components/MyAnswers/MyAnswers';
-=======
-import Tags from './components/Tags/Tags';
->>>>>>> ec32a564b7ac227563763f5b1fc4b46ec487270f
 
 function App() {
   return (
@@ -37,14 +33,10 @@ function App() {
         <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
-<<<<<<< HEAD
         <Route path='/chart' element={<Chart />}></Route>
         <Route path='/myquestions' element={<MyQuestions />}></Route>
         <Route path='/myanswers' element={<MyAnswers />}></Route>
         
-=======
-        <Route path = "/tags" element = {<Tags/>}></Route>
->>>>>>> ec32a564b7ac227563763f5b1fc4b46ec487270f
       </Routes>
       {/* <Footer /> */}
      </BrowserRouter>
