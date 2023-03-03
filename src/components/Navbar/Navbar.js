@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom'
 import NotificationBox from './NotificationBox'
 import { useState, useEffect } from 'react'
 import './Navbar.css'
+
+// const nodemailer = require("nodemailer");
 // var well = {
 //   boxShadow: "0px 0px 10px 0px #f0f0f0"
 // }
@@ -25,6 +27,29 @@ export default function Navbar() {
       setLoginStatus(true);
     }
   }
+
+  // const sendMail = async (req, res) => {
+
+  //   let testAccount = await nodemailer.createTestAccount();
+
+
+  //   let transporter = nodemailer.createTransport({
+  //     host: "smtp.ethereal.email",
+  //     port: 587,
+  //     auth: {
+  //       user: 'wendell10@ethereal.email',
+  //       pass: 'bGGZ1vN5shVuVzDGJZ'
+  //     },
+  //   });
+
+  //   let info = await transporter.sendMail({
+  //     from: '"Fred Foo 👻" <foo@example.com>', // sender address
+  //     to: "darshitbhuva1@gmail.com", // list of receivers
+  //     subject: "Hello ✔", // Subject line
+  //     text: "Hello world?", // plain text body
+  //     html: "<b>Hello world?</b>", // html body
+  //   });
+  // }
 
   const logout = () => {
 
@@ -49,7 +74,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; position:fixed;top:0; z-index:9999; width:100%;">
         {/* <img src={require('./Doubt2.jpg')}   height="30" width="30" alt="image" /> */}
         <div className="container-fluid">
-          <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black' ,paddingTop:"10px"}}>
+          <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black', paddingTop: "10px" }}>
             <a href="/" style={iconstyle}>
               &nbsp;<i style={title}>Doubt</i><b>Out</b>
             </a>
@@ -58,7 +83,7 @@ export default function Navbar() {
 
           <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ bsSscrollHheight: "100px" }}>
             <li className="nav-item dropdown" >
-              <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button"  aria-expanded="false" style={{ color: 'black' }}>
+              <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button" aria-expanded="false" style={{ color: 'black' }}>
                 Products
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{ color: 'black' }}>
@@ -93,7 +118,7 @@ export default function Navbar() {
             <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
 
             <button className='btn btn-white  mr-2' onClick={() => setShow(!show)}><i className="fas fa-bell"></i></button>
-            
+
             <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
             <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
 
@@ -124,17 +149,17 @@ export default function Navbar() {
         </div>
       </nav>
       {
-              show && (
-                <div className="title1">
-                  <NotificationBox 
-        description="Here all notifications will be displayed." 
-      
-        title="For Notifications" className="box"
-        /> 
-                  {/* <textarea className="notification" type="text" placeholder="Add Your comment.." rows={10} cols={6}></textarea> */}
-                </div>
-              )
-            }
+        show && (
+          <div className="title1">
+            <NotificationBox
+              description="Here all notifications will be displayed."
+
+              title="For Notifications" className="box"
+            />
+            {/* <textarea className="notification" type="text" placeholder="Add Your comment.." rows={10} cols={6}></textarea> */}
+          </div>
+        )
+      }
     </div>
   )
 }
