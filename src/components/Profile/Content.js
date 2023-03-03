@@ -10,7 +10,7 @@ export default function Content(props) {
     const params = useParams();
     // const [value, setValue] = useState("");
     const [question, setQuestion] = useState([])
-    const [html, setHtml] = useState("");
+    const [html, setHtml]= useState("");
     // const [state, setState] = useState(false);
     const [answers, setAnswer] = useState([]);
     const [vote, setVotes] = useState({});

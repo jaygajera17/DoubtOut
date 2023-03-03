@@ -221,9 +221,9 @@ export default function Content(props) {
                     if (state === true) {
 
                         return (<>
-                            <div class="alert alert-success alert-dismissible" role="alert">
+                            <div className="alert alert-success alert-dismissible" role="alert">
                                 Your Answer is Posted <strong>Successfully</strong>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </>)
 
@@ -240,12 +240,12 @@ export default function Content(props) {
 
 
                     </div>
-                    <div class="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
+                    <div className="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                         <h1>{question.title}</h1>
                         <div className='mt-5'>{html}</div>
                     </div>
                 </div>
-                <hr style={{
+                <hr Style={{
                     background: "black",
                     height: "2px",
                     border: "none",
@@ -259,19 +259,19 @@ export default function Content(props) {
                             <div className="">
 
                                 <div className="d-flex flex-row">
-                                    <div class="d-flex flex-column col-md-0 mt-0 mx-0">
+                                    <div className="d-flex flex-column col-md-0 mt-0 mx-0">
                                         <button className='btn btn-white' onClick={(e) => upvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
                                         <div className='mx-3'>{vote[ans._id]}</div>
                                         <button className='btn btn-white' onClick={(e) => downvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
                                         {(
                                             () => {
                                                 if (ans.status === "Accepted") {
-                                                    return (<><button className='btn btn-white'><i class="fa fa-check" Style="font-size:25px;color:lightgreen;"></i></button></>)
+                                                    return (<><button className='btn btn-white'><i className="fa fa-check" Style="font-size:25px;color:lightgreen;"></i></button></>)
                                                 }
                                             }
                                         )()}
                                     </div>
-                                    <div class="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
+                                    <div className="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                                         <p>{parse(ans.answer)}</p>
 
 
@@ -279,9 +279,9 @@ export default function Content(props) {
                                     </div>
                                 </div>
 
-                                {/* <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
+                                {/* <p className="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p> */}
 
-                                <hr style={{
+                                <hr Style={{
                                     background: "#959595",
                                     height: "2px",
                                     border: "none",

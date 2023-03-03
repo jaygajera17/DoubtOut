@@ -6,19 +6,23 @@ import parse from 'html-react-parser';
 import Sidebar from '../Sidebar/Sidebar';
 import { Avatar } from '@mui/material';
 import './profile.css';
+import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
 
-// import CanvasJSReact from './canvasjs.react';
-// var CanvasJS = CanvasJSReact.CanvasJS;
-// var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import Posts from '../Questions/Posts';
+import Pagination from '../Questions/Pagination';
 
 import { PieChart } from 'react-minimal-pie-chart';
-
+import Chart from '../charts/Chart';
 
 export default function Profile() {
 
     const [questions, setQuestions] = useState([]);
     const [noOfAns, setnoOfAns] = useState({});
     const [points, setPoints] = useState(0);
+
+    // for pagination in profile
+    const [postPerPage] = useState(4);
+    const [currentPage, setcurrentPage] = useState(1);
 
     const fetchAllQuestions = async () => {
 
@@ -66,34 +70,16 @@ export default function Profile() {
         Points();
     }, [])
 
-    // const options = {
-    //     exportEnabled: true,
-    //     animationEnabled: true,
-    //     title: {
-    //         text: "Website Traffic Sources"
-    //     },
-    //     data: [{
-    //         type: "pie",
-    //         startAngle: 75,
-    //         toolTipContent: "<b>{label}</b>: {y}%",
-    //         showInLegend: "true",
-    //         legendText: "{label}",
-    //         indexLabelFontSize: 16,
-    //         indexLabel: "{label} - {y}%",
-    //         dataPoints: [
-    //             { y: 18, label: "Direct" },
-    //             { y: 49, label: "Organic Search" },
-    //             { y: 9, label: "Paid Search" },
-    //             { y: 5, label: "Referral" },
-    //             { y: 19, label: "Social" }
-    //         ]
-    //     }]
-    // }
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexOfFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = questions.slice(indexOfFirstPost, indexOfLastPost);
 
+    const paginate = pageNum => setcurrentPage(pageNum);
 
     return (
         <div className='container' Style="height:100vh; margin-top:13vh; z-index:1; background-color:white">
-            <Sidebar />
+            
+            <ProfileSidebar/>
 
             <div className='profile'>
                 <div className='ProfileAndName'>
@@ -104,55 +90,20 @@ export default function Profile() {
                     </div>
                 </div>
 
-                <hr Style="border: 0.7px solid"/>
+                <hr Style="border: 0.7px solid " />
 
-                <div className='allChart'>
-                    <div className='QuesChart'>
-                        <div className='title'>No of asked questions</div>
 
-                        <div>
-                            <PieChart lineWidth='60' viewBoxSize={[100, 100]}
-                                data={[
-                                    { title: 'React', value: 10, color: '#E38627' },
-                                    { title: 'Node', value: 25, color: '#C13C37' },
-                                    { title: 'Mongo', value: 5, color: '#6A2135' },
-                                ]}
-                            />
-                        </div>
+{/* 
+                <div className="questions">
+                    <div className="question">
+                        <Posts posts={currentPosts} />
                     </div>
 
-                    <div className='QuesChart'>
-                        <div className='title'>No of given answers.</div>
-
-                        <div>
-                            <PieChart lineWidth='60' viewBoxSize={[100, 100]}
-                                data={[
-                                    { title: 'MERN', value: 35, color: '#E38627' },
-                                    { title: 'Node', value: 25, color: '#C13C37' },
-                                    { title: 'Mongo', value: 5, color: '#6A2135' },
-                                ]}
-                            />
-
-                        </div>
-                    </div>
-
-                    <div className='QuesChart'>
-                        <div className='title'>No of accepted answers</div>
-
-                        <div>
-                            <PieChart lineWidth='60' viewBoxSize={[100, 100]}
-                                data={[
-                                    { title: 'React', value: 5, color: '#E38627' },
-                                    { title: 'Node', value: 5, color: '#C13C37' },
-                                    { title: 'Mongo', value: 55, color: '#6A2135' },
-                                ]}
-                            />
-
-                        </div>
-                    </div>
                 </div>
+                <div className="container">
 
-                <hr Style="border: 0.7px solid"/>
+                    <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
+                </div> */}
 
             </div>
 

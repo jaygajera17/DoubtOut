@@ -4,7 +4,7 @@ const answer = require('../models/Answer');
 const fetchuser = require('../middleware/fetchuser');
 const Answer = require("../models/Answer");
 const { route } = require('./questions');
-
+const User = require("../models/User");
 const LocalStorage = require('node-localStorage').LocalStorage;
 var localStorage = new LocalStorage('./scratch');
 
@@ -40,6 +40,26 @@ router.post("/fetchanswer/:id", async (req, res) => {
     catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post('/fetchUserAnswers/:username', async(req, res)=>{
+    try{
+        let user = await User.findOne({username : req.params.username});
+
+        const answers = await Answer.find({user : user._id});
+
+        if(!answers)
+        {
+            return res.status(404).send("Question not Found");
+
+        }
+
+        res.json(answers);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
     }
 })
 
