@@ -12,6 +12,7 @@ import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import UserQuestionContent from './components/Profile/Content';
 import Admin from './components/Admin/user';
+import Tags from './components/Tags/Tags';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
+        <Route path = "/tags" element = {<Tags/>}></Route>
       </Routes>
       {/* <Footer /> */}
      </BrowserRouter>
