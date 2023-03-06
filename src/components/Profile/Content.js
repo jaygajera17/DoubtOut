@@ -25,6 +25,7 @@ export default function Content(props) {
     }
     const fetchQuestion = async (id) => {
 
+       
         await fetch(`http://localhost:5000/api/question/fetchQueById/${id}`, {
             method: "POST",
             headers: {

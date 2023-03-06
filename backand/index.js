@@ -15,6 +15,7 @@ app.use(cors());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/question", require("./routes/questions"));
 app.use("/api/answer", require("./routes/answers"));
+app.use("/api/comment", require("./routes/comment"));
 app.use("/api/admin", require("./routes/admin"));
 
 
