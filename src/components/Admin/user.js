@@ -5,7 +5,7 @@ import axios from 'axios';
  var mydiv = {
     margin: '8% 8%',
     };
-export default function Admin() {
+export default function AdminUser() {
   const [users, setUsers] = useState([])
   const navigate = useNavigate()
  

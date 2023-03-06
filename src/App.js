@@ -11,8 +11,9 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import UserQuestionContent from './components/Profile/Content';
-import Admin from './components/Admin/user';
+import AdminUser from './components/Admin/user';
 import AdminQestion from './components/Admin/question';
+import Admin from './components/Admin/AdminHome';
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
         <Route path="/question/:type" element = {<Content />}></Route>
         <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
-        <Route path='/adminuser' element={<Admin />}></Route>
+        <Route path='/admin' element={<Admin />}></Route>
+        <Route path='/adminuser' element={<AdminUser />}></Route>
         <Route path='/adminquestion' element={<AdminQestion/>}> </Route>
 
       </Routes>
