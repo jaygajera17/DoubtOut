@@ -1,5 +1,6 @@
 .profile{
     display: block;
+    width: 100%;
 }
 .ProfileAndName{
     display: flex;

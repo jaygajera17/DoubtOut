@@ -9,7 +9,7 @@ export default function ProfileSidebar() {
             <div className="sidebar-container">
                 <div className="sidebar-options">
                     <div className="sidebar-option">
-                        <NavLink className="sideLink" to="/chart">Analysis</NavLink>
+                        <NavLink className="sideLink" to="/analysis">Analysis</NavLink>
                     </div>
                     <div className="sidebar-option">
                         <NavLink className="sideLink" to="/myquestions">Questions</NavLink>

@@ -84,20 +84,6 @@ export default function Profile() {
 
             <ProfileHeader/>
 
-{/* 
-                <div className="questions">
-                    <div className="question">
-                        <Posts posts={currentPosts} />
-                    </div>
-
-                </div>
-                <div className="container">
-
-                    <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
-                </div> */}
-
-
-
         </div>
     )
 }

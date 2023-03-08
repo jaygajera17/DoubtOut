@@ -17,7 +17,6 @@ const router = express.Router();
 router.post('/addquestion', fetchuser, async(req, res)=>{
     try{
 
-
         let question = await Question.create({
             user : req.user.id,
             title: req.body.title,
@@ -59,8 +58,6 @@ router.post('/fetchQueByHigherVotes', async (req,res)=>{
 router.post('/fetchQueById/:id', async(req, res)=>{
 
     try{
-        
-        
         
         let question = await Question.findOne({_id : req.params.id});
         // question=question[0]
