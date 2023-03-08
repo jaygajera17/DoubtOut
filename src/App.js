@@ -15,6 +15,7 @@ import Admin from './components/Admin/user';
 import Chart from './components/charts/Chart';
 import MyQuestions from './components/MyQuestions/MyQuestions';
 import MyAnswers from './components/MyAnswers/MyAnswers';
+import Tags from './components/Tags/Tags';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
         <Route path='/chart' element={<Chart />}></Route>
+        <Route path='/tags' element= {<Tags />}></Route>
         <Route path='/myquestions' element={<MyQuestions />}></Route>
         <Route path='/myanswers' element={<MyAnswers />}></Route>
         
