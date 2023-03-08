@@ -13,6 +13,7 @@ import Pagination from '../Questions/Pagination';
 
 import { PieChart } from 'react-minimal-pie-chart';
 import Chart from '../charts/Chart';
+import ProfileHeader from '../ProfileHeader/ProfileHeader';
 
 export default function Profile() {
 
@@ -81,32 +82,7 @@ export default function Profile() {
             
             <ProfileSidebar/>
 
-            <div className='profile'>
-                <div className='ProfileAndName'>
-                    <Avatar sx={{ height: '58px', width: '58px' }} />
-                    <div className='nameAndActive'>
-                        <div className='name'>Name</div>
-                        <p>user since..</p>
-                    </div>
-                </div>
-
-                <hr Style="border: 0.7px solid " />
-
-
-{/* 
-                <div className="questions">
-                    <div className="question">
-                        <Posts posts={currentPosts} />
-                    </div>
-
-                </div>
-                <div className="container">
-
-                    <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
-                </div> */}
-
-            </div>
-
+            <ProfileHeader/>
 
         </div>
     )

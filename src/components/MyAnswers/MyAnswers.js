@@ -1,26 +1,21 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import parse from 'html-react-parser';
-
-import Posts from '../Questions/Posts';
+import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
+import ProfileHeader from '../ProfileHeader/ProfileHeader';
+import PostsAns from './PostsAns';
 import Pagination from '../Questions/Pagination';
-
-import { PieChart } from 'react-minimal-pie-chart';
-import Chart from '../charts/Chart';
+import './myanswer.css';
 
 export default function Profile() {
 
-    const [answers, setAnswers] = useState({});
+    const [answers, setAnswers] = useState([]);
 
-    // for pagination in profile
+    // for pagination in Answers in profile section.
     const [postPerPage] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
 
-   
-
-    // This function will find the count of No. of answer for a perticular Question
+    // This function will find the No. of answers given by a User
     const FindAnsOfUser = async () => {
         const response = await fetch(`http://localhost:5000/api/answer/fetchUserAnswers/${localStorage.getItem("username")}`, {
             method: "POST",
@@ -28,6 +23,7 @@ export default function Profile() {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
+            console.log(response);
             return response.json();
         }).then(data => setAnswers(data));
     }
@@ -43,11 +39,14 @@ export default function Profile() {
     const paginate = pageNum => setcurrentPage(pageNum);
 
     return (
-        <div>
+        <div className="container" Style="height:100vh;margin-top:13vh; z-index:1; background-color:white">
+            <ProfileSidebar />
+            <div className='header_and_content'>
+                <ProfileHeader />
 
                 <div className="questions">
                     <div className="question">
-                        <Posts posts={currentPosts} />
+                        <PostsAns posts={currentPosts} />
                     </div>
 
                 </div>
@@ -57,5 +56,6 @@ export default function Profile() {
                 </div>
 
             </div>
+        </div>
     )
 }
