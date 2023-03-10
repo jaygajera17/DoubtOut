@@ -16,7 +16,7 @@ import MyQuestions from './components/MyQuestions/MyQuestions';
 import MyAnswers from './components/MyAnswers/MyAnswers';
 import Analysis from './components/Analysis/Analysis';
 import Tags from './components/Tags/Tags';
-
+import QuestionOnTags from './components/Tags/QuestionOnTags';
 function App() {
   return (
     <div>
@@ -35,12 +35,17 @@ function App() {
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
         <Route path='/chart' element={<Chart />}></Route>
-        <Route path='/tags' element= {<Tags />}></Route>
+        
         <Route path='/myquestions' element={<MyQuestions />}></Route>
         <Route path='/myanswers' element={<MyAnswers />}></Route>
         <Route path='/analysis' element={<Analysis />}></Route>
 
-        <Route path="/tags" element={<Tags />}></Route>
+        {/* <Route path="/tags" element={<Tags />}></Route> */}
+
+        {/* tags routers */}
+        <Route path='/tags' element= {<Tags />}></Route>
+        <Route path = '/questionOntags/:type' element = {<QuestionOnTags/>}></Route>
+        
         
       </Routes>
       {/* <Footer /> */}
