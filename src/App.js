@@ -13,7 +13,7 @@ import Profile from './components/Profile/Profile';
 import UserQuestionContent from './components/Profile/Content';
 import AdminUser from './components/Admin/user';
 import AdminQestion from './components/Admin/question';
-import Admin from './components/Admin/AdminHome';
+import AdminHome from './components/Admin/AdminHome';
 
 function App() {
   return (
@@ -22,8 +22,7 @@ function App() {
       <Navbar />
       <Routes>
 
-        <Route path = "/" element = {<Homepage/>}/>
-     
+        <Route path = "/" element = {<Homepage/>}/>    
         <Route path = "/editor" element = {<Editor/>}/>
         <Route path = "/login" element = {<Login/>}/>
         <Route path = "/register" element = {<Register/>}/>
@@ -31,7 +30,7 @@ function App() {
         <Route path="/question/:type" element = {<Content />}></Route>
         <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
-        <Route path='/admin' element={<Admin />}></Route>
+        <Route path='/adminHome' element={<AdminHome />}></Route>
         <Route path='/adminuser' element={<AdminUser />}></Route>
         <Route path='/adminquestion' element={<AdminQestion/>}> </Route>
 
