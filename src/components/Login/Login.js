@@ -45,7 +45,7 @@ function Login() {
       }
       else if (json.userType === "admin") {
         setTimeout(() => {
-          navigate("/admin");
+          navigate("/adminHome");
           window.location.reload(true);
         }, 2000);
       }

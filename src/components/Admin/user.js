@@ -5,7 +5,7 @@ import axios from 'axios';
  var mydiv = {
     margin: '8% 8%',
     };
-export default function Admin() {
+export default function AdminUser() {
   const [users, setUsers] = useState([])
   const navigate = useNavigate()
  
@@ -48,7 +48,7 @@ export default function Admin() {
       <table className="table ">
               <thead>
                 <tr className="table-primary">
-                  <th scope="col">User Name </th>
+                  <th  scope="col" >User Name </th>
                   <th scope="col">User Email</th>
                   <th scope="col">Delete</th>
                 </tr>
@@ -63,7 +63,7 @@ export default function Admin() {
               <tbody>
                 <tr>
                   <th scope="row">{user.id}</th>
-                  <td Style='text-align: left; width:25%'>{user.username}</td>
+                  <td Style='text-align: left; width:25%' ><button onClick={fetchUsers}>{user.username}</button></td>
                   <td Style='text-align: center; width:40%'>{user.email}</td>
                   <td Style='text-align: center; width:40%'>
                     <button className="fa fa-trash" aria-hidden="true" onClick={() => deleteUser(user._id)}></button>

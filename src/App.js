@@ -16,8 +16,12 @@ import MyQuestions from './components/MyQuestions/MyQuestions';
 import MyAnswers from './components/MyAnswers/MyAnswers';
 import Analysis from './components/Analysis/Analysis';
 import Tags from './components/Tags/Tags';
+import AdminAnalysis from './components/Admin/analysis';
 import QuestionOnTags from './components/Tags/QuestionOnTags';
 import Search from './components/Questions/Search';
+import AdminUser from './components/Admin/user';
+import AdminQuestions from './components/Admin/Adminquestion';
+import AdminHome from './components/Admin/AdminHome';
 
 function App() {
   return (
@@ -35,6 +39,10 @@ function App() {
         <Route path="/question/:type" element = {<Content />}></Route>
         <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/adminHome' element={<AdminHome />}></Route>
+        <Route path='/adminuser' element={<AdminUser />}></Route>
+        <Route path='/adminanalysis' element={<AdminAnalysis/>}> </Route>
+        <Route path='/adminquestions' element={<AdminQuestions />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
         <Route path='/chart' element={<Chart />}></Route>
         
