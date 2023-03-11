@@ -34,13 +34,22 @@ function Login() {
     if (json.success != null) {
       setState(true);
       window.scrollTo(0, 0);
-      
+
       localStorage.setItem("username", json.username);
 
-      setTimeout(() => {
-        navigate("/");
-        window.location.reload(true);
-      }, 2000);
+      if (json.userType === "user") {
+        setTimeout(() => {
+          navigate("/");
+          window.location.reload(true);
+        }, 2000);
+      }
+      else if (json.userType === "admin") {
+        setTimeout(() => {
+          navigate("/admin");
+          window.location.reload(true);
+        }, 2000);
+      }
+
     }
     else {
       alert('Invalid Credentials');
@@ -49,7 +58,7 @@ function Login() {
   const onChange = (e) => {
 
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
-  
+
   }
 
   useEffect(() => {
@@ -59,33 +68,33 @@ function Login() {
   return (
 
     <div>
-      
+
       <div style={{ marginTop: '80px' }}>
-        
-      {(
-        () => {
-          if (state === true) {
 
-            return (<>
-              <div class="alert alert-success alert-dismissible" role="alert" Style="background-color:green; color:white;">
-                You are <strong>Successfully</strong> logged in!!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            </>)
+        {(
+          () => {
+            if (state === true) {
 
+              return (<>
+                <div class="alert alert-success alert-dismissible" role="alert" Style="background-color:green; color:white;">
+                  You are <strong>Successfully</strong> logged in!!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              </>)
+
+            }
           }
-        }
-      )()}
+        )()}
         {/* <Heading/> */}
 
       </div>
 
       <body>
-     
-            <div className="bg-img">
+
+        <div className="bg-img">
 
           <div className="content">
-           
+
             <header style={{ color: 'black' }}> Login</header>
             <form onSubmit={handleSubmit} method='post'>
               <div className="field">

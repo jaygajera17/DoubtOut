@@ -17,6 +17,8 @@ import MyAnswers from './components/MyAnswers/MyAnswers';
 import Analysis from './components/Analysis/Analysis';
 import Tags from './components/Tags/Tags';
 import QuestionOnTags from './components/Tags/QuestionOnTags';
+import Search from './components/Questions/Search';
+
 function App() {
   return (
     <div>
@@ -45,6 +47,9 @@ function App() {
         {/* tags routers */}
         <Route path='/tags' element= {<Tags />}></Route>
         <Route path = '/questionOntags/:type' element = {<QuestionOnTags/>}></Route>
+
+        {/* Search Question */}
+        <Route path = "/search" element={<Search/>}></Route>
         
         
       </Routes>

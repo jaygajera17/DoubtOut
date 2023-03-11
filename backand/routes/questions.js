@@ -3,6 +3,9 @@ const express = require('express');
 // var localStorage = new LocalStorage('./scratch');
 const Question = require("../models/Question");
 const User = require("../models/User");
+const Answer = require("../models/Answer");
+
+const ApiFeatures = require("../utils/apifeatures");
 // const { body, validationResult } = require('express-validator');
 // const bcrypt = require('bcryptjs');
 const fetchuser = require('../middleware/fetchuser');
@@ -152,13 +155,82 @@ router.post("/fetchQuePertag/:name", async (req, res) => {
 
     questions.map(que => {
         que.tags.split(" ").map(tag => {
-            if(tag.toLowerCase() === req.params.name)
-            {
+            if (tag.toLowerCase() === req.params.name) {
                 questionsPertag.push(que);
             }
         })
     })
     res.json(questionsPertag);
+})
+
+
+router.post("/answeredQue", async (req, res) => {
+
+    const answers = await Answer.find();
+    const questions = await Question.find();
+
+    let ansobj = {};
+
+
+    answers.map(ans => {
+        if (ansobj[ans.questionid] == null) {
+            ansobj[ans.questionid] = 1;
+        }
+    })
+    const answeredQuestion = [];
+
+    questions.map(que => {
+        if (ansobj[que._id] === 1) {
+            answeredQuestion.push(que);
+        }
+    })
+
+    res.json(answeredQuestion);
+})
+
+router.post("/unansweredQue", async (req, res) => {
+    const answers = await Answer.find();
+    const questions = await Question.find();
+
+    let ansobj = {};
+
+
+    answers.map(ans => {
+        if (ansobj[ans.questionid] == null) {
+            ansobj[ans.questionid] = 1;
+        }
+    })
+    const unansweredQuestion = [];
+
+    questions.map(que => {
+        if (ansobj[que._id] == null) {
+            unansweredQuestion.push(que);
+        }
+    })
+
+    res.json(unansweredQuestion);
+})
+
+// search questions
+router.post("/search", async (req, res) => {
+    // const apifeature = new ApiFeatures(Question.find(), req.query).search().filter();
+
+    try {
+        //const jobs = await Job.find();
+        // console.log(req.query.keyword);
+        let questions = await Question.find({"title": {$regex : req.query.keyword, $options: "i"}});
+
+        if(questions.length === 0)
+        {
+            questions = await Question.find({"tags": {$regex : req.query.keyword, $options: "i"}});
+        }
+        res.json(questions);
+
+    }
+    catch (e) {
+        console.log(e.message);
+        res.status(500).send("Internal server error");
+    }
 })
 
 module.exports = router

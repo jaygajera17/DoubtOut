@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
 import ProfileHeader from '../ProfileHeader/ProfileHeader';
-import Posts from '../Questions/Posts';
-import Pagination from '../Questions/Pagination';
+import Posts from './Posts';
+import Pagination from './Pagination';
 
 export default function MyQuestions() {
 
