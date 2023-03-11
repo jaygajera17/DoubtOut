@@ -29,8 +29,6 @@ export default function ProfileHeader() {
                 <div className='nameAndActive'>
                     <div className='name'>{localStorage.getItem("username")}</div>
                     <p>User since <strong>{localStorage.getItem("since")}</strong></p>
-                    <div className='name'>Name</div>
-                    <p>user since..</p>
                     <div>Points: {points}</div>
                 </div>
 
