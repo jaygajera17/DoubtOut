@@ -18,12 +18,9 @@ import MyQuestions from './components/MyQuestions/MyQuestions';
 import MyAnswers from './components/MyAnswers/MyAnswers';
 import Analysis from './components/Analysis/Analysis';
 import Tags from './components/Tags/Tags';
-<<<<<<< HEAD
 import AdminAnalysis from './components/Admin/analysis';
 
-=======
 import QuestionOnTags from './components/Tags/QuestionOnTags';
->>>>>>> da5f033f297fc5ef599f3b2b670ac8ad4956a632
 function App() {
   return (
     <div>
