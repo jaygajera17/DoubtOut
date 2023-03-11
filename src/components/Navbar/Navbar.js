@@ -1,7 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import NotificationBox from './NotificationBox'
 import { useState, useEffect } from 'react'
+
 import './Navbar.css'
 
 // const nodemailer = require("nodemailer");
@@ -18,8 +19,11 @@ var title = {
 }
 export default function Navbar() {
 
+  const navigate = useNavigate();
   const [loginStatus, setLoginStatus] = useState(false);
   const [show, setShow] = useState(false);
+
+  // const [questions, setQuestions] = useState([]);
 
   const isLoggedin = () => {
     if (localStorage.getItem('username') !== null) {
@@ -63,6 +67,31 @@ export default function Navbar() {
     // navigate("/login");
   }
 
+  const searchQuestion = async (e) => {
+
+    e.preventDefault();
+    const que = document.getElementById('searchQue').value;
+
+    await fetch(`http://localhost:5000/api/question/search?keyword=${que}`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      return response.json();
+    }).then(questions => {
+   
+      navigate("/search", { state: questions });
+      // setQuestions(data);
+    })
+
+    // console.log(questions.length);
+   
+
+
+
+  }
+
   useEffect(() => {
     isLoggedin();
   }, [loginStatus])
@@ -97,8 +126,8 @@ export default function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarScroll" >
-            <form className="d-flex" style={{ width: 500 }}>
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <form className="d-flex" style={{ width: 500 }} onSubmit={searchQuestion}>
+              <input className="form-control me-2" id="searchQue" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-primary" type="submit">Search</button>
 
             </form>

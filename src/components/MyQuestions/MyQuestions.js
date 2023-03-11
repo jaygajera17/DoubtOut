@@ -6,6 +6,8 @@ import ProfileHeader from '../ProfileHeader/ProfileHeader';
 import Posts from '../Questions/Posts';
 import Pagination from '../Questions/Pagination';
 import './myquestions.css';
+import Posts from './Posts';
+import Pagination from './Pagination';
 
 export default function MyQuestions() {
 

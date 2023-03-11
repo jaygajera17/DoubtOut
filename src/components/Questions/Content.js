@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef , useMemo} from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import parse from "html-react-parser";
 import JoditEditor from "jodit-react";
@@ -20,11 +20,17 @@ export default function Content(props) {
     const [quevoteStatus, setqueVoteStatus] = useState({});
     const [queVote, setQueVote] = useState();
 
+    // to show the comment box
+    const [show, setShow] = useState(false);
+
+    // to add a new comment
+    const [comment, setComment] = useState({});
+    const [commentState, setCommentState] = useState(false);
 
     const config = useMemo(() => ({
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
     }), []);
-    
+
 
     const isLoggedIn = () => {
         if (localStorage.getItem('username') !== null) {
@@ -77,7 +83,7 @@ export default function Content(props) {
                 'Content-Type': 'application/json'
             },
 
-            body: JSON.stringify({ answer: value, postedId: '63ae78ac00418318bfbfc2a8', postedBy: 'JayGajera', votes: 0 }),
+            body: JSON.stringify({ answer: value }),
         });
 
         const json = await response.json()
@@ -204,6 +210,40 @@ export default function Content(props) {
         setQueVote(json);
     }
 
+    const onChange = (e) => {
+        setComment({ ...comment, [e.target.name]: e.target.value })
+    }
+
+    const addComment = async (e, id) => {
+        e.preventDefault();
+
+        const response = await fetch(`http://localhost:5000/api/comment/addcomment/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ comment: comment.comment, qid: question._id }),
+        });
+
+        const json = await response.json();
+
+        if (json["status"] === true) {
+            setCommentState(true);
+            window.scrollTo(0, 0);
+        }
+
+    }
+
+    const fetchComments = async(id)=>{
+        await fetch(`http://localhost:5000/api/comment/fetchComments`, {
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            body : JSON.stringify({qid : question._id, ansid : id}) 
+        }).then(response => response.json()).then(data => setComment(data))
+    }
 
     useEffect(() => {
         isLoggedIn();
@@ -223,6 +263,21 @@ export default function Content(props) {
                         return (<>
                             <div className="alert alert-success alert-dismissible" role="alert">
                                 Your Answer is Posted <strong>Successfully</strong>
+                                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </>)
+
+                    }
+                }
+            )()}
+
+            {(
+                () => {
+                    if (commentState === true) {
+
+                        return (<>
+                            <div className="alert alert-success alert-dismissible" role="alert">
+                                Your Comment is Posted <strong>Successfully</strong>
                                 <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </>)
@@ -257,7 +312,7 @@ export default function Content(props) {
                     <div className='mt-5'>
                         {answers.map(ans => (
                             <div className="">
-
+                                
                                 <div className="d-flex flex-row">
                                     <div className="d-flex flex-column col-md-0 mt-0 mx-0">
                                         <button className='btn btn-white' onClick={(e) => upvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
@@ -274,8 +329,30 @@ export default function Content(props) {
                                     <div className="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                                         <p>{parse(ans.answer)}</p>
 
-
                                         <small className='d-flex flex-row-reverse'>Posted By : {ans.postedBy}</small>
+
+                                        <div className="comments" Style="display:relative; bottom:0px;">
+                                            <div className="comment">
+                                                
+                                                {/* <p>This is comment..
+                                                    <span>username</span>
+                                                    <small>Timestamp</small>
+                                                </p> */}
+                                            </div>
+                                            <p onClick={() => setShow(!show)}>Add a comment</p>
+                                            {
+                                                show && (
+                                                    <div className="title">
+                                                        <form method="POST" onSubmit={(e) => addComment(e, ans._id)}>
+                                                            <textarea type="text" placeholder="Add Your comment.." rows={5} cols={100} name="comment" onChange={onChange}></textarea><br></br>
+                                                            <button type="submit" className='btn btn-primary'>Add comment</button>
+                                                        </form>
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
+
+
                                     </div>
                                 </div>
 

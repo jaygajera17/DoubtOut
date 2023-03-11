@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 // import parse from 'html-react-parser';
 import Sidebar from '../Sidebar/Sidebar';
 import './questions.css';
@@ -8,10 +8,12 @@ import '../Header/header.css';
 import Posts from './Posts';
 import Pagination from './Pagination';
 
-export default function Questions() {
+export default function Search() {
 
+    const location = useLocation();
     // const navigate = useNavigate();
-    const [questions, setQuestions] = useState([])
+    const [questions, setQuestions] = useState([]);
+
 
 
     // for pagination
@@ -22,16 +24,16 @@ export default function Questions() {
     // const [showFilter, setShowFilter] = useState(false);
 
     // fetch all the questions
-    const fetchAllQuestions = async () => {
-        await fetch("http://localhost:5000/api/question/fetchquestions", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            return response.json();
-        }).then(data => setQuestions(data))
-    }
+    // const fetchAllQuestions = async () => {
+    //     await fetch("http://localhost:5000/api/question/fetchquestions", {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         }
+    //     }).then(response => {
+    //         return response.json();
+    //     }).then(data => setQuestions(data))
+    // }
 
 
 
@@ -50,7 +52,7 @@ export default function Questions() {
 
     // Function to filter all the questions which are answered.
 
-    const answeredQuestions = async()=>{
+    const answeredQuestions = async () => {
         await fetch("http://localhost:5000/api/question/answeredQue", {
             method: "POST",
             headers: {
@@ -61,7 +63,7 @@ export default function Questions() {
         }).then(data => setQuestions(data))
     }
 
-    const unansweredQuestions = async() => {
+    const unansweredQuestions = async () => {
         await fetch("http://localhost:5000/api/question/unansweredQue", {
             method: "POST",
             headers: {
@@ -73,12 +75,12 @@ export default function Questions() {
     }
 
     useEffect(() => {
-        fetchAllQuestions();
-        // FindFrequencyOfAns();
-        // fetchVotes();
 
-    }, [])
+        if (location.state !== null) {
+            setQuestions(location.state);
+        }
 
+    })
     // logic to find index of posts to display questions
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -126,7 +128,7 @@ export default function Questions() {
 
                                             }
                                             }> */}
-                                                {/* <FilterList style={{ fontSize: '21px' }} />
+                                            {/* <FilterList style={{ fontSize: '21px' }} />
                                                 <p className="filter-text">Filter</p>
                                             </div>
 

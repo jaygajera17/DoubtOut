@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar'
 
 
@@ -46,7 +47,7 @@ export default function Tags() {
                                         <div class="card h-100">
                                             {/* <img src="..." class="card-img-top" alt="..."> */}
                                             <div class="card-body">
-                                                <h5 className="card-title p-1" Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px; display:inline;">{tag.tagname}</h5>
+                                                <NavLink className="card-title p-1" to={{ pathname: `/questionOntags/${tag.tagname}` }} Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px; display:inline;">{tag.tagname}</NavLink>
                                                 <p className="card-text m-2">{tag.desc.slice(0, 100)}...</p>
                                             </div>
                                         </div>
