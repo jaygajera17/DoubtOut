@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import AdminSidebar from './AdminSidebar';
 import axios from 'axios';
 import Chart from '../charts/Chart';
-import '../Analysis/analysis.css';
+import '../MyProfile/Analysis/analysis.css';
 import '../Header/header.css';
 import '../Questions/questions.css';
 

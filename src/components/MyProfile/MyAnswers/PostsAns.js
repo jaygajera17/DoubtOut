@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
-import '../Header/header.css';
+import '../../Header/header.css';
 import './postsAns.css';
 
 export default function Posts({ posts }) {

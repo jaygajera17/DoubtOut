@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ProfileHeader from "../ProfileHeader/ProfileHeader";
 import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
-import Chart from "../charts/Chart";
-import './analysis.css';
+import Chart from "../../charts/Chart";
+import '../Analysis/analysis.css';
 
 
 export default function Analysis() {

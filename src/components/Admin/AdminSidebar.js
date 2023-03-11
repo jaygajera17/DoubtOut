@@ -1,5 +1,5 @@
 import React from 'react';
-import '../ProfileSidebar/profileSidebar.css';
+import '../MyProfile/ProfileSidebar/profileSidebar.css';
 import { Public, Stars, Work } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom'
 
