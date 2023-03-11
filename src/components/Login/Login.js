@@ -34,13 +34,34 @@ function Login() {
     if (json.success != null) {
       setState(true);
       window.scrollTo(0, 0);
-      
-      localStorage.setItem("username", json.username);
 
-      setTimeout(() => {
-        navigate("/");
-        window.location.reload(true);
-      }, 2000);
+      localStorage.setItem("username", json.username);
+      
+      //stroing date information for profile section..
+      const month = new Map();
+      month['01'] = "Jan";  month['02'] = "Feb";  month['03'] = "Mar";  month['04'] = "Apr";  month['05'] = "May";  month['06'] = "June";
+      month['07'] = "July";  month['08'] = "Aug";  month['09'] = "Sep";  month['10'] = "Oct";  month['11'] = "Nov";  month['12'] = "Dec";
+      
+      const year = json.date.substring(0, 4);
+      const mn = json.date.substring(5, 7);
+      console.log(json.date.toLocaleString('default', { month: 'long' }));
+      
+      localStorage.setItem("since", month[mn]+" "+year);
+
+
+      if (json.userType === "user") {
+        setTimeout(() => {
+          navigate("/");
+          window.location.reload(true);
+        }, 2000);
+      }
+      else if (json.userType === "admin") {
+        setTimeout(() => {
+          navigate("/adminHome");
+          window.location.reload(true);
+        }, 2000);
+      }
+
     }
     else {
       alert('Invalid Credentials');
@@ -49,7 +70,7 @@ function Login() {
   const onChange = (e) => {
 
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
-  
+
   }
 
   useEffect(() => {
@@ -59,33 +80,33 @@ function Login() {
   return (
 
     <div>
-      
+
       <div style={{ marginTop: '80px' }}>
-        
-      {(
-        () => {
-          if (state === true) {
 
-            return (<>
-              <div class="alert alert-success alert-dismissible" role="alert" Style="background-color:green; color:white;">
-                You are <strong>Successfully</strong> logged in!!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            </>)
+        {(
+          () => {
+            if (state === true) {
 
+              return (<>
+                <div class="alert alert-success alert-dismissible" role="alert" Style="background-color:green; color:white;">
+                  You are <strong>Successfully</strong> logged in!!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              </>)
+
+            }
           }
-        }
-      )()}
+        )()}
         {/* <Heading/> */}
 
       </div>
 
       <body>
-     
-            <div className="bg-img">
+
+        <div className="bg-img">
 
           <div className="content">
-           
+
             <header style={{ color: 'black' }}> Login</header>
             <form onSubmit={handleSubmit} method='post'>
               <div className="field">

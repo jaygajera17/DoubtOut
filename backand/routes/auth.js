@@ -2,7 +2,7 @@ const express = require('express');
 const LocalStorage = require('node-localStorage').LocalStorage;
 var localStorage = new LocalStorage('./scratch');
 const User = require("../models/User");
-const Question = require("../models/Question");
+const Admin = require("../models/Admin");
 
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -55,12 +55,13 @@ router.post('/createuser', [
             }
         }
 
-        console.log(data);
+        // console.log(data);
         const authtaken = jwt.sign(data, JWT_SECRET);
-       
+
         localStorage.setItem('token', authtaken);
         localStorage.setItem('username', req.body.username);
-        res.json({ 'success': authtaken, 'username': req.body.username});
+        res.json({ 'success': authtaken, 'username': req.body.username,'date':user.date});
+        res.json({ 'success': authtaken, 'username': req.body.username });
         // res.json({autotaken});
     }
     catch (err) {
@@ -87,34 +88,71 @@ router.post('/login', [
     const { email, password } = req.body;
 
     try {
-        let user = await User.findOne({ email });
 
-        if (!user) {
-            return res.status(400).json({ error: "Please Enter Correct login Credentials" });
+        let admin = await Admin.findOne({ email });
+
+        if (!admin) {
+            let user = await User.findOne({ email });
+
+            if (!user) {
+                return res.status(400).json({ error: "Please Enter Correct login Credentials" });
+            }
+
+            const passwordCompare = await bcrypt.compare(password, user.password);
+
+            if (!passwordCompare) {
+                return res.status(400).json({ error: "enter Correct login Credentials" });
+            }
+
+            const data = {
+                user: {
+                    id: user.id,
+                    username: user.username
+                }
+            }
+
+            const authToken = jwt.sign(data, JWT_SECRET);
+            //res.json({authToken});
+            localStorage.setItem('token', authToken);
+            localStorage.setItem('username', user.username);
+
+            req.body.authtoken = authToken;
+            // req.body.userType = user.type;
+
+            return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username, "userType": "user" });
         }
 
-        const passwordCompare = await bcrypt.compare(password, user.password);
-      
-        if (!passwordCompare) {
+        const adminPassword = await bcrypt.compare(password, admin.password);
+
+        if (!adminPassword) {
             return res.status(400).json({ error: "enter Correct login Credentials" });
         }
 
-        const data = {
+        const admindata = {
             user: {
-                id: user.id,
-                username:user.username
+                id: admin.id,
+                username: admin.username
             }
         }
 
-        const authToken = jwt.sign(data, JWT_SECRET);
+        const authToken = jwt.sign(admindata, JWT_SECRET);
         //res.json({authToken});
         localStorage.setItem('token', authToken);
         localStorage.setItem('username', user.username);
+        localStorage.setItem('since', user.date);
       
         req.body.authtoken = authToken;
         // req.body.userType = user.type;
 
-        return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username });
+        return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username ,'date':user.date});
+        localStorage.setItem('username', admin.username);
+
+        req.body.authtoken = authToken;
+        // req.body.userType = user.type;
+
+        return res.status(200).json({ 'success': req.body.authtoken, 'username': admin.username, "userType" : "admin"});
+
+
     }
     catch (error) {
         console.error(error.message);
