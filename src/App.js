@@ -38,7 +38,6 @@ function App() {
         <Route path='/myquestions' element={<MyQuestions />}></Route>
         <Route path='/myanswers' element={<MyAnswers />}></Route>
         <Route path='/analysis' element={<Analysis />}></Route>
-
         <Route path="/tags" element={<Tags />}></Route>
         
       </Routes>

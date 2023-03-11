@@ -8,7 +8,7 @@ export default function Sidebar() {
             <div className="sidebar-container">
                 <div className="sidebar-options">
                     <div className="sidebar-option">
-                        <NavLink >Home</NavLink>
+                        <NavLink to="/">Home</NavLink>
                     </div>
                     <div className="sidebar-option">
                         <NavLink >PUBLIC</NavLink>

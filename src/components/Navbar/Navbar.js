@@ -54,15 +54,13 @@ export default function Navbar() {
   const logout = () => {
 
     localStorage.removeItem('username');
-
+    localStorage.removeItem('since');
 
     setLoginStatus(false);
 
     window.location.reload(true);
 
-    // navigate("/");
-
-
+    // navigate("/login");
   }
 
   useEffect(() => {

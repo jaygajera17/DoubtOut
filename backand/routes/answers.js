@@ -201,19 +201,9 @@ router.post("/points", async(req, res)=>{
     try{
         let username = localStorage.getItem("username");
 
-        let answers = await Answer.find({"postedBy" : username});
+        let answers = await Answer.find({$and:[{"postedBy" : username},{"status" : "Accepted"}]});
 
-        let count = 0;
-
-        answers.map(answer => {
-            if(answer.status === "Accepted")
-            {
-                count += 1;
-            }
-        })
-
-        count = count * 5;
-        res.json({"points" : count});
+        res.json({"points" : answers.length*5});
     }
     catch(e){
         console.log(e.message);

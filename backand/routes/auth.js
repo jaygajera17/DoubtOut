@@ -60,7 +60,7 @@ router.post('/createuser', [
        
         localStorage.setItem('token', authtaken);
         localStorage.setItem('username', req.body.username);
-        res.json({ 'success': authtaken, 'username': req.body.username});
+        res.json({ 'success': authtaken, 'username': req.body.username,'date':user.date});
         // res.json({autotaken});
     }
     catch (err) {
@@ -110,11 +110,12 @@ router.post('/login', [
         //res.json({authToken});
         localStorage.setItem('token', authToken);
         localStorage.setItem('username', user.username);
+        localStorage.setItem('since', user.date);
       
         req.body.authtoken = authToken;
         // req.body.userType = user.type;
 
-        return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username });
+        return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username ,'date':user.date});
     }
     catch (error) {
         console.error(error.message);

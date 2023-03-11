@@ -13,7 +13,11 @@ const UserSchema = new Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    date:{
+        type:Date,
+        default:Date.now
+    },
 })
 const user = mongoose.model('user', UserSchema);
 user.createIndexes();
