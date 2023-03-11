@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { NavLink } from 'react-router-dom'
-import Chart from 'chart.js/auto'
+import Chart from '../charts/Chart';
+import  AdminSidebar  from '../Admin/AdminSidebar';
 import axios from "axios";
+import { Tag } from "@mui/icons-material";
 export default function AdminHome() {
     const [user, setUser] = useState(0);
     const [question, setQuestion] = useState(0);
@@ -28,102 +30,23 @@ export default function AdminHome() {
             )
         }
 
-    const noOfQuestions = async () => {
-        await fetch('http://localhost:5000/api/admin/noOfQuestions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                setQuestion(data)
-            }
-            )
-    }
-
-    const noOfAnswers = async () => {
-        await fetch('http://localhost:5000/api/admin/noOfAnswers', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-    
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                setAnswer(data)
-            }
-            )
-    }
-
-    const noOfAccept = async () => {
-        await fetch('http://localhost:5000/api/admin/noOfAccept', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                setAccept(data)
-            }
-            )
-    }
-
-    const chartall= () => {
-        if(chartInstance) chartInstance.destroy();
-        const ctx = document.getElementById('user-chart1').getContext('2d');
-        const newChartInstance = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Users', 'Questions', 'Answers', 'Accepted Answers'],
-                datasets: [{
-                    label: 'Overall Report',
-                    data: [user, question, answer, accept]
-                }]
-            }
-        }); 
-        setChartInstance(newChartInstance);
-      // newChartInstance.reset();
-    }
    
-    // const chart = async () => {
-    //     await fetch('http://localhost:5000/api/admin/chart', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
 
-    //         .then((response) => {
-    //             return response.json()
-    //         })
-    //         .then((data) => {
-    //             setquestionByMonth(data)
-    //         }
-    //         )
+    // const chartall= () => {
     //     if(chartInstance) chartInstance.destroy();
     //     const ctx = document.getElementById('user-chart1').getContext('2d');
     //     const newChartInstance = new Chart(ctx, {
     //         type: 'bar',
     //         data: {
-    //             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    //             labels: ['Users', 'Questions', 'Answers', 'Accepted Answers'],
     //             datasets: [{
-    //                 label: 'Number of question',
-    //                 data: questionByMonth
+    //                 label: 'Overall Report',
+    //                 data: [user, question, answer, accept]
     //             }]
     //         }
-    //     });
+    //     }); 
     //     setChartInstance(newChartInstance);
+    //   // newChartInstance.reset();
     // }
 
     // const chart = async () => {
@@ -146,47 +69,53 @@ export default function AdminHome() {
     //     setChartInstance(newChartInstance);
     //     //console.log("question by month",questionByMonth);
     // }
-    
+    const [questions, setQuestions] = useState([]);
+    const [Tags, setTags] = useState([]);
+    const [count, setCount] = useState([]);
     useEffect(() => {
-        noOfusers();
-        noOfQuestions();
-        noOfAnswers();
-        noOfAccept();
-        chartall();
-        
-         //chart();
+        fetch(`http://localhost:5000/api/question/fetchquestions`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return response.json();
+        }).then(data => setQuestions(data));
     }, [])
+
+
+    useEffect(() => {
+        const freqOfTags = [];
+        const tag = [];
+        const cnt = [];
+
+        questions.map(question => question.tags.split(" ").map(tag => {
+            freqOfTags[tag] = 0;
+        }))
+
+        questions.map(question => question.tags.split(" ").map(tag => {
+            freqOfTags[tag] = freqOfTags[tag] + 1;
+        }))
+
+        // console.log(freqOfTags);
+
+        for (const i in freqOfTags) {
+            tag.push(i);
+            cnt.push(parseInt(freqOfTags[i]));
+        }
+
+        setTags(tag);
+        setCount(cnt);
+
+    }, [questions]);
 
     
  
 
     return (
-        <div Style="background-color:#f8f9f9; height:100%; margin-top:15vh; z-index:1;">
-       <h1 style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '10vh',
-      }}>Admin Home</h1>
-       
-        <h3> User Analysis</h3>
-         <li><button className="btn btn-primary"><NavLink to="/adminuser"> delete user </NavLink></button></li>
-         <p>No of user currently is   {user}  </p> 
-         
-         <br/>
-        
-
-        <h3> Question Analysis</h3>
-        <li><button className="btn btn-primary"><NavLink to="/adminquestion"> delete question </NavLink></button></li>
-        <p>no of total question is  {question} </p>
-        <div class="chart-container" Style="position: relative; height:40vh; width:80vw">
-        <canvas id="user-chart1"></canvas>
-        </div>
-        <br/>
-
-        <h3> Answer Analysis</h3>
-        <p> no of total answer is {answer} and out of this total answer accepted is {accept}</p>
-        
+        <div >
+            <AdminSidebar />
+     
         <br/>
         </div>
     );

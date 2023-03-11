@@ -110,25 +110,10 @@ router.delete('/deletequestion/:id',async (req,res) => {
             // console.log(e.message);
             res.status(500).send("Internal Server Error");
         }
-    })
-
-   router.get('/question-by-month',async(req,res)=>{
-       
-           const questions = await Question.aggregate([
-                {
-                    $group: {
-                        _id: { $month: "$date" },
-                        count: { $sum: 1 }
-                    }
-                }
-           ]);
-          
-              res.json(questions);
-       
-   })   
+    }) 
 
 
-router.get('/chart',async(req,res)=>{
+router.get('/question-by-month',async(req,res)=>{
     try{
         const questions = await Question.aggregate([
             {

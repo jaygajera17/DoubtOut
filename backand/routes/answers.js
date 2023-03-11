@@ -4,10 +4,11 @@ const answer = require('../models/Answer');
 const fetchuser = require('../middleware/fetchuser');
 const Answer = require("../models/Answer");
 const { route } = require('./questions');
-
+const User = require("../models/User");
 const LocalStorage = require('node-localStorage').LocalStorage;
 var localStorage = new LocalStorage('./scratch');
 
+const Question = require("../models/Question");
 const router = express.Router();
 const mongoose = require('mongoose')
 
@@ -40,6 +41,78 @@ router.post("/fetchanswer/:id", async (req, res) => {
     catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post('/fetchUserAnswers/:username', async(req, res)=>{
+    try{
+        
+        const answers = await Answer.find({postedBy : req.params.username});
+        // console.log(answers);
+
+        if(!answers)
+        {
+            return res.status(404).send("Question not Found");
+        }
+
+        res.json(answers);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+router.post('/fetchUserAnsweredQuestions/:username', async(req, res)=>{
+    try{
+        
+        const answers = await Answer.find({postedBy : req.params.username});
+        // console.log(answers);
+
+        const questions = [];
+
+        for(i in answers){
+            const question = await Question.find({_id:answers[i].questionid});
+            questions.push(question);
+        }
+
+        if(!questions)
+        {
+            return res.status(404).send("Question not Found");
+        }
+
+        res.json(questions);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+
+router.post('/fetchUserAcceptedAnsweredQuestions/:username', async(req, res)=>{
+    try{
+        
+        const answers = await Answer.find({$and: [{postedBy : req.params.username }, { status : "Accepted" }]});
+        // console.log(answers);
+
+        const questions = [];
+
+        for(i in answers){
+            const question = await Question.find({_id:answers[i].questionid});
+            questions.push(question);
+        }
+
+        if(!questions)
+        {
+            return res.status(404).send("Question not Found");
+        }
+
+        res.json(questions);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
     }
 })
 

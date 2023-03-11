@@ -1,0 +1,26 @@
+.profile_sidebar{
+    display:flex;
+    padding: 20px;
+    height: 100%;
+    flex: 0.5;
+    max-width: 150px;
+    border-right: 1px solid #ddd;
+}
+
+ .sideLink{
+    text-decoration: none;
+    color: #000;
+ }
+
+ .sideLink:hover {
+    color:#000;
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+ }
+
+ .sidebar-option >p {
+    color:#000;
+    font-size: 14px;
+ }

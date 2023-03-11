@@ -15,10 +15,10 @@ export default function Sidebar() {
                         <div className="link">
                             <div className="link-tag">
                                     <Public />
-                                    <NavLink>Questions</NavLink>
+                                    <NavLink to="/questions">Questions</NavLink>
                             </div>
                             <div className="tags">
-                                <p>tags</p>
+                                <NavLink to = "/tags" className="mt-1 mb-1">tags</NavLink>
                                 <p>Users</p>
                             </div>
                         </div>

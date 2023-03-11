@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+}
+.profile{
+    display: block;
+}
+.ProfileAndName{
+    display: flex;
+    margin-left: 10px;
+
+}
+.nameAndActive{
+    display: block;
+    margin-left: 20px;
+}
+.name{
+    font-size: 30px;
+    font-weight: 400;
+}
+.allChart{
+    display: flex;
+}
+.QuesChart{
+   padding: 30px;
+   padding-top: 50px;
+}
+.title{
+   justify-content: center;
+   font-weight: 400;
+}
+.card5{
+    display: block;
+}

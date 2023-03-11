@@ -1,0 +1,14 @@
+.allChart{
+    display: flex;
+}
+.QuesChart{
+   padding: 30px;
+   padding-top: 50px;
+}
+.title{
+    justify-content: center;
+    font-weight: 400;
+ }
+ .header_and_content{
+    display: block;
+ }

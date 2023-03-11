@@ -9,6 +9,7 @@ var localStorage = new LocalStorage('./scratch');
 
 const router = express.Router();
 
+// To add a new Comment of a perticular answer of a question.
 router.post('/addcomment/:id',fetchuser, async (req, res) => {
     try {
 
@@ -25,6 +26,22 @@ router.post('/addcomment/:id',fetchuser, async (req, res) => {
     catch (error) {
         console.log(error.message);
         res.status(400).send("Internal Server Error");
+    }
+})
+
+// To fetch all comments related to perticular answer of any question
+
+router.post("/fetchComments", async(req, res)=>{
+    try{
+
+        let comments = await Comment.find({questionid : req.body.qid, answerid:req.body.ansid});
+
+        res.json(comments);
+    }
+    catch(e)
+    {
+        console.log(e.message);
+        res.status(400).send("Internal server error");
     }
 })
 

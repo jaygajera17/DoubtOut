@@ -1,0 +1,17 @@
+.profile{
+    display: block;
+    width: 100%;
+}
+.ProfileAndName{
+    display: flex;
+    margin-left: 10px;
+
+}
+.nameAndActive{
+    display: block;
+    margin-left: 20px;
+}
+.name{
+    font-size: 30px;
+    font-weight: 400;
+}

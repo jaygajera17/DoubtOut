@@ -64,8 +64,6 @@ export default function Questions() {
 
     return (
         <>
-
-
             <div Style="height:100%; margin-top:13vh; z-index:1; background-color:white">
                 <div class="">
 
@@ -126,7 +124,6 @@ export default function Questions() {
                                     <div className="questions">
                                         <div className="question">
                                             <Posts posts={currentPosts} />
-
                                         </div>
 
                                     </div>
