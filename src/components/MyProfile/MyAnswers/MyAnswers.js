@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ProfileSidebar from '../ProfileSidebar/ProfileSidebar';
 import ProfileHeader from '../ProfileHeader/ProfileHeader';
 import PostsAns from './PostsAns';
-import Pagination from '../Questions/Pagination';
+import Pagination from '../../Questions/Pagination';
 import './myanswer.css';
 
 export default function Profile() {
