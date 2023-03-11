@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
-import '../MyQuestions/myquestions.css';
+
 
  var mydiv = {
     margin: '8% 8%',

@@ -5,7 +5,6 @@ import axios from 'axios';
 import '../Questions/questions.css';
 import '../Header/header.css';
 import AdminSidebar from './AdminSidebar';
-import '../MyQuestions/myquestions.css';
 
 export default function Adminquestion() {
 
