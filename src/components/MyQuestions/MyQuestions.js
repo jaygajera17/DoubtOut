@@ -77,7 +77,7 @@ export default function MyQuestions() {
             <div className='header_and_content' Style="width:100%;">
                 <ProfileHeader />
 
-                {/* filter based on date , tags and status  */}
+                {/* filter based on date , tags  */}
                 <div className='filters_menu'>
                     <strong Style="display:inline">Find your questions between : </strong>
                     <input type="date" name="startDate" onChange={onChange} /> 

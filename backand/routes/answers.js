@@ -12,7 +12,7 @@ const Question = require("../models/Question");
 const router = express.Router();
 const mongoose = require('mongoose')
 
-router.post('/addanswer/:id',fetchuser, async (req, res) => {
+router.post('/addanswer/:id', fetchuser, async (req, res) => {
     try {
 
         // console.log(req.params.id);
@@ -44,73 +44,175 @@ router.post("/fetchanswer/:id", async (req, res) => {
     }
 })
 
-router.post('/fetchUserAnswers/:username', async(req, res)=>{
-    try{
-        
-        const answers = await Answer.find({postedBy : req.params.username});
+router.post('/fetchUserAnswers/:username', async (req, res) => {
+    try {
+
+        const answers = await Answer.find({ postedBy: req.params.username });
         // console.log(answers);
 
-        if(!answers)
-        {
+        if (!answers) {
             return res.status(404).send("Question not Found");
         }
 
         res.json(answers);
     }
-    catch(e){
+    catch (e) {
         console.log(e.message);
         res.status(500).send("Internal Server Error");
     }
 })
 
-router.post('/fetchUserAnsweredQuestions/:username', async(req, res)=>{
-    try{
-        
-        const answers = await Answer.find({postedBy : req.params.username});
-        // console.log(answers);
+// This is for filtering answeres based on Date,tag and status
+router.post('/fetchUserFilteredAnswers/:username', async (req, res) => {
+    try {
 
-        const questions = [];
+        const answers = await Answer.find({ postedBy: req.params.username });
 
-        for(i in answers){
-            const question = await Question.find({_id:answers[i].questionid});
-            questions.push(question);
+        const startDate = req.body.startDate;
+        const endDate = req.body.endDate;
+        const tags = req.body.tags;
+        const status = req.body.status;
+
+        if (!answers) {
+            return res.status(404).send("Answers not Found");
         }
 
-        if(!questions)
-        {
-            return res.status(404).send("Question not Found");
+        const afterDateapplied = [];
+        answers.map(ans => {
+            const year = ans.date.getUTCFullYear();
+            var month = ans.date.getUTCMonth() + 1;
+            var day = ans.date.getUTCDate();
+
+            if (month >= '0' && month <= '9') month = "0" + month;
+            if (day >= '0' && day <= '9') day = "0" + day;
+
+            const date = year + "-" + month + "-" + day;
+
+            if (date >= startDate && date <= endDate) {
+                afterDateapplied.push(ans);
+            }
+        })
+
+        const afterTagsapplied = [];
+        var tagAppiled = false;
+        if (tags) {
+            for (i in afterDateapplied) {
+                const que = await Question.find({ _id: afterDateapplied[i].questionid });
+                if (que[0].tags.split(" ").includes(tags)) {
+                    afterTagsapplied.push(afterDateapplied[i]);
+                }
+            }
+            tagAppiled = true;
         }
 
-        res.json(questions);
+        const afterStatusApplied = [];
+        var statusAppiled = false;
+        if (status) {
+            if (tagAppiled) {
+                afterTagsapplied.map(ans => {
+                    if (ans.status === status) {
+                        afterStatusApplied.push(ans);
+                    }
+                })
+            }
+            else {
+                afterDateapplied.map(ans => {
+                    if (ans.status = status) {
+                        afterStatusApplied.push(ans);
+                    }
+                })
+            }
+            statusAppiled = true;
+        }
+
+        if (statusAppiled)
+            res.json(afterStatusApplied);
+        else if (tagAppiled)
+            res.json(afterTagsapplied);
+        else {
+            res.json(afterDateapplied);
+        }
     }
-    catch(e){
+    catch (e) {
         console.log(e.message);
         res.status(500).send("Internal Server Error");
     }
 })
 
 
-router.post('/fetchUserAcceptedAnsweredQuestions/:username', async(req, res)=>{
-    try{
-        
-        const answers = await Answer.find({$and: [{postedBy : req.params.username }, { status : "Accepted" }]});
+router.post("/givenAnswersTags/:username", async (req, res) => {
+    try {
+        const answers = await Answer.find({ postedBy: req.params.username });
+
+        const questions = [];
+
+        for (i in answers) {
+            const question = await Question.find({ _id: answers[i].questionid });
+            questions.push(question);
+        }
+        const tags = [];
+
+        questions.map(que => {
+            que[0].tags.split(" ").map(tag => {
+                if (tags.indexOf(tag) == -1) tags.push(tag);
+            })
+        })
+
+        res.json(tags);
+    }
+    catch (e) {
+        console.log(error.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+
+router.post('/fetchUserAnsweredQuestions/:username', async (req, res) => {
+    try {
+
+        const answers = await Answer.find({ postedBy: req.params.username });
         // console.log(answers);
 
         const questions = [];
 
-        for(i in answers){
-            const question = await Question.find({_id:answers[i].questionid});
+        for (i in answers) {
+            const question = await Question.find({ _id: answers[i].questionid });
             questions.push(question);
         }
 
-        if(!questions)
-        {
+        if (!questions) {
             return res.status(404).send("Question not Found");
         }
 
         res.json(questions);
     }
-    catch(e){
+    catch (e) {
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+
+router.post('/fetchUserAcceptedAnsweredQuestions/:username', async (req, res) => {
+    try {
+
+        const answers = await Answer.find({ $and: [{ postedBy: req.params.username }, { status: "Accepted" }] });
+        // console.log(answers);
+
+        const questions = [];
+
+        for (i in answers) {
+            const question = await Question.find({ _id: answers[i].questionid });
+            questions.push(question);
+        }
+
+        if (!questions) {
+            return res.status(404).send("Question not Found");
+        }
+
+        res.json(questions);
+    }
+    catch (e) {
         console.log(e.message);
         res.status(500).send("Internal Server Error");
     }
@@ -149,7 +251,7 @@ router.post("/upvote/:id", async (req, res) => {
 
         const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, { $set: { "votes": vote } });
 
-        res.json({"status": "upvoted"});
+        res.json({ "status": "upvoted" });
     }
 
     catch (e) {
@@ -176,7 +278,7 @@ router.post("/downvote/:id", async (req, res) => {
 
         const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, { $set: { "votes": vote } });
 
-        res.json({"status": "downvoted"});
+        res.json({ "status": "downvoted" });
     }
 
     catch (e) {
@@ -185,27 +287,27 @@ router.post("/downvote/:id", async (req, res) => {
     }
 })
 
-router.post("/acceptanswer/:id", async(req, res)=>{
-    try{
-        const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, {$set : {"status": "Accepted"}});
-        res.json({"status": "Accepted"});
+router.post("/acceptanswer/:id", async (req, res) => {
+    try {
+        const updatedAnswer = await Answer.findByIdAndUpdate(req.params.id, { $set: { "status": "Accepted" } });
+        res.json({ "status": "Accepted" });
     }
 
-    catch(e){
+    catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server error");
     }
 })
 
-router.post("/points", async(req, res)=>{
-    try{
+router.post("/points", async (req, res) => {
+    try {
         let username = localStorage.getItem("username");
 
-        let answers = await Answer.find({$and:[{"postedBy" : username},{"status" : "Accepted"}]});
+        let answers = await Answer.find({ $and: [{ "postedBy": username }, { "status": "Accepted" }] });
 
-        res.json({"points" : answers.length*5});
+        res.json({ "points": answers.length * 5 });
     }
-    catch(e){
+    catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
     }
