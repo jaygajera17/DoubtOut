@@ -6,6 +6,11 @@ import '../Analysis/analysis.css';
 
 
 export default function Analysis() {
+    const [filters, setFilters] = useState({ startDate: "", endDate: "" });
+
+    const onChange = (e) => {
+        setFilters({ ...filters, [e.target.name]: e.target.value })
+    }
 
     //for fetching tags of asked questions.
     const [questions, setQuestions] = useState([]);
@@ -29,13 +34,35 @@ export default function Analysis() {
         const tag = [];
         const cnt = [];
 
-        questions.map(question => question.tags.split(" ").map(tag => {
-            freqOfTags[tag] = 0;
-        }))
+        if (filters.startDate && filters.endDate) {
+            questions.map(question => {
+                // console.log(question.date.substring(0, 10));
+                if (question.date.substring(0, 10) >= filters.startDate && question.date.substring(0, 10) <= filters.endDate)
+                    question.tags.split(" ").map(tag => {
+                        freqOfTags[tag] = 0;
+                    })
+            })
 
-        questions.map(question => question.tags.split(" ").map(tag => {
-            freqOfTags[tag] = freqOfTags[tag] + 1;
-        }))
+            questions.map(question => {
+                if (question.date.substring(0, 10) >= filters.startDate && question.date.substring(0, 10) <= filters.endDate)
+                    question.tags.split(" ").map(tag => {
+                        freqOfTags[tag] = freqOfTags[tag] + 1;
+                    })
+            })
+        }
+        else {
+            questions.map(question =>
+                question.tags.split(" ").map(tag => {
+                    freqOfTags[tag] = 0;
+                })
+            )
+
+            questions.map(question =>
+                question.tags.split(" ").map(tag => {
+                    freqOfTags[tag] = freqOfTags[tag] + 1;
+                })
+            )
+        }
 
         // console.log(freqOfTags);
 
@@ -47,7 +74,7 @@ export default function Analysis() {
         setTags(tag);
         setCount(cnt);
 
-    }, [questions]);
+    }, [questions, filters]);
 
     //for fetching tags of accepted answered question.
     const [acceptedansweredQues, setAcceptedAnsweredQues] = useState([]);
@@ -60,7 +87,6 @@ export default function Analysis() {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            console.log(response);
             return response.json();
         }).then(data => setAcceptedAnsweredQues(data));
     }, []);
@@ -71,19 +97,38 @@ export default function Analysis() {
         const ac_ans_tag = [];
         const ac_ans_cnt = [];
 
-        acceptedansweredQues.map(ques => {
-            const tags = ques[0].tags;
-            tags.split(" ").map(tag =>
-                ac_ans_freqOfTags[tag] = 0
-            )
-        })
+        if (filters.startDate && filters.endDate) {
+            acceptedansweredQues.map(ques => {
+                const tags = ques[0].tags;
+                if (ques[0].date.substring(0, 10) >= filters.startDate && ques[0].date.substring(0, 10) <= filters.endDate)
+                    tags.split(" ").map(tag =>
+                        ac_ans_freqOfTags[tag] = 0
+                    )
+            })
 
-        acceptedansweredQues.map(ques => {
-            const tags = ques[0].tags;
-            tags.split(" ").map(tag =>
-                ac_ans_freqOfTags[tag] = ac_ans_freqOfTags[tag] + 1
-            )
-        })
+            acceptedansweredQues.map(ques => {
+                const tags = ques[0].tags;
+                if (ques[0].date.substring(0, 10) >= filters.startDate && ques[0].date.substring(0, 10) <= filters.endDate)
+                    tags.split(" ").map(tag =>
+                        ac_ans_freqOfTags[tag] = ac_ans_freqOfTags[tag] + 1
+                    )
+            })
+        }
+        else {
+            acceptedansweredQues.map(ques => {
+                const tags = ques[0].tags;
+                tags.split(" ").map(tag =>
+                    ac_ans_freqOfTags[tag] = 0
+                )
+            })
+
+            acceptedansweredQues.map(ques => {
+                const tags = ques[0].tags;
+                tags.split(" ").map(tag =>
+                    ac_ans_freqOfTags[tag] = ac_ans_freqOfTags[tag] + 1
+                )
+            })
+        }
 
         for (const i in ac_ans_freqOfTags) {
             ac_ans_tag.push(i);
@@ -93,8 +138,7 @@ export default function Analysis() {
         setAcAnsTags(ac_ans_tag);
         setAcAnsCount(ac_ans_cnt);
 
-    }, [acceptedansweredQues]);
-
+    }, [acceptedansweredQues, filters]);
 
     //for fetching tags of answered questions
     const [answeredQues, setAnsweredQues] = useState([]);
@@ -107,40 +151,62 @@ export default function Analysis() {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            console.log(response);
             return response.json();
         }).then(data => setAnsweredQues(data));
     }, []);
 
     useEffect(() => {
-        console.log(answeredQues);
+        // console.log(answeredQues);
         const ans_freqOfTags = [];
         const ans_tag = [];
         const ans_cnt = [];
 
-        answeredQues.map(ques => {
-            const tags = ques[0].tags;
-            tags.split(" ").map(tag =>
-                ans_freqOfTags[tag] = 0
-            )
-        })
+        if (filters.startDate && filters.endDate) {
+            answeredQues.map(ques => {
+                const tags = ques[0].tags;
+                if (ques[0].date.substring(0, 10) >= filters.startDate && ques[0].date.substring(0, 10) <= filters.endDate)
+                    tags.split(" ").map(tag =>
+                        ans_freqOfTags[tag] = 0
+                    )
+            })
 
-        answeredQues.map(ques => {
-            const tags = ques[0].tags;
-            tags.split(" ").map(tag =>
-                ans_freqOfTags[tag] = ans_freqOfTags[tag] + 1
-            )
-        })
+            answeredQues.map(ques => {
+                const tags = ques[0].tags;
+                if (ques[0].date.substring(0, 10) >= filters.startDate && ques[0].date.substring(0, 10) <= filters.endDate)
+                    tags.split(" ").map(tag =>
+                        ans_freqOfTags[tag] = ans_freqOfTags[tag] + 1
+                    )
+            })
+            console.log(ans_freqOfTags);
+        }
+        else {
+            answeredQues.map(ques => {
+                const tags = ques[0].tags;
+                tags.split(" ").map(tag =>
+                    ans_freqOfTags[tag] = 0
+                )
+            })
+
+            answeredQues.map(ques => {
+                const tags = ques[0].tags;
+                tags.split(" ").map(tag =>
+                    ans_freqOfTags[tag] = ans_freqOfTags[tag] + 1
+                )
+            })
+
+        }
 
         for (const i in ans_freqOfTags) {
             ans_tag.push(i);
             ans_cnt.push(parseInt(ans_freqOfTags[i]));
         }
 
+        console.log(ans_cnt);
+        console.log(ans_tag);
         setAnsTags(ans_tag);
         setAnsCount(ans_cnt);
 
-    }, [answeredQues]);
+    }, [answeredQues, filters]);
 
     return (
         <div>
@@ -149,17 +215,22 @@ export default function Analysis() {
                 <div className='header_and_content'>
                     <ProfileHeader />
 
-                        <div className="title_row1">
-                            {/* <p className="title1">Total No of Questions asked by You: {questions.length}</p>
+                    <div className='filters_menu'>
+                        <input type="date" name="startDate" onChange={onChange} />
+                        <strong Style="display:inline">To</strong>
+                        <input type="date" name="endDate" onChange={onChange} />
+                    </div>
+                    <div className="title_row1">
+                        {/* <p className="title1">Total No of Questions asked by You: {questions.length}</p>
                             <p className="title2">Total No of Questions asked by You: {questions.length}</p> */}
-                        </div>
+                    </div>
                     <div className="charts">
                         <div className="first_row">
-                            <Chart title={"Total "+ questions.length +" questions asked by you & used tags as follows"} count={count} Tags={Tags} />
-                            <Chart title={"Total "+ answeredQues.length +" answers given by you & used tags as follows"} count={Anscount} Tags={AnsTags} />
+                            <Chart title={"Total " + questions.length + " questions asked by you & used tags as follows"} count={count} Tags={Tags} />
+                            <Chart title={"Total " + answeredQues.length + " answers given by you & used tags as follows"} count={Anscount} Tags={AnsTags} />
                         </div>
                         <div className="last_chart">
-                            <Chart title={"Your total "+ acceptedansweredQues.length +" answers acceted & used tags as follows"} count={AcAnscount} Tags={AcAnsTags} />
+                            <Chart title={"Your total " + acceptedansweredQues.length + " answers acceted & used tags as follows"} count={AcAnscount} Tags={AcAnsTags} />
                         </div>
                     </div>
 

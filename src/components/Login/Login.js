@@ -47,7 +47,7 @@ function Login() {
       console.log(json.date.toLocaleString('default', { month: 'long' }));
       
       localStorage.setItem("since", month[mn]+" "+year);
-
+      console.log(localStorage.getItem("since"));
 
       if (json.userType === "user") {
         setTimeout(() => {
