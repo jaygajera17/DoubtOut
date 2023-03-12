@@ -115,11 +115,12 @@ router.post('/login', [
             //res.json({authToken});
             localStorage.setItem('token', authToken);
             localStorage.setItem('username', user.username);
+            localStorage.setItem('since', user.date);
 
             req.body.authtoken = authToken;
             // req.body.userType = user.type;
 
-            return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username, "userType": "user" });
+            return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username, "userType": "user", "date":user.date });
         }
 
         const adminPassword = await bcrypt.compare(password, admin.password);
@@ -138,13 +139,13 @@ router.post('/login', [
         const authToken = jwt.sign(admindata, JWT_SECRET);
         //res.json({authToken});
         localStorage.setItem('token', authToken);
-        localStorage.setItem('username', user.username);
-        localStorage.setItem('since', user.date);
+        //localStorage.setItem('username', user.username);
+        
       
         req.body.authtoken = authToken;
         // req.body.userType = user.type;
 
-        return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username ,'date':user.date});
+    //    return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username ,'date':user.date});
         localStorage.setItem('username', admin.username);
 
         req.body.authtoken = authToken;

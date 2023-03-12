@@ -93,7 +93,7 @@ export default function QuestionOnTags() {
                                     }
                                 </div>
                             </div> */}
-                            This displays all questions
+                            <p>Total {questions.length} Questions</p>
                             <div className="questions">
                                 <div className="question">
                                     <Posts posts={currentPosts} />
