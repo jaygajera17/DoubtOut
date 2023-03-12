@@ -113,6 +113,9 @@ export default function Content(props) {
             let json = await response.json();
             setqueVoteStatus(json);
         }
+        else {
+            navigate("/login");
+        }
     }
 
     const downvoteQue = async (e, id) => {

@@ -114,7 +114,7 @@ export default function AdminHome() {
  
 
     return (
-        <div >
+        <div className='container' Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
             <AdminSidebar />
      
         <br/>

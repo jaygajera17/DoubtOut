@@ -20,7 +20,7 @@ export default function Sidebar() {
                             </div>
                             <div className="tags">
                                 <NavLink to="/tags" className="mt-1 mb-1">tags</NavLink>
-                                <p>Users</p>
+                                
                             </div>
                             <div className="link-tag">
                                 <AccountCircle />

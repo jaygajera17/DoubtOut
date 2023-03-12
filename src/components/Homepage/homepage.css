@@ -1,33 +1,201 @@
-.verdicts {
-    display: flex;
-    justify-content: space-between;
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  .intro-img img {
+    display: block;
+    height: auto;
     max-width: 100%;
-    height: 30%;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    margin-left: 100px;
-    margin-right: auto;
-}
-.verdicts p {
-    width: 200px;
-    text-align: center;
-    color: rgb(38, 79, 191);
-    font-weight: 400;
-}
-.verdicts p strong {
-    color: #ca5c34;
+  }
+  
+  img {
+    vertical-align: middle;
+    border-style: none;
+  }
+  .contents {
+    padding: 0px 0 80px;
+  }
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+  
+  div {
+    display: block;
+  }
+  
+  .contents h2 {
+    color: #333;
+    font-size: 42px;
     font-weight: 700;
-    text-transform: uppercase;
-}
-.verdicts a {
-    align-self: flex-end;
-}
-.verdicts .button {
-    margin-top: 50px;
-}
-@media screen and (max-width: 400px) {
-    .col-25, .col-75, .verdicts p ,.verdicts p strong {
-      width: 100%;
-      margin-top: 0;
+    line-height: 60px;
+    margin-bottom: 25px;
+  }
+  
+  
+  .hero-area .contents p {
+    color: #9a9a9a;
+    font-size: 14px;
+    line-height: 26px;
+  }
+  .contents p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 50px;
+  }
+  p {
+    font-size: 14px;
+    color: #9a9a9a;
+    line-height: 26px;
+    font-family: 'Rubik', sans-serif;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  
+  .job-search-form {
+    margin-top: 35px;
+  }
+  .head-title, .contents p{
+    text-align: left;
+    font-family: 'Rubik', sans-serif;
+  }
+  
+  .contents p{
+    line-height: 26px;
+  }
+  
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+  
+  form {
+    display: block;
+    margin-top: 0em;
+  }
+  
+  .row {
+    /* display: -ms-flexbox; */
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .job-search-form .button {
+    background: #4e63d7;
+  }
+  .job-search-form .button {
+    font-size: 22px;
+    line-height: 14px;
+    display: inline-block;
+    position: relative;
+    outline: none !important;
+    background: #4e63d7;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    overflow: hidden;
+    padding: 11px 12px;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    border-radius: 4px;
+    z-index: 1;
+  }
+  .job-search-form {
+    margin-top: 35px;
+  }
+  
+  .job-search-form .form-group {
+    margin-bottom: 0;
+    width: 90%;
+  }
+  .job-search-form .form-group .form-control {
+    height: 46px;
+  }
+  
+  .form-control {
+    width: 100%;
+   
+    height: 46px;
+    padding: 0 20px;
+    font-size: 14px;
+    border-radius: 30px;
+    border: 1px solid #ececec;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  
+  .styled-select {
+   
+    position: relative;
+    
+    width: 100%;
+    background: #fff;
+    border-radius: 30px;
+  }
+  
+  label {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  
+  .job-search-form .search-category-container .styled-select > select {
+    background: transparent;
+    font-size: 14px;
+    line-height: 25px;
+    border: 0;
+    border-radius: 30px;
+    height: 46px;
+    border: 1px solid #ececec;
+    color: #495057;
+    padding: 10px 20px;
+    z-index: 1;
+    width: 100%;
+    position: relative;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+  
+  option {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+  }
+  .job-search-form .form-group i {
+    position: absolute;
+    top: 14px;
+    color: #9a9a9a;
+    right: 30px;
+    font-size: 18px;
+  }
+  
+  @media (min-width: 768px){
+  .col-md-5 {
+    /* -ms-flex: 0 0 41.666667%; */
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+  }
+  
+  }
+  
+  @media (max-width: 768px)
+  {
+    .form-control{
+        margin-bottom: 20px;
     }
   }
+  

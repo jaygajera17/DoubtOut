@@ -2,6 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import AdminSidebar from './AdminSidebar';
+
+
  var mydiv = {
     margin: '8% 8%',
     };
@@ -42,8 +45,9 @@ export default function AdminUser() {
   }
 
   return (
-    <div Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
-      <h3> Get User Data </h3>
+    <div  Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
+      <AdminSidebar/>
+            <h3> Get User Data </h3>
       <button onClick={fetchUsers}>Fetch Users</button>
       <table className="table ">
               <thead>
@@ -76,5 +80,6 @@ export default function AdminUser() {
         })}
       </div>
     </div>
+    
   )
 }

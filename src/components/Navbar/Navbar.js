@@ -141,7 +141,7 @@ export default function Navbar() {
 
             </ul>
 
-            {loginStatus && (<NavLink to='/profile' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>)}
+            {loginStatus && (<NavLink to='/analysis' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>)}
             <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
 
             <button className='btn btn-white  mr-2' onClick={() => setShow(!show)}><i className="fas fa-bell"></i></button>
