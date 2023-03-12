@@ -27,8 +27,8 @@ export default function ProfileHeader() {
             <div className='ProfileAndName'>
                 <Avatar sx={{ height: '58px', width: '58px' }} />
                 <div className='nameAndActive'>
-                    <div className='name'>Name</div>
-                    <p>user since..</p>
+                    <div className='name'>{localStorage.getItem("username")}</div>
+                    <p>User since <strong>{localStorage.getItem("since")}</strong></p>
                     <div>Points: {points}</div>
                 </div>
 

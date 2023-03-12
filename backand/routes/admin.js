@@ -204,6 +204,28 @@ router.get('/question-by-month',async(req,res)=>{
     }
 })  
 
+router.get('/question-by-year',async(req,res)=>{
+    try{
+        const questions = await Question.aggregate([
+            {
+                $match: { date: { $exists: true } }
+              },
+            {
+                
+                $group: {
+                    _id: { $year: "$date" },
+                    count: { $sum: 1 }
+                }
+            }
+       ]);
+       res.json(questions);
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("internel server error");
+    }
+})
+
 
 
 module.exports = router;

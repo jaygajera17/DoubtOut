@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
-// import Sidebar from '../Sidebar/Sidebar';
-import '../Questions/questions.css';
+import '../../Questions/questions.css';
 // import { FilterList } from '@mui/icons-material';
-import '../Header/header.css';
+import '../../Header/header.css'
 
 
 export default function Posts({ posts }) {

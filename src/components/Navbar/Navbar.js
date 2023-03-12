@@ -58,15 +58,13 @@ export default function Navbar() {
   const logout = () => {
 
     localStorage.removeItem('username');
-
+    localStorage.removeItem('since');
 
     setLoginStatus(false);
 
     window.location.reload(true);
 
-    // navigate("/");
-
-
+    navigate("/");
   }
 
   const searchQuestion = async (e) => {
@@ -82,13 +80,13 @@ export default function Navbar() {
     }).then(response => {
       return response.json();
     }).then(questions => {
-   
+
       navigate("/search", { state: questions });
       // setQuestions(data);
     })
 
     // console.log(questions.length);
-   
+
 
 
 
@@ -143,7 +141,7 @@ export default function Navbar() {
 
             </ul>
 
-            <NavLink to='/profile' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>
+            {loginStatus && (<NavLink to='/profile' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>)}
             <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
 
             <button className='btn btn-white  mr-2' onClick={() => setShow(!show)}><i className="fas fa-bell"></i></button>

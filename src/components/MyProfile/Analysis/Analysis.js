@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ProfileHeader from "../ProfileHeader/ProfileHeader";
 import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
-import Chart from "../charts/Chart";
-import './analysis.css';
+import Chart from "../../charts/Chart";
+import '../Analysis/analysis.css';
+
 
 export default function Analysis() {
 
@@ -47,7 +48,6 @@ export default function Analysis() {
         setCount(cnt);
 
     }, [questions]);
-
 
     //for fetching tags of accepted answered question.
     const [acceptedansweredQues, setAcceptedAnsweredQues] = useState([]);
@@ -149,13 +149,17 @@ export default function Analysis() {
                 <div className='header_and_content'>
                     <ProfileHeader />
 
+                        <div className="title_row1">
+                            {/* <p className="title1">Total No of Questions asked by You: {questions.length}</p>
+                            <p className="title2">Total No of Questions asked by You: {questions.length}</p> */}
+                        </div>
                     <div className="charts">
                         <div className="first_row">
-                            <Chart title="No of questions asked by you in particular tag" count={count} Tags={Tags} />
-                            <Chart title="No of answers given by you in particular tag" count={Anscount} Tags={AnsTags} />
+                            <Chart title={"Total "+ questions.length +" questions asked by you & used tags as follows"} count={count} Tags={Tags} />
+                            <Chart title={"Total "+ answeredQues.length +" answers given by you & used tags as follows"} count={Anscount} Tags={AnsTags} />
                         </div>
                         <div className="last_chart">
-                            <Chart title="No of your answers accepted by user in particular tag" count={AcAnscount} Tags={AcAnsTags} />
+                            <Chart title={"Your total "+ acceptedansweredQues.length +" answers acceted & used tags as follows"} count={AcAnscount} Tags={AcAnsTags} />
                         </div>
                     </div>
 

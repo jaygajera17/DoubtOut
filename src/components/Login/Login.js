@@ -36,6 +36,18 @@ function Login() {
       window.scrollTo(0, 0);
 
       localStorage.setItem("username", json.username);
+      
+      //stroing date information for profile section..
+      const month = new Map();
+      month['01'] = "Jan";  month['02'] = "Feb";  month['03'] = "Mar";  month['04'] = "Apr";  month['05'] = "May";  month['06'] = "June";
+      month['07'] = "July";  month['08'] = "Aug";  month['09'] = "Sep";  month['10'] = "Oct";  month['11'] = "Nov";  month['12'] = "Dec";
+      
+      const year = json.date.substring(0, 4);
+      const mn = json.date.substring(5, 7);
+      console.log(json.date.toLocaleString('default', { month: 'long' }));
+      
+      localStorage.setItem("since", month[mn]+" "+year);
+
 
       if (json.userType === "user") {
         setTimeout(() => {

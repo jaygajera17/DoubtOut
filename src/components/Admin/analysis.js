@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import AdminSidebar from './AdminSidebar';
 import axios from 'axios';
 import Chart from '../charts/Chart';
-import '../Analysis/analysis.css';
+import '../MyProfile/Analysis/analysis.css';
 import '../Header/header.css';
 import '../Questions/questions.css';
 
@@ -21,6 +21,10 @@ export default function AdminAnalysis() {
     const [questions, setQuestions] = useState([]);
     const [Tags, setTags] = useState([]);
     const [count, setCount] = useState([]);
+   
+
+
+   
     useEffect(() => {
         fetch(`http://localhost:5000/api/question/fetchquestions`, {
             method: "POST",
@@ -143,28 +147,123 @@ export default function AdminAnalysis() {
            
             })
     }
-    const deleteQuestion = async (id) => {
-        const response = axios.delete(`http://localhost:5000/api/admin/deleteQuestion/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => {
-            fetchQuestions()
-            window.location.reload();
-            return response.json()
-        })
-        const data = await response.json()
-        if (data.status === 'success') {
-            fetchQuestions()
+
+   const [january, setJanuary] = useState(0);
+const [february, setFebruary] = useState(0);
+const [march, setMarch] = useState(0);
+const [april, setApril] = useState(0);
+const [may, setMay] = useState(0);
+const [june, setJune] = useState(0);
+const [july, setJuly] = useState(0);
+const [august, setAugust] = useState(0);
+const [september, setSeptember] = useState(0);
+const [october, setOctober] = useState(0);
+const [november, setNovember] = useState(0);
+const [december, setDecember] = useState(0);
+   
+useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('http://localhost:5000/api/admin/question-by-month');
+        const data = await response.json();
+  
+        data.forEach(item => {
+          const monthIndex = item._id - 1;
+          const count = item.count;
+          switch (monthIndex) {
+            case 0:
+              setJanuary(count);
+              break;
+            case 1:
+              setFebruary(count);
+              break;
+            case 2:
+              setMarch(count);
+              break;
+            case 3:
+              setApril(count);
+              break;
+            case 4:
+              setMay(count);
+              break;
+            case 5:
+              setJune(count);
+              break;
+            case 6:
+              setJuly(count);
+              break;
+            case 7:
+              setAugust(count);
+              break;
+            case 8:
+              setSeptember(count);
+              break;
+            case 9:
+              setOctober(count);
+              break;
+            case 10:
+              setNovember(count);
+              break;
+            case 11:
+              setDecember(count);
+              break;
+            default:
+              break;
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  
+    fetchData();
+  }, []);
+
+  const[twentyone,setTwentyone]=useState(0);
+  const[twentytwo,setTwentytwo]=useState(0);
+  const[twentythree,setTwentythree]=useState(0);
+
+  useEffect(() => {
+    async function fetchData() {
+        try {
+            const response = await fetch('http://localhost:5000/api/admin/question-by-year');
+            const data = await response.json();
+            data.forEach(item => {
+                const yearIndex = item._id - 2021;
+                const count = item.count;
+                switch (yearIndex) {
+                    case 0:
+                        setTwentyone(count);
+                        break;
+                    case 1:
+                        setTwentytwo(count);
+                        break;
+                    case 2:
+                        setTwentythree(count);
+                        break;
+                    default:
+                        break;
+                }
+            });
+        } catch (error) {
+            console.error(error);
         }
     }
+    fetchData();
+}, []);
+
+
+  
+            
+
+   
 
     useEffect(() => {
         noOfusers();
         noOfQuestions();
         noOfAnswers();
         noOfAccept();
+       
     }, [])
     
     return (
@@ -175,9 +274,14 @@ export default function AdminAnalysis() {
            
                 <div className='charts'>
                     <div className="first_row">
-                        <Chart title="No of questions asked by you in particular tag" count={[NoOfQuestions,accept,answer]} Tags={["no of question","no of accept","no of answer"]} />
-                        <Chart title="No of questions asked by you in particular tag" count={count} Tags={Tags} />
-                    </div>   
+                        <Chart title="overall data" count={[user,NoOfQuestions,answer,accept]} Tags={["Users","Questions","Answers","Accepted Answers"]} />
+                        <Chart title="No of questions in particular tag" count={count} Tags={Tags} />
+                    </div>  
+                    {'\n'} 
+                    <div className="first_row">
+                        <Chart title="No of questions in particular month" count={[january,february,march,april,may,june,july,august,september,october,november,december]} Tags={["january","february","march","april","may","june","july","august","september","october","november","december"]} />
+                        <Chart title="No of questions in particular year" count={[twentyone,twentytwo,twentythree]} Tags={["2021","2022","2023"]} />
+                    </div>
                  </div>
            
         </div>
