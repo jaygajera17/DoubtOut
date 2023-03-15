@@ -342,7 +342,7 @@ export default function Content(props) {
                                                     <small>Timestamp</small>
                                                 </p> */}
                                             </div>
-                                            <p onClick={() => setShow(!show)}>Add a comment</p>
+                                            {/* <p onClick={() => setShow(!show)}>Add a comment</p> */}
                                             {
                                                 show && (
                                                     <div className="title">

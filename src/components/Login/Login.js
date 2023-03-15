@@ -4,6 +4,7 @@ import './Login.css'
 
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 function Login() {
 
   const navigate = useNavigate();
@@ -120,15 +121,15 @@ function Login() {
                 <input type="password" onChange={onChange} name='password' className="pass-key" required placeholder="Password" />
               </div>
               <div className="pass">
-                <p>Forgot Password?</p>
+                {/* <p>Forgot Password?</p> */}
               </div>
-              <div className="field">
+              <div className="field my-2">
                 <button type="submit"
                   value="Login"  >Login </button>
               </div>
             </form>
             <div className="signup">Don't have account?
-              <a href="/">Signup Now</a>
+              <NavLink to="/register">Signup Now</NavLink>
             </div>
           </div>
         </div>
