@@ -133,16 +133,7 @@ function Login() {
             </div>
           </div>
         </div>
-
-
-
-
       </body>
-
-
-
-
-
     </div>
 
   )
