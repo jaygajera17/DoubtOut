@@ -17,10 +17,10 @@ export default function AdminSidebar() {
                     <div className="sidebar-option">
                         <NavLink className="sideLink" to="/Adminquestions">Questions</NavLink>
                     </div>
-                    {/* <div className="sidebar-option">
-                        <NavLink  className="sideLink">Tags</NavLink>
-                    </div>
                     <div className="sidebar-option">
+                        <NavLink  className="sideLink" to="/Adminanswer">answer</NavLink>
+                    </div>
+                    {/* <div className="sidebar-option">
                         <NavLink  className="sideLink">Badges</NavLink>
                     </div> */}
                 </div>

@@ -181,6 +181,26 @@ router.delete('/deletequestion/:id',async (req,res) => {
         }
     }) 
 
+    router.delete('/deleteanswer/:id',async (req,res) => {
+        try{
+                Answer.findByIdAndRemove(req.params.id,(err,data)=>{
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            console.log("deleted");
+                        }
+                });
+               // console.log(req.params.id);
+                res.json({"status": "deleted"});
+            }
+            catch (e) {
+                // console.log(e.message);
+                res.status(500).send("Internal Server Error");
+            }
+        })
+        
+
 
 router.get('/question-by-month',async(req,res)=>{
     try{
