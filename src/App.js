@@ -23,6 +23,7 @@ import Search from './components/Questions/Search';
 import AdminUser from './components/Admin/user';
 import AdminQuestions from './components/Admin/Adminquestion';
 import AdminHome from './components/Admin/AdminHome';
+import Adminanswer from './components/Admin/AdminAnswer';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path='/adminuser' element={<AdminUser />}></Route>
         <Route path='/adminanalysis' element={<AdminAnalysis/>}> </Route>
         <Route path='/adminquestions' element={<AdminQuestions />}></Route>
+        <Route path='/adminanswer' element={<Adminanswer />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
         <Route path='/chart' element={<Chart />}></Route>
         

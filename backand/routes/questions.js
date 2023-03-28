@@ -269,7 +269,6 @@ router.post("/usedtags/:username", async(req, res)=>{
     }
     catch(e)
     {
-        console.log(error.message);
         res.status(400).send("Internal Server Error");
     }
 })
