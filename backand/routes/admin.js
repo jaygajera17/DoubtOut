@@ -162,16 +162,30 @@ router.delete('/deleteUser/:id',async (req,res) => {
 })
 
 
-router.delete('/deletequestion/:id',async (req,res) => {
+router.delete('/deleteQuestion/:id',async (req,res) => {
     try{
-            Question.findByIdAndRemove(req.params.id,(err,data)=>{
+           await Question.findByIdAndRemove(req.params.id,async(err,data)=>{
                     if(err){
                         console.log(err);
                     }
                     else{
                         console.log("deleted");
+
+                        await Answer.deleteMany({questionid : req.params.id}, (err, data)=>{
+                            if(err)
+                            {
+                                console.log(err);
+                                console.log("Not deleted Answers");
+                            }
+                            else
+                            {
+                                console.log("All answers are deleted");
+                            }
+                        });
                     }
             });
+
+
            // console.log(req.params.id);
             res.json({"status": "deleted"});
         }
