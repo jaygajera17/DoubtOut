@@ -119,7 +119,7 @@ export default function Navbar() {
                 <li><NavLink className="dropdown-item" to="/questions">Questions</NavLink></li>
                 <li><a className="dropdown-item" href="/editor">Code Editor</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="/">FAQ</a></li>
+                {/* <li><a className="dropdown-item" href="/">FAQ</a></li> */}
               </ul>
             </li>
           </ul>)}
@@ -148,10 +148,10 @@ export default function Navbar() {
             {loginStatus && (localStorage.getItem("Usertype") === 'user') && (<NavLink to='/analysis' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>)}
             <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
 
-            <button className='btn btn-white  mr-2' onClick={() => setShow(!show)}><i className="fas fa-bell"></i></button>
+            {/* <button className='btn btn-white  mr-2' onClick={() => setShow(!show)}><i className="fas fa-bell"></i></button> */}
 
-            <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button>
-            <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button>
+            {/* <button className='btn btn-white  mr-2'><i className="fa fa-question" aria-hidden="true"></i></button> */}
+            {/* <button className='btn btn-white mr-2'><i className="fa fa-trophy"></i></button> */}
 
             <ul className="navbar-nav " Style={{ bsSscrollHheight: "100px" }}>
 

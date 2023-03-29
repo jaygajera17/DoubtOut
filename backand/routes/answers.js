@@ -32,15 +32,33 @@ router.post('/addanswer/:id', fetchuser, async (req, res) => {
     }
 })
 
-router.post("/fetchanswer/:id", async (req, res) => {
+router.post("/fetchanswer", async (req, res) => {
     try {
-        const answers = await Answer.find({ questionid: req.params.id });
+        const answers = await Answer.find();
         res.json(answers);
     }
 
     catch (e) {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post('/fetchUserAnswers', async (req, res) => {
+    try {
+
+        const answers = await Answer.find();
+        // console.log(answers);
+
+        if (!answers) {
+            return res.status(404).send("Question not Found");
+        }
+
+        res.json(answers);
+    }
+    catch (e) {
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
     }
 })
 
@@ -136,6 +154,108 @@ router.post('/fetchUserFilteredAnswers/:username', async (req, res) => {
     catch (e) {
         console.log(e.message);
         res.status(500).send("Internal Server Error");
+    }
+})
+
+router.post('/fetchAllFilteredAnswers', async (req, res) => {
+    try {
+
+        const answers = await Answer.find();
+
+        const startDate = req.body.startDate;
+        const endDate = req.body.endDate;
+        const tags = req.body.tags;
+        const status = req.body.status;
+
+        if (!answers) {
+            return res.status(404).send("Answers not Found");
+        }
+
+        const afterDateapplied = [];
+        answers.map(ans => {
+            const year = ans.date.getUTCFullYear();
+            var month = ans.date.getUTCMonth() + 1;
+            var day = ans.date.getUTCDate();
+
+            if (month >= '0' && month <= '9') month = "0" + month;
+            if (day >= '0' && day <= '9') day = "0" + day;
+
+            const date = year + "-" + month + "-" + day;
+
+            if (date >= startDate && date <= endDate) {
+                afterDateapplied.push(ans);
+            }
+        })
+
+        const afterTagsapplied = [];
+        var tagAppiled = false;
+        if (tags) {
+            for (i in afterDateapplied) {
+                const que = await Question.find();
+                if (que[0].tags.split(" ").includes(tags)) {
+                    afterTagsapplied.push(afterDateapplied[i]);
+                }
+            }
+            tagAppiled = true;
+        }
+
+        const afterStatusApplied = [];
+        var statusAppiled = false;
+        if (status) {
+            if (tagAppiled) {
+                afterTagsapplied.map(ans => {
+                    if (ans.status === status) {
+                        afterStatusApplied.push(ans);
+                    }
+                })
+            }
+            else {
+                afterDateapplied.map(ans => {
+                    if (ans.status = status) {
+                        afterStatusApplied.push(ans);
+                    }
+                })
+            }
+            statusAppiled = true;
+        }
+
+        if (statusAppiled)
+            res.json(afterStatusApplied);
+        else if (tagAppiled)
+            res.json(afterTagsapplied);
+        else {
+            res.json(afterDateapplied);
+        }
+    }
+    catch (e) {
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+router.post("/givenAllAnswersTags", async (req, res) => {
+    try {
+        const answers = await Answer.find();
+
+        const questions = [];
+
+        for (i in answers) {
+            const question = await Question.find();
+            questions.push(question);
+        }
+        const tags = [];
+
+        questions.map(que => {
+            que[0].tags.split(" ").map(tag => {
+                if (tags.indexOf(tag) == -1) tags.push(tag);
+            })
+        })
+
+        res.json(tags);
+    }
+    catch (e) {
+        console.log(error.message);
+        res.status(400).send("Internal Server Error");
     }
 })
 

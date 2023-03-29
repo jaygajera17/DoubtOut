@@ -13,6 +13,7 @@ import UserQuestionContent from './components/MyProfile/Profile/Content';
 import Admin from './components/Admin/user';
 import Chart from './components/charts/Chart';
 import MyQuestions from './components/MyProfile/MyQuestions/MyQuestions';
+import UpdateQuestion from './components/MyProfile/MyQuestions/UpdateQuestion';
 import MyAnswers from './components/MyProfile/MyAnswers/MyAnswers';
 import Analysis from './components/MyProfile/Analysis/Analysis';
 import Tags from './components/Tags/Tags';
@@ -22,6 +23,7 @@ import Search from './components/Questions/Search';
 import AdminUser from './components/Admin/user';
 import AdminQuestions from './components/Admin/Adminquestion';
 import AdminHome from './components/Admin/AdminHome';
+import Adminanswer from './components/Admin/AdminAnswer';
 
 function App() {
   return (
@@ -43,10 +45,12 @@ function App() {
         <Route path='/adminuser' element={<AdminUser />}></Route>
         <Route path='/adminanalysis' element={<AdminAnalysis/>}> </Route>
         <Route path='/adminquestions' element={<AdminQuestions />}></Route>
+        <Route path='/adminanswer' element={<Adminanswer />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
         <Route path='/chart' element={<Chart />}></Route>
         
         <Route path='/myquestions' element={<MyQuestions />}></Route>
+        <Route path='/updateque/:type' element = {<UpdateQuestion/>}/>
         <Route path='/myanswers' element={<MyAnswers />}></Route>
         <Route path='/analysis' element={<Analysis />}></Route>
         <Route path="/tags" element={<Tags />}></Route>

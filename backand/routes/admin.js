@@ -162,15 +162,27 @@ router.delete('/deleteUser/:id',async (req,res) => {
 })
 
 
-router.post('/deleteQuestion/:id',async (req,res) => {
+router.delete('/deleteQuestion/:id',async (req,res) => {
     try{
-            Question.findByIdAndRemove(req.params.id,(err,data)=>{
+           await Question.findByIdAndRemove(req.params.id,async(err,data)=>{
                     if(err){
                         console.log(err);
                     }
                     else{
                         console.log("deleted");
                         // Answer.deleteMany( { questionid : req.params.id } );
+
+                        await Answer.deleteMany({questionid : req.params.id}, (err, data)=>{
+                            if(err)
+                            {
+                                console.log(err);
+                                console.log("Not deleted Answers");
+                            }
+                            else
+                            {
+                                console.log("All answers are deleted");
+                            }
+                        });
                     }
             });
 
@@ -183,6 +195,26 @@ router.post('/deleteQuestion/:id',async (req,res) => {
             res.status(500).send("Internal Server Error");
         }
     }) 
+
+    router.delete('/deleteanswer/:id',async (req,res) => {
+        try{
+                Answer.findByIdAndRemove(req.params.id,(err,data)=>{
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            console.log("deleted");
+                        }
+                });
+               // console.log(req.params.id);
+                res.json({"status": "deleted"});
+            }
+            catch (e) {
+                // console.log(e.message);
+                res.status(500).send("Internal Server Error");
+            }
+        })
+        
 
 
 router.get('/question-by-month',async(req,res)=>{

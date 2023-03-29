@@ -49,6 +49,10 @@ export default function MyQuestions() {
     }, []);
 
     useEffect(() => {
+        fetchAllFilteredQuestions();
+    }, [filters])
+
+    useEffect(() => {
         fetch(`http://localhost:5000/api/question/fetchUserQuestions/${localStorage.getItem("username")}`, {
             method: "POST",
             headers: {
@@ -60,9 +64,7 @@ export default function MyQuestions() {
         }).then(data => setQuestions(data));
     },[]);
 
-    useEffect(() => {
-        fetchAllFilteredQuestions();
-    }, [filters])
+   
 
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;

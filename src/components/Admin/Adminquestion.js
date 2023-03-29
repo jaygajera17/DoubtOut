@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../Questions/questions.css';
 import '../Header/header.css';
 import AdminSidebar from './AdminSidebar';
+import Pagination from '../MyProfile/MyQuestions/Pagination';
 
 export default function Adminquestion() {
 
@@ -19,8 +20,15 @@ export default function Adminquestion() {
     const [noOfAns, setnoOfAns] = useState({});
     const [vote, setVotes]  = useState({});
     const [usedTags, setUsedTags] = useState([]);
+     // for pagination in questions in profile
+     const [postPerPage] = useState(4);
+     const [currentPage, setcurrentPage] = useState(1);
 
-
+     const indexOfLastPost = currentPage * postPerPage;
+     const indexOfFirstPost = indexOfLastPost - postPerPage;
+     const currentPosts = questions.slice(indexOfFirstPost, indexOfLastPost);
+ 
+     const paginate = pageNum => setcurrentPage(pageNum);
     
     const fetchAllFilteredQuestions = async () => {
         const response = await fetch(`http://localhost:5000/api/question/fetchUserFilteredQuestions`, {
@@ -129,11 +137,16 @@ export default function Adminquestion() {
     }, [])
    
     return (
-        <div className='container' Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
+        <>
+        <div className='' Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
 
+        
             <AdminSidebar/>
-            {/* sidebar overflow occur */}
+            </div>
             
+            <br></br>
+            {/* sidebar overflow occur */}
+        {/* <div style={{ marginTop: '10px', marginLeft: '50px' }}> */}
             <div className='filters_menu'>
                     <strong Style="display:inline">Find All questions between : </strong>
                     <input type="date" name="startDate" onChange={onChange} /> 
@@ -145,6 +158,7 @@ export default function Adminquestion() {
                         {usedTags.map(tag => <option value={tag}>{tag}</option>)}
                     </select>
                 </div>
+                {/* </div> */}
             
            <ul>
 
@@ -188,8 +202,11 @@ export default function Adminquestion() {
 
 ))}
 </ul>
-        </div>
+{/* <div className="container">
+                    <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
+                </div> */}
         
+        </>
         )
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 
 import './Register.css'
 function Register() {
@@ -100,7 +100,7 @@ function Register() {
             </div>
 
             <div className="pass">
-              <a href='/'>Forgot Password?</a>
+              {/* <a href='/'>Forgot Password?</a> */}
             </div>
             <div className="field">
               <button type="submit"
@@ -108,7 +108,7 @@ function Register() {
             </div>
           </form>
           <div className="signup">Already Have Acount?
-            <a href="/login">Sigin Now</a>
+            <NavLink to="/login">Sigin Now</NavLink>
           </div>
         </div>
       </div>

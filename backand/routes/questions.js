@@ -77,6 +77,26 @@ router.post('/fetchQueById/:id', async (req, res) => {
     }
 })
 
+router.post('/updateque/:id', async(req, res)=>{
+    try{
+
+        const {title, question, tags} = req.body;
+        // console.log(req.body);
+        const newquestion = {};
+
+        newquestion.title = title;
+        newquestion.question = question;
+        newquestion.tags = tags;
+        let fetchquestion = await Question.findByIdAndUpdate(req.params.id, {$set : newquestion}, {new : true});
+
+        res.json({status:"updated"});
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
 //finding questions of uses.
 router.post('/fetchUserQuestions/:username', async (req, res) => {
     try {
@@ -249,7 +269,6 @@ router.post("/usedtags/:username", async(req, res)=>{
     }
     catch(e)
     {
-        console.log(error.message);
         res.status(400).send("Internal Server Error");
     }
 })
@@ -291,7 +310,11 @@ router.post("/downvote/:id", async (req, res) => {
 router.post("/fetchVotes/:id", async (req, res) => {
     const question = await Question.findById(req.params.id);
 
-    res.json(question.votes);
+    if(question)
+    {
+        res.json(question.votes);
+    }
+    
 })
 
 router.post("/fetchallVotes", async (req, res) => {

@@ -17,6 +17,15 @@ export default function AdminSidebar() {
                     <div className="sidebar-option">
                         <NavLink className="sideLink" to="/Adminquestions">Questions</NavLink>
                     </div>
+<<<<<<< HEAD
+=======
+                    <div className="sidebar-option">
+                        <NavLink  className="sideLink" to="/Adminanswer">answer</NavLink>
+                    </div>
+                    {/* <div className="sidebar-option">
+                        <NavLink  className="sideLink">Badges</NavLink>
+                    </div> */}
+>>>>>>> 338075220802a74b62b3189b746aaeae0c69b27b
                 </div>
             </div>
         </div>
