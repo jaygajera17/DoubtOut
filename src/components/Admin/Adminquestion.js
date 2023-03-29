@@ -106,7 +106,7 @@ export default function Adminquestion() {
 
     const deleteQuestion = async (id) => {
         const response = axios.delete(`http://localhost:5000/api/admin/deleteQuestion/${id}`, {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -135,7 +135,7 @@ export default function Adminquestion() {
             {/* sidebar overflow occur */}
             
             <div className='filters_menu'>
-                    <strong Style="display:inline">Find your questions between : </strong>
+                    <strong Style="display:inline">Find All questions between : </strong>
                     <input type="date" name="startDate" onChange={onChange} /> 
                     <strong Style="display:inline">To</strong>
                     <input type="date" name="endDate" onChange={onChange} />

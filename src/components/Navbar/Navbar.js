@@ -59,6 +59,7 @@ export default function Navbar() {
 
     localStorage.removeItem('username');
     localStorage.removeItem('since');
+    localStorage.removeItem('Usertype');
 
     setLoginStatus(false);
 
@@ -108,6 +109,7 @@ export default function Navbar() {
           </div>
 
 
+          {localStorage.getItem("Usertype") === 'user' && (
           <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ bsSscrollHheight: "100px" }}>
             <li className="nav-item dropdown" >
               <a className="nav-link dropdown-toggle" href="/" id="navbarScrollingDropdown" role="button" aria-expanded="false" style={{ color: 'black' }}>
@@ -120,7 +122,7 @@ export default function Navbar() {
                 <li><a className="dropdown-item" href="/">FAQ</a></li>
               </ul>
             </li>
-          </ul>
+          </ul>)}
 
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -134,14 +136,16 @@ export default function Navbar() {
             <div className="searchbar">
 
             </div>
-            <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" Style={{ bsSscrollHheight: "100px" }}>
-              <li class="nav-item">
-                <a className="nav-link mr" href="/editor" style={{ color: 'black' }}><button className='btn btn-outline dark'>&lt;/&gt;</button></a>
-              </li>
+              <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" Style={{ bsSscrollHheight: "100px" }}>
+                <li class="nav-item">
+            {localStorage.getItem("Usertype") === 'user' && (
+                  <a className="nav-link mr" href="/editor" style={{ color: 'black' }}><button className='btn btn-outline dark'>&lt;/&gt;</button></a>
+                  )}
+                </li>
 
-            </ul>
+              </ul>
 
-            {loginStatus && (<NavLink to='/analysis' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>)}
+            {loginStatus && (localStorage.getItem("Usertype") === 'user') && (<NavLink to='/analysis' className='btn btn-white mr-2'>{localStorage.getItem("username")}</NavLink>)}
             <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button>
 
             <button className='btn btn-white  mr-2' onClick={() => setShow(!show)}><i className="fas fa-bell"></i></button>

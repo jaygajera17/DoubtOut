@@ -8,12 +8,12 @@ import '../../Header/header.css'
 
 export default function Posts({ posts }) {
 
-  
-    const [noOfAns, setnoOfAns] = useState({});
-    const [vote, setVotes]  = useState({});
 
-     // This function will find the count of No. of answer for a perticular Question
-     const FindFrequencyOfAns = async () => {
+    const [noOfAns, setnoOfAns] = useState({});
+    const [vote, setVotes] = useState({});
+
+    // This function will find the count of No. of answer for a perticular Question
+    const FindFrequencyOfAns = async () => {
         const response = await fetch("http://localhost:5000/api/answer/findNumberOfAns", {
             method: "POST",
             headers: {
@@ -27,7 +27,7 @@ export default function Posts({ posts }) {
 
     }
 
-    const fetchVotes = async()=>{
+    const fetchVotes = async () => {
 
         const response = await fetch(`http://localhost:5000/api/question/fetchallVotes`, {
             method: 'POST',
@@ -82,6 +82,10 @@ export default function Posts({ posts }) {
 
                             <div className="question-answer">
                                 <NavLink to={{ pathname: `/answer/${question._id}` }} className="card-title" Style="text-decoration:none;color:#0074CC"><h4>{question.title}</h4></NavLink>
+                                <div Style="position: absolute; right: 7%;">
+                                    <i Style="padding:5px; color:#0074CC" className="fa fa-edit" aria-hidden="true"></i>
+                                    <i Style="padding:5px; color:#0074CC" className="fa fa-trash" aria-hidden="true"></i>
+                                </div>
                                 <div style={{ width: "90%", }}>
                                     <small Style="font-size:1px;">{parse(question.question)[0]}</small>
                                 </div>

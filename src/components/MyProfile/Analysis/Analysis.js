@@ -177,7 +177,6 @@ export default function Analysis() {
                         ans_freqOfTags[tag] = ans_freqOfTags[tag] + 1
                     )
             })
-            console.log(ans_freqOfTags);
         }
         else {
             answeredQues.map(ques => {
@@ -201,8 +200,6 @@ export default function Analysis() {
             ans_cnt.push(parseInt(ans_freqOfTags[i]));
         }
 
-        console.log(ans_cnt);
-        console.log(ans_tag);
         setAnsTags(ans_tag);
         setAnsCount(ans_cnt);
 

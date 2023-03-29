@@ -40,7 +40,7 @@ router.post('/addquestion', fetchuser, async (req, res) => {
 router.post('/fetchquestions', async (req, res) => {
     try {
         const questions = await Question.find();
-        res.json(questions);
+        res.json(questions.reverse());
     }
     catch (e) {
         console.log(e.message);

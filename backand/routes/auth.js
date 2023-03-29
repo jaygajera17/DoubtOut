@@ -46,6 +46,7 @@ router.post('/createuser', [
             email: req.body.email,
             password: secPass,
 
+
         })
 
         const data = {
@@ -61,10 +62,9 @@ router.post('/createuser', [
         localStorage.setItem('token', authtaken);
         localStorage.setItem('username', req.body.username);
         res.json({ 'success': authtaken, 'username': req.body.username,'date':user.date});
-        res.json({ 'success': authtaken, 'username': req.body.username });
-        // res.json({autotaken});
     }
     catch (err) {
+        
         console.error(err.message);
         // res.status(500).send("Some error occured");
         res.status(400).json({ error: "Internal server error" });

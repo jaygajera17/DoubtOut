@@ -270,7 +270,6 @@ useEffect(() => {
         <div className="container" Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
             <AdminSidebar />
            
-           
                 <div className='charts'>
                     <div className="first_row">
                         <Chart title="overall data" count={[user,NoOfQuestions,answer,accept]} Tags={["Users","Questions","Answers","Accepted Answers"]} />

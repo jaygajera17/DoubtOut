@@ -162,7 +162,7 @@ router.delete('/deleteUser/:id',async (req,res) => {
 })
 
 
-router.delete('/deletequestion/:id',async (req,res) => {
+router.post('/deleteQuestion/:id',async (req,res) => {
     try{
             Question.findByIdAndRemove(req.params.id,(err,data)=>{
                     if(err){
@@ -170,8 +170,11 @@ router.delete('/deletequestion/:id',async (req,res) => {
                     }
                     else{
                         console.log("deleted");
+                        // Answer.deleteMany( { questionid : req.params.id } );
                     }
             });
+
+
            // console.log(req.params.id);
             res.json({"status": "deleted"});
         }
