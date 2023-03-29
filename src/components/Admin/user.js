@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
 
@@ -68,7 +68,9 @@ export default function AdminUser() {
                   <tbody>
                     <tr>
                       <th scope="row">{user.id}</th>
-                      <td Style='text-align: left; width:25%' ><button onClick={fetchUsers}>{user.username}</button></td>
+                      <td Style='text-align: left; width:25%' >
+                        <button><NavLink to={{ pathname: `/UserProfileAnalysis/${user.username}`}}>{user.username}</NavLink></button>
+                      </td>
                       <td Style='text-align: center; width:40%'>{user.email}</td>
                       <td Style='text-align: center; width:40%'>
                         <button className="fa fa-trash" aria-hidden="true" onClick={() => deleteUser(user._id)}></button>

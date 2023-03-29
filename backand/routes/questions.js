@@ -97,6 +97,19 @@ router.post('/updateque/:id', async(req, res)=>{
     }
 })
 
+router.post('/deleteque/:id', async(req, res)=>{
+    try{
+
+        let deletequestion = await Question.findByIdAndDelete(req.params.id);
+        res.json({status:"deleted"});
+        
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
 //finding questions of uses.
 router.post('/fetchUserQuestions/:username', async (req, res) => {
     try {

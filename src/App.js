@@ -24,6 +24,7 @@ import AdminUser from './components/Admin/user';
 import AdminQuestions from './components/Admin/Adminquestion';
 import AdminHome from './components/Admin/AdminHome';
 import Adminanswer from './components/Admin/AdminAnswer';
+import UserProfileAnalysis from './components/Admin/Analysis/UserProfileAnalysis';
 
 function App() {
   return (
@@ -40,20 +41,25 @@ function App() {
         <Route path="/questions" element = {<Questions />}></Route>
         <Route path="/question/:type" element = {<Content />}></Route>
         <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
+       
+       {/* profile routes */}
+        <Route path='/chart' element={<Chart />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/myquestions' element={<MyQuestions />}></Route>
+        <Route path='/updateque/:type' element = {<UpdateQuestion/>}/>
+        <Route path='/myanswers' element={<MyAnswers />}></Route>
+        <Route path='/analysis' element={<Analysis />}></Route>
+        <Route path="/tags" element={<Tags />}></Route>
+        
+        {/* admin routes  */}
         <Route path='/adminHome' element={<AdminHome />}></Route>
         <Route path='/adminuser' element={<AdminUser />}></Route>
         <Route path='/adminanalysis' element={<AdminAnalysis/>}> </Route>
         <Route path='/adminquestions' element={<AdminQuestions />}></Route>
         <Route path='/adminanswer' element={<Adminanswer />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
-        <Route path='/chart' element={<Chart />}></Route>
+        <Route path='/UserProfileAnalysis/:username' element={<UserProfileAnalysis />}></Route>
         
-        <Route path='/myquestions' element={<MyQuestions />}></Route>
-        <Route path='/updateque/:type' element = {<UpdateQuestion/>}/>
-        <Route path='/myanswers' element={<MyAnswers />}></Route>
-        <Route path='/analysis' element={<Analysis />}></Route>
-        <Route path="/tags" element={<Tags />}></Route>
 
         {/* <Route path="/tags" element={<Tags />}></Route> */}
 

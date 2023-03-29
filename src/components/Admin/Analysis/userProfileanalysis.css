@@ -1,0 +1,23 @@
+.charts{
+    display:block;
+    padding:50px;
+}
+.title_row1{
+    display: block;
+}
+.title1{
+    position: absolute;
+    right:  47%;
+    top:27%; 
+}
+.title2{
+    position: absolute;
+    right: 27%;
+}
+.first_row{
+    display: flex;
+}
+.last_chart{
+    margin-top: 3%;
+    margin-left: 25%;
+}
