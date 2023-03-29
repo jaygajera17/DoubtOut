@@ -143,7 +143,7 @@ export default function Adminquestion() {
         
             <AdminSidebar/>
             </div>
-            
+           
             <br></br>
             {/* sidebar overflow occur */}
         {/* <div style={{ marginTop: '10px', marginLeft: '50px' }}> */}
@@ -195,7 +195,7 @@ export default function Adminquestion() {
                     <small className='d-flex flex-row-reverse'> asked {question.date.slice(0, 10)} at {question.date.slice(12, 16)} <p Style="color:#0074CC">{question.postedBy}&nbsp;</p></small>
                 </div>
             </div>
-            <button onClick={() => deleteQuestion(question._id)}>Delete</button>
+            <button Style="baclground-color: transparent" onClick={() => deleteQuestion(question._id)}><i className='fa fa-trash'></i></button>
         </div>
         
     </div>
@@ -205,7 +205,7 @@ export default function Adminquestion() {
 {/* <div className="container">
                     <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
                 </div> */}
-        
+       
         </>
         )
 
