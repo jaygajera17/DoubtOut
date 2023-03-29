@@ -1,3 +1,4 @@
+/* to give margin to all filters */
 .filters_menu > * {
     margin: 10px;
 }

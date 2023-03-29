@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import ProfileHeader from "../ProfileHeader/ProfileHeader";
-import ProfileSidebar from "../ProfileSidebar/ProfileSidebar";
-import Chart from "../../charts/Chart";
-import '../Analysis/analysis.css';
+import Chart from '../../charts/Chart'
+import {useParams} from 'react-router-dom'
+import './userProfileanalysis.css';
 
+export default function UserProfileAnalysis() {
+    const params = useParams();
+    let username = params.username;
 
-export default function Analysis() {
     const [filters, setFilters] = useState({ startDate: "", endDate: "" });
 
     const onChange = (e) => {
@@ -18,7 +19,7 @@ export default function Analysis() {
     const [count, setCount] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/question/fetchUserQuestions/${localStorage.getItem("username")}`, {
+        fetch(`http://localhost:5000/api/question/fetchUserQuestions/${username}`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +82,7 @@ export default function Analysis() {
     const [AcAnsTags, setAcAnsTags] = useState([]);
     const [AcAnscount, setAcAnsCount] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/api/answer/fetchUserAcceptedAnsweredQuestions/${localStorage.getItem("username")}`, {
+        fetch(`http://localhost:5000/api/answer/fetchUserAcceptedAnsweredQuestions/${username}`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -145,7 +146,7 @@ export default function Analysis() {
     const [AnsTags, setAnsTags] = useState([]);
     const [Anscount, setAnsCount] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/api/answer/fetchUserAnsweredQuestions/${localStorage.getItem("username")}`, {
+        fetch(`http://localhost:5000/api/answer/fetchUserAnsweredQuestions/${username}`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -208,9 +209,9 @@ export default function Analysis() {
     return (
         <div>
             <div className="container" Style="height:100vh; margin-top:13vh; z-index:1; background-color:white">
-                <ProfileSidebar />
+                
                 <div className='header_and_content'>
-                    <ProfileHeader />
+                   
 
                     <div className='filters_menu'>
                         <input type="date" name="startDate" onChange={onChange} />

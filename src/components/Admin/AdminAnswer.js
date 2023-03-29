@@ -82,7 +82,7 @@ export default function Adminanswer() {
             
                 {/* filter based on date , tags and status  */}
                 <div className='filters_menu'>
-                    <strong Style="display:inline">Find given answers between : </strong>
+                    <strong Style="display:inline">Find answers between : </strong>
                     <input type="date" name="startDate" onChange={onChange} />
                     <strong Style="display:inline">To</strong>
                     <input type="date" name="endDate" onChange={onChange} />
@@ -92,10 +92,10 @@ export default function Adminanswer() {
                         {usedTags.map(tag => <option value={tag}>{tag}</option>)}
                     </select>
 
-                    <input type="radio" name="status" value="Accepted" onChange={onChange}/>
-                    <label for="accepted">Accepted</label>
+                   <input type="radio"  name="status" value="Accepted" onChange={onChange}/>
+                    <label for="accepted" style={{fontSize: '14px'}}>Accepted</label>
                     <input type="radio" name="status" value="Not Accepted" onChange={onChange}/>
-                    <label for="notAccepted">Not Accepted</label>
+                    <label for="notAccepted" style={{fontSize: '14px'}}>Not Accepted</label>
                 </div>
 
 

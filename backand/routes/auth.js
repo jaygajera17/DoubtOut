@@ -51,6 +51,7 @@ router.post('/createuser', [
             email: req.body.email,
             password: secPass,
 
+
         })
 
         const data = {
@@ -70,6 +71,7 @@ router.post('/createuser', [
         // res.json({autotaken});
     }
     catch (err) {
+        
         console.error(err.message);
         // res.status(500).send("Some error occured");
         res.status(400).json({ error: "Internal server error" });

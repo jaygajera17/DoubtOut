@@ -17,12 +17,7 @@ export default function ProfileSidebar() {
                     <div className="sidebar-option">
                         <NavLink className="sideLink" to="/myanswers">Answers</NavLink>
                     </div>
-                    <div className="sidebar-option">
-                        <NavLink  className="sideLink">Tags</NavLink>
-                    </div>
-                    <div className="sidebar-option">
-                        <NavLink  className="sideLink">Badges</NavLink>
-                    </div>
+                    
                 </div>
             </div>
         </div>

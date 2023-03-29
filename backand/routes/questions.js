@@ -40,7 +40,7 @@ router.post('/addquestion', fetchuser, async (req, res) => {
 router.post('/fetchquestions', async (req, res) => {
     try {
         const questions = await Question.find();
-        res.json(questions);
+        res.json(questions.reverse());
     }
     catch (e) {
         console.log(e.message);
@@ -72,6 +72,39 @@ router.post('/fetchQueById/:id', async (req, res) => {
         res.json(question);
     }
     catch (e) {
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+router.post('/updateque/:id', async(req, res)=>{
+    try{
+
+        const {title, question, tags} = req.body;
+        // console.log(req.body);
+        const newquestion = {};
+
+        newquestion.title = title;
+        newquestion.question = question;
+        newquestion.tags = tags;
+        let fetchquestion = await Question.findByIdAndUpdate(req.params.id, {$set : newquestion}, {new : true});
+
+        res.json({status:"updated"});
+    }
+    catch(e){
+        console.log(e.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+router.post('/deleteque/:id', async(req, res)=>{
+    try{
+
+        let deletequestion = await Question.findByIdAndDelete(req.params.id);
+        res.json({status:"deleted"});
+        
+    }
+    catch(e){
         console.log(e.message);
         res.status(500).send("Internal Server Error");
     }
@@ -290,7 +323,11 @@ router.post("/downvote/:id", async (req, res) => {
 router.post("/fetchVotes/:id", async (req, res) => {
     const question = await Question.findById(req.params.id);
 
-    res.json(question.votes);
+    if(question)
+    {
+        res.json(question.votes);
+    }
+    
 })
 
 router.post("/fetchallVotes", async (req, res) => {

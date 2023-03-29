@@ -31,45 +31,6 @@ export default function AdminHome() {
             )
         }
 
-   
-
-    // const chartall= () => {
-    //     if(chartInstance) chartInstance.destroy();
-    //     const ctx = document.getElementById('user-chart1').getContext('2d');
-    //     const newChartInstance = new Chart(ctx, {
-    //         type: 'bar',
-    //         data: {
-    //             labels: ['Users', 'Questions', 'Answers', 'Accepted Answers'],
-    //             datasets: [{
-    //                 label: 'Overall Report',
-    //                 data: [user, question, answer, accept]
-    //             }]
-    //         }
-    //     }); 
-    //     setChartInstance(newChartInstance);
-    //   // newChartInstance.reset();
-    // }
-
-    // const chart = async () => {
-    //     await axios.get('http://localhost:5000/api/admin/chart')
-    //     .then((response) => {
-    //         setquestionByMonth(response.data)
-    //     })
-    //     if(chartInstance) chartInstance.destroy();
-    //     const ctx = document.getElementById('user-chart1').getContext('2d');
-    //     const newChartInstance = new Chart(ctx, {
-    //         type: 'bar',
-    //         data: {
-    //             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-    //             datasets: [{
-    //                 label: 'Number of question',
-    //                 data: questionByMonth
-    //             }]
-    //         }
-    //     });
-    //     setChartInstance(newChartInstance);
-    //     //console.log("question by month",questionByMonth);
-    // }
     const [questions, setQuestions] = useState([]);
     const [Tags, setTags] = useState([]);
     const [count, setCount] = useState([]);
@@ -110,13 +71,9 @@ export default function AdminHome() {
 
     }, [questions]);
 
-    
- 
-
     return (
         <div className='container' Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
             <AdminSidebar />
-     
         <br/>
         </div>
     );
