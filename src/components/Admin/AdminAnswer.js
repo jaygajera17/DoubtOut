@@ -6,7 +6,6 @@ import Pagination from '../Questions/Pagination';
 import PostsAns from './PostAns';
 
 
-
 export default function Adminanswer() {
 
     const [filters, setFilters] = useState({ startDate: "", endDate: "", tags: "", status: "" });
@@ -17,24 +16,10 @@ export default function Adminanswer() {
 
     const [answers, setAnswers] = useState([]);
 
-    // for pagination in Answers in profile section.
+    // for pagination in Answers in Admin section.
     const [postPerPage] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
 
-   
-
-    // This function will find the No. of answers given by a User
-    useEffect(() => {
-        fetch(`http://localhost:5000/api/answer/fetchUseranswer`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            console.log(response);
-            return response.json();
-        }).then(data => setAnswers(data));
-    },[]);
 
     const fetchAllFilteredAnswers = async () => {
         const response = await fetch(`http://localhost:5000/api/answer/fetchAllFilteredAnswers`, {
@@ -49,8 +34,6 @@ export default function Adminanswer() {
         }).then(data => setAnswers(data));
     };
 
-   
-
     const [usedTags, setUsedTags] = useState([]);
     useEffect(() => {
         fetch(`http://localhost:5000/api/answer/givenAllAnswersTags/`, {
@@ -63,11 +46,25 @@ export default function Adminanswer() {
         }).then(data => setUsedTags(data));
     }, []);
 
-    console.log(usedTags);
-
+    // console.log(usedTags);
+    
     useEffect(() => {
         fetchAllFilteredAnswers();
     }, [filters])
+
+
+    // This function will find the No. of answers given by a User
+    useEffect(() => {
+        fetch(`http://localhost:5000/api/answer/fetchUseranswer`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            console.log(response);
+            return response.json();
+        }).then(data => setAnswers(data));
+    },[]);
 
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;

@@ -277,7 +277,7 @@ router.post("/givenAllAnswersTags", async (req, res) => {
         const questions = [];
 
         for (i in answers) {
-            const question = await Question.find();
+            const question = await Question.find({ _id: answers[i].questionid });
             questions.push(question);
         }
         const tags = [];
