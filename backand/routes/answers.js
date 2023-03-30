@@ -228,7 +228,7 @@ router.post('/fetchAllFilteredAnswers', async (req, res) => {
         var tagAppiled = false;
         if (tags) {
             for (i in afterDateapplied) {
-                const que = await Question.find();
+                const que = await Question.find({ _id: afterDateapplied[i].questionid });
                 if (que[0].tags.split(" ").includes(tags)) {
                     afterTagsapplied.push(afterDateapplied[i]);
                 }
