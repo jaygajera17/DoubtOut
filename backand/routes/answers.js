@@ -44,6 +44,43 @@ router.post("/fetchanswer", async (req, res) => {
     }
 })
 
+router.post("/fetchanswer/:id", async (req, res) => {
+    try {
+        const answers = await Answer.find({ questionid: req.params.id });
+        res.json(answers);
+    }
+
+    catch (e) {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/userAnstoUpdate/:id", async (req, res)=>{
+    try{
+        const answer = await Answer.findOne({_id: req.params.id});
+        res.json(answer);
+    }
+    catch(e)
+    {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/updateans/:id", async (req, res)=>{
+    try{
+        const answer = await Answer.findByIdAndUpdate(req.params.id, {$set: {answer: req.body.answer}});
+
+        res.json({status: "updated"});
+    }
+    catch(e)
+    {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
 router.post('/fetchUserAnswers', async (req, res) => {
     try {
 

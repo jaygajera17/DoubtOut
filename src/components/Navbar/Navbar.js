@@ -1,11 +1,11 @@
+
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import NotificationBox from './NotificationBox'
 import { useState, useEffect } from 'react'
-
 import './Navbar.css'
 
-// const nodemailer = require("nodemailer");
+
 // var well = {
 //   boxShadow: "0px 0px 10px 0px #f0f0f0"
 // }
@@ -18,7 +18,7 @@ var title = {
   color: "#0D6EFD",
 }
 export default function Navbar() {
-
+  
   const navigate = useNavigate();
   const [loginStatus, setLoginStatus] = useState(false);
   const [show, setShow] = useState(false);
@@ -34,25 +34,25 @@ export default function Navbar() {
 
   // const sendMail = async (req, res) => {
 
-  //   let testAccount = await nodemailer.createTestAccount();
+    // let testAccount = await nodemailer.createTestAccount();
 
 
-  //   let transporter = nodemailer.createTransport({
-  //     host: "smtp.ethereal.email",
-  //     port: 587,
-  //     auth: {
-  //       user: 'wendell10@ethereal.email',
-  //       pass: 'bGGZ1vN5shVuVzDGJZ'
-  //     },
-  //   });
+    // let transporter = await nodemailer.createTransport({
+    //   host: "smtp.ethereal.email",
+    //   port: 587,
+    //   auth: {
+    //     user: 'amalia22@ethereal.email',
+    //     pass: 'R58kDqqCbnw1wwACfX',
+    //   },
+    // });
 
-  //   let info = await transporter.sendMail({
-  //     from: '"Fred Foo 👻" <foo@example.com>', // sender address
-  //     to: "darshitbhuva1@gmail.com", // list of receivers
-  //     subject: "Hello ✔", // Subject line
-  //     text: "Hello world?", // plain text body
-  //     html: "<b>Hello world?</b>", // html body
-  //   });
+    // let info = await transporter.sendMail({
+    //   from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    //   to: "darshitbhuva1@gmail.com", // list of receivers
+    //   subject: "Hello ✔", // Subject line
+    //   text: "Hello world?", // plain text body
+    //   html: "<b>Hello world?</b>", // html body
+    // });
   // }
 
   const logout = () => {

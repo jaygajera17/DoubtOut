@@ -34,7 +34,19 @@ router.post("/gettag", async(req, res)=>{
     }
     catch(e)
     {
-        console.log(error.message);
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/tagdesc/:tagname", async(req, res)=>{
+    try{
+        let tag = await Tags.findOne({tagname : req.params.tagname});
+        res.json(tag);
+    }
+    catch(e)
+    {
+        console.log(e.message);
         res.status(400).send("Internal Server Error");
     }
 })

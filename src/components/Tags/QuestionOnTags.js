@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { useParams, NavLink } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
@@ -16,6 +17,9 @@ export default function QuestionOnTags() {
     // for questions
     const [questions, setQuestions] = useState([])
 
+    // for tag Description
+    const [tagdescription, settagdesc] = useState({});
+
     const fetchQue = async (tagname) => {
         await fetch(`http://localhost:5000/api/question/fetchQuePertag/${tagname}`, {
             method: "POST",
@@ -28,6 +32,19 @@ export default function QuestionOnTags() {
 
     }
 
+    const tagDesc = async (tagname) => {
+        await fetch(`http://localhost:5000/api/tag/tagdesc/${tagname}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return response.json();
+        }).then(data => {
+            settagdesc(data)
+        });
+    }
+
     // logic to find index of posts to display questions
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -37,7 +54,8 @@ export default function QuestionOnTags() {
 
     useEffect(() => {
         fetchQue(params.type);
-    }, [])
+        tagDesc(params.type);
+    }, [questions])
 
     return (
         <div Style="height:100%; margin-top:13vh; z-index:1; background-color:white">
@@ -93,6 +111,7 @@ export default function QuestionOnTags() {
                                     }
                                 </div>
                             </div> */}
+                            <p>{tagdescription.desc}</p>
                             <p>Total {questions.length} Questions</p>
                             <div className="questions">
                                 <div className="question">

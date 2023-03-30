@@ -50,6 +50,7 @@ export default function Posts({ posts }) {
                                 <div style={{ width: "90%", }}>
                                     <p Style="font-size:25px;">{parse(answer.answer)}</p>
                                 </div>
+                                <NavLink className="mt-2" to={{pathname : `/updateans/${answer._id}`}} Style="font-size:15px;">Update</NavLink>
                                 <div className="author">
                                     <div className="author-details">
                                         <p>{answer.postedBy}</p>
