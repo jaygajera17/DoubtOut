@@ -21,19 +21,6 @@ export default function Profile() {
     const [postPerPage] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
 
-    // This function will find the No. of answers given by a User
-    useEffect(() => {
-        fetch(`http://localhost:5000/api/answer/fetchUserAnswers/${localStorage.getItem("username")}`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            console.log(response);
-            return response.json();
-        }).then(data => setAnswers(data));
-    },[]);
-
     const fetchAllFilteredAnswers = async () => {
         const response = await fetch(`http://localhost:5000/api/answer/fetchUserFilteredAnswers/${localStorage.getItem("username")}`, {
             method: "POST",
@@ -64,6 +51,19 @@ export default function Profile() {
     useEffect(() => {
         fetchAllFilteredAnswers();
     }, [filters])
+
+    // This function will find the No. of answers given by a User
+    useEffect(() => {
+        fetch(`http://localhost:5000/api/answer/fetchUserAnswers/${localStorage.getItem("username")}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            console.log(response);
+            return response.json();
+        }).then(data => setAnswers(data));
+    },[]);
 
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;

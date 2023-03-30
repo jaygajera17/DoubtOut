@@ -6,6 +6,10 @@ import '../Questions/questions.css';
 import '../Header/header.css';
 import AdminSidebar from './AdminSidebar';
 import Pagination from '../MyProfile/MyQuestions/Pagination';
+import ProfileSidebar from './AdminSidebar';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 export default function Adminquestion() {
 
@@ -114,7 +118,7 @@ export default function Adminquestion() {
 
     const deleteQuestion = async (id) => {
         const response = axios.delete(`http://localhost:5000/api/admin/deleteQuestion/${id}`, {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -138,17 +142,16 @@ export default function Adminquestion() {
    
     return (
         <>
-        <div className='' Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
-
-        
-            <AdminSidebar/>
-            </div>
+        <div className="container" Style="height:100vh;margin-top:13vh; z-index:1; background-color:white">
+            <ProfileSidebar/>
+              <div className='header_and_content'>
             
+           
             <br></br>
             {/* sidebar overflow occur */}
         {/* <div style={{ marginTop: '10px', marginLeft: '50px' }}> */}
             <div className='filters_menu'>
-                    <strong Style="display:inline">Find your questions between : </strong>
+                    <strong Style="display:inline">Find All questions between : </strong>
                     <input type="date" name="startDate" onChange={onChange} /> 
                     <strong Style="display:inline">To</strong>
                     <input type="date" name="endDate" onChange={onChange} />
@@ -195,8 +198,9 @@ export default function Adminquestion() {
                     <small className='d-flex flex-row-reverse'> asked {question.date.slice(0, 10)} at {question.date.slice(12, 16)} <p Style="color:#0074CC">{question.postedBy}&nbsp;</p></small>
                 </div>
             </div>
-            <button onClick={() => deleteQuestion(question._id)}>Delete</button>
+            <Button  variant="outlined" startIcon={<DeleteIcon />} onClick={() => deleteQuestion(question._id)}>delete</Button>
         </div>
+       
         
     </div>
 
@@ -205,7 +209,8 @@ export default function Adminquestion() {
 {/* <div className="container">
                     <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
                 </div> */}
-        
+       </div>
+       </div>
         </>
         )
 

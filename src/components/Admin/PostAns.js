@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 import parse from 'html-react-parser';
 import '../MyProfile/MyAnswers/postsAns.css';
 import axios from 'axios';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 export default function Posts({ posts }) {
 
@@ -57,7 +59,7 @@ export default function Posts({ posts }) {
                                         <p>0</p>
                                         <span>views</span>
                                     </div>
-                                    <button onClick={() => deleteAnswer(answer._id)}>Delete</button>
+                                    <Button variant="outlined" startIcon={<DeleteIcon />}   onClick={() => deleteAnswer(answer._id)}>Delete</Button>
 
                                 </div>
                             </div>

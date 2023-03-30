@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 connectToMongo();
 const app = express()
-const port = 5000
+const port = process.env.PORT||5000
 
 app.get('/', (req, res) => {
     res.send('Hello DoutbtOut')
@@ -18,6 +18,11 @@ app.use("/api/answer", require("./routes/answers"));
 app.use("/api/comment", require("./routes/comment"));
 app.use("/api/admin", require("./routes/admin"));
 app.use("/api/tag", require("./routes/tags"));
+
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static("client/build"));
+    
+}
 
 
 app.listen(port, () => {
