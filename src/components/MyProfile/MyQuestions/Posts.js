@@ -13,21 +13,22 @@ export default function Posts({ posts }) {
     const [vote, setVotes] = useState({});
     const [state, setState] = useState(false);
 
-    // const deleteQue = async (id) => {
-    //     const response = await fetch(`http://localhost:5000/api/question/deleteque/${id}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //     });
+    const deleteQue = async (id) => {
+        const response = await fetch(`http://localhost:5000/api/question/deleteque/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
 
-    //     const json = await response.json()
+        const json = await response.json()
 
-    //     if (json["status"] === "deleted") {
-    //         setState(true);
-    //         window.scrollTo(0, 0)
-    //     }
-    // }
+        if (json["status"] === "deleted") {
+            setState(true);
+            window.scrollTo(0, 0)
+            window.location.reload(true);
+        }
+    }
 
     // This function will find the count of No. of answer for a perticular Question
     const FindFrequencyOfAns = async () => {
@@ -106,7 +107,7 @@ export default function Posts({ posts }) {
                                         <span>Answers</span>
                                     </div>
                                     <div className="all-option">
-                                        <small>0 views</small>
+                                        {/* <small>0 views</small> */}
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +116,7 @@ export default function Posts({ posts }) {
                                 <NavLink to={{ pathname: `/answer/${question._id}` }} className="card-title" Style="text-decoration:none;color:#0074CC"><h4>{question.title}</h4></NavLink>
                                 <div Style="position: absolute; right: 7%;">
                                     <NavLink to={{ pathname: `/updateque/${question._id}` }}><i Style="padding:5px; color:#0074CC" className="fa fa-edit" aria-hidden="true"></i></NavLink>
-                                    {/* <NavLink to={{ pathname: `/deleteque/${question._id}` }}><i Style="padding:5px; color:#0074CC" className="fa fa-trash" aria-hidden="true"></i>s</NavLink> */}
+                                    <NavLink onClick={()=>deleteQue(question._id)}><i Style="padding:25px; color:#0074CC" className="fa fa-trash" aria-hidden="true"></i></NavLink>
                                     {/* <button onClick={deleteQue(question._id)}><i Style="padding:5px; color:#0074CC" className="fa fa-trash" aria-hidden="true"></i></button> */}
                                 </div>
                                 <div style={{ width: "90%", }}>

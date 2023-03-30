@@ -5,9 +5,9 @@ import NotificationBox from './NotificationBox'
 import { useState, useEffect } from 'react'
 import './Navbar.css'
 
-
+// let nodemailer = require("nodemailer");
 // var well = {
-//   boxShadow: "0px 0px 10px 0px #f0f0f0"
+  // boxShadow: "0px 0px 10px 0px #f0f0f0"
 // }
 var iconstyle = {
   marginleft: "10px",

@@ -470,4 +470,18 @@ router.post("/points", async (req, res) => {
     }
 })
 
+
+router.post("/deleteans/:id", async(req, res)=>{
+    try{
+        await Answer.deleteOne({_id : req.params.id});
+
+        res.json({"status":"deleted"})
+    }
+    catch(e)
+    {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
 module.exports = router
