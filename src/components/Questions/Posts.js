@@ -76,7 +76,7 @@ export default function Posts({ posts }) {
                                         <span>Answers</span>
                                     </div>
                                     <div className="all-option">
-                                        <small>0 views</small>
+                                        {/* <small>0 views</small> */}
                                     </div>
                                 </div>
                             </div>

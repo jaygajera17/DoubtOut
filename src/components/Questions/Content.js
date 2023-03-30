@@ -102,6 +102,8 @@ export default function Content(props) {
 
         if (localStorage.getItem("username") !== null) {
             e.preventDefault();
+            document.getElementById("quedownvotbtn").disabled = false;
+            document.getElementById("queupvotebtn").disabled = true;
 
             const response = await fetch(`http://localhost:5000/api/question/upvote/${id}`, {
                 method: 'POST',
@@ -119,8 +121,13 @@ export default function Content(props) {
     }
 
     const downvoteQue = async (e, id) => {
+
+
         if (localStorage.getItem("username") !== null) {
             e.preventDefault();
+            document.getElementById("quedownvotbtn").disabled = true;
+            document.getElementById("queupvotebtn").disabled = false;
+
             const response = await fetch(`http://localhost:5000/api/question/downvote/${id}`, {
                 method: 'POST',
                 headers: {
@@ -141,8 +148,10 @@ export default function Content(props) {
 
         if (localStorage.getItem("username") !== null) {
 
-
             e.preventDefault();
+            document.getElementById("ansdownvotebtn"+id).disabled = false;
+            document.getElementById("ansupvotebtn"+id).disabled = true;
+
             const response = await fetch(`http://localhost:5000/api/answer/upvote/${id}`, {
                 method: 'POST',
                 headers: {
@@ -164,6 +173,10 @@ export default function Content(props) {
 
         if (localStorage.getItem("username") !== null) {
             e.preventDefault();
+
+            document.getElementById("ansdownvotebtn" + id).disabled = true;
+            document.getElementById("ansupvotebtn" + id).disabled = false;
+
             const response = await fetch(`http://localhost:5000/api/answer/downvote/${id}`, {
                 method: 'POST',
                 headers: {
@@ -237,14 +250,14 @@ export default function Content(props) {
 
     }
 
-    const fetchComments = async(id)=>{
+    const fetchComments = async (id) => {
         await fetch(`http://localhost:5000/api/comment/fetchComments`, {
-            method : "POST",
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
 
-            body : JSON.stringify({qid : question._id, ansid : id}) 
+            body: JSON.stringify({ qid: question._id, ansid: id })
         }).then(response => response.json()).then(data => setComment(data))
     }
 
@@ -292,9 +305,9 @@ export default function Content(props) {
 
                 <div className="d-flex flex-row">
                     <div className="d-flex flex-column col-md-0 mt-0 mx-0">
-                        <button className='btn btn-white' onClick={(e) => upvoteQue(e, question._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
+                        <button className='btn btn-white' id="queupvotebtn" onClick={(e) => upvoteQue(e, question._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
                         <div className='mx-3'>{queVote}</div>
-                        <button className='btn btn-white' onClick={(e) => downvoteQue(e, question._id)} Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
+                        <button className='btn btn-white' id="quedownvotbtn" onClick={(e) => downvoteQue(e, question._id)} Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
 
 
                     </div>
@@ -315,12 +328,12 @@ export default function Content(props) {
                     <div className='mt-5'>
                         {answers.map(ans => (
                             <div className="">
-                                
+
                                 <div className="d-flex flex-row">
                                     <div className="d-flex flex-column col-md-0 mt-0 mx-0">
-                                        <button className='btn btn-white' onClick={(e) => upvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
+                                        <button className='btn btn-white' id={"ansupvotebtn" + ans._id} onClick={(e) => upvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-up" Style="font-size: 35px;"></i></button>
                                         <div className='mx-3'>{vote[ans._id]}</div>
-                                        <button className='btn btn-white' onClick={(e) => downvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
+                                        <button className='btn btn-white' id = {"ansdownvotebtn" + ans._id} onClick={(e) => downvote(e, ans._id)} Style="width:15px; border:none;"><i className="fa fa-caret-down" Style="font-size: 35px;"></i></button>
                                         {(
                                             () => {
                                                 if (ans.status === "Accepted") {
@@ -336,7 +349,7 @@ export default function Content(props) {
 
                                         <div className="comments" Style="display:relative; bottom:0px;">
                                             <div className="comment">
-                                                
+
                                                 {/* <p>This is comment..
                                                     <span>username</span>
                                                     <small>Timestamp</small>

@@ -3,6 +3,10 @@ import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
+import { useEffect } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 
 var mydiv = {
@@ -24,6 +28,9 @@ export default function AdminUser() {
       })
       .then((data) => setUsers(data))
   }
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   const deleteUser = async (id) => {
     const response = axios.delete(`http://localhost:5000/api/admin/deleteUser/${id}`, {
@@ -48,14 +55,15 @@ export default function AdminUser() {
     <div className='container' Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
       <AdminSidebar />
       <div Style="display:block">
-        <h3> Get User Data </h3>
-        <button onClick={fetchUsers}>Fetch Users</button>
+        
+        {/* {fetchUsers} */}
+        {/* <button onClick={fetchUsers}>Fetch Users</button> */}
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th Style='text-align: left; width:25%' scope="col" >User Name </th>
-              <th Style='text-align: center; width:40%' scope="col">User Email</th>
-              <th Style='text-align: center; width:40%' scope="col">Delete</th>
+              <th  style={{ width: '250px',textAlign:'center', height: '40px' }}scope="col" >User Name </th>
+              <th style={{ width: '250px',textAlign:'center', height: '40px' }} scope="col">User Email</th>
+              <th style={{ width: '250px',textAlign:'center', height: '40px' }} scope="col">Delete</th>
             </tr>
           </thead>
         </table>
@@ -67,14 +75,16 @@ export default function AdminUser() {
                 <table className="table table-bordered">
                   <tbody>
                     <tr>
-                      <th scope="row">{user.id}</th>
-                      <td Style='text-align: left; width:25%' >
-                        <button><NavLink to={{ pathname: `/UserProfileAnalysis/${user.username}`}}>{user.username}</NavLink></button>
+                      {/* <th scope="row">{user.id}</th> */}
+                      <td style={{ width: '250px',textAlign:'center', height: '40px' }} >
+                        <button className='btn btn-outline-primary' style={{ width: '150px', height: '40px' }}><NavLink to={{ pathname: `/UserProfileAnalysis/${user.username}`}}>{user.username}</NavLink></button>
                       </td>
-                      <td Style='text-align: center; width:40%'>{user.email}</td>
-                      <td Style='text-align: center; width:40%'>
-                        <button className="fa fa-trash" aria-hidden="true" onClick={() => deleteUser(user._id)}></button>
+                      <td  style={{ width: '250px',textAlign:'center', height: '40px' }}>{user.email}</td>
+                      <td style={{ width: '250px',textAlign:'center', height: '40px' }}>
+                        <Button  variant="outlined" startIcon={<DeleteIcon />}  aria-hidden="true" onClick={() => deleteUser(user._id)}>     delete
+</Button>
                       </td>
+                     
                     </tr>
                   </tbody>
                 </table>

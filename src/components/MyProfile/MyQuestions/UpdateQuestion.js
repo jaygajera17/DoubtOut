@@ -36,10 +36,6 @@ export default function UpdateQuestion(props) {
     const updateQue = async(e, id)=>{
         e.preventDefault();
 
-        // console.log(id);
-        // console.log(credentials.title);
-        // console.log(value);
-        // console.log(credentials.tags);
         const response = await fetch(`http://localhost:5000/api/question/updateque/${id}`, {
             method: 'POST',
             headers: {
@@ -50,7 +46,7 @@ export default function UpdateQuestion(props) {
         })
 
         let json = await response.json();
-        console.log(json.status);
+        // console.log(json.status);
         if (json.status === "updated") {
             setState(true);
             window.scrollTo(0, 0)

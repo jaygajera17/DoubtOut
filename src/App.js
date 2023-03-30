@@ -14,6 +14,7 @@ import Admin from './components/Admin/user';
 import Chart from './components/charts/Chart';
 import MyQuestions from './components/MyProfile/MyQuestions/MyQuestions';
 import UpdateQuestion from './components/MyProfile/MyQuestions/UpdateQuestion';
+import UpdateAnswer from './components/MyProfile/MyAnswers/UpdateAnswer';
 import MyAnswers from './components/MyProfile/MyAnswers/MyAnswers';
 import Analysis from './components/MyProfile/Analysis/Analysis';
 import Tags from './components/Tags/Tags';
@@ -60,6 +61,12 @@ function App() {
         <Route path='/admin' element={<Admin />}></Route>
         <Route path='/UserProfileAnalysis/:username' element={<UserProfileAnalysis />}></Route>
         
+        <Route path='/myquestions' element={<MyQuestions />}></Route>
+        <Route path='/updateque/:type' element = {<UpdateQuestion/>}/>
+        <Route path='/updateans/:type' element= {<UpdateAnswer/>}></Route>
+        <Route path='/myanswers' element={<MyAnswers />}></Route>
+        <Route path='/analysis' element={<Analysis />}></Route>
+        <Route path="/tags" element={<Tags />}></Route>
 
         {/* <Route path="/tags" element={<Tags />}></Route> */}
 
