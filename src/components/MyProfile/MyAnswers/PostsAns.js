@@ -22,6 +22,23 @@ export default function Posts({ posts }) {
 
     }
 
+    const deleteAns = async(id)=>{
+        const response = await fetch(`http://localhost:5000/api/answer/deleteans/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+
+        const json = await response.json()
+
+        if (json["status"] === "deleted") {
+            // setState(true);
+            window.scrollTo(0, 0)
+            window.location.reload(true);
+        }
+    }
+
     useEffect(() => {
         fetchVotes();
     }, [])
@@ -38,10 +55,10 @@ export default function Posts({ posts }) {
                                         <p>{vote[answer._id]}</p>
                                         <span>votes</span>
                                     </div>
-                                    <div className="all-option">
+                                    {/* <div className="all-option">
                                         <p>0</p>
                                         <span>views</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
@@ -49,6 +66,10 @@ export default function Posts({ posts }) {
                                 <NavLink to={{ pathname: `/question/${answer.questionid}` }} className="GotoQues"><h4>Go to Question</h4></NavLink>
                                 <div style={{ width: "90%", }}>
                                     <p Style="font-size:25px;">{parse(answer.answer)}</p>
+                                </div>
+                                <div Style="position: absolute; right: 7%;" className='mt-5'>
+                                    <NavLink className="mt-2" to={{ pathname: `/updateans/${answer._id}` }} Style="font-size:15px;"><i Style="padding:5px; color:#0074CC" className="fa fa-edit" aria-hidden="true"></i></NavLink>
+                                    <NavLink onClick={()=>deleteAns(answer._id)}><i Style="padding:25px; color:#0074CC" className="fa fa-trash" aria-hidden="true"></i></NavLink>
                                 </div>
                                 <div className="author">
                                     <div className="author-details">

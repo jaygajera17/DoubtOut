@@ -46,7 +46,7 @@ export default function Profile() {
         }).then(data => setUsedTags(data));
     }, []);
 
-    console.log(usedTags);
+    // console.log(usedTags);
 
     useEffect(() => {
         fetchAllFilteredAnswers();

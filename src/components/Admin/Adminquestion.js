@@ -59,6 +59,11 @@ export default function Adminquestion() {
             return response.json();
         }).then(data => setUsedTags(data));
     }, []);
+    
+    useEffect(() => {
+        fetchAllFilteredQuestions();
+    }, [filters])
+
     useEffect(() => {
         fetch(`http://localhost:5000/api/question/fetchquestions`, {
             method: "POST",
@@ -98,9 +103,6 @@ export default function Adminquestion() {
         }).then(data => setQuestions(data))
     }
 
-    useEffect(() => {
-        fetchAllFilteredQuestions();
-    }, [filters])
 
 
 
@@ -120,7 +122,7 @@ export default function Adminquestion() {
     }
 
     const deleteQuestion = async (id) => {
-        const response = axios.delete(`http://localhost:5000/api/admin/deleteQuestion/${id}`, {
+        const response = await fetch(`http://localhost:5000/api/question/deleteque/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

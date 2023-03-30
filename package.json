@@ -21,7 +21,7 @@
     "jquery": "^3.6.3",
     "mongodb": "^2.2.16",
     "node-localstorage": "^2.2.1",
-    "nodemailer": "^4.6.4",
+    "nodemailer": "^6.9.1",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-dom": "^18.2.0",

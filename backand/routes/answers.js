@@ -44,6 +44,43 @@ router.post("/fetchanswer", async (req, res) => {
     }
 })
 
+router.post("/fetchanswer/:id", async (req, res) => {
+    try {
+        const answers = await Answer.find({ questionid: req.params.id });
+        res.json(answers);
+    }
+
+    catch (e) {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/userAnstoUpdate/:id", async (req, res)=>{
+    try{
+        const answer = await Answer.findOne({_id: req.params.id});
+        res.json(answer);
+    }
+    catch(e)
+    {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+router.post("/updateans/:id", async (req, res)=>{
+    try{
+        const answer = await Answer.findByIdAndUpdate(req.params.id, {$set: {answer: req.body.answer}});
+
+        res.json({status: "updated"});
+    }
+    catch(e)
+    {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
 router.post('/fetchUserAnswers', async (req, res) => {
     try {
 
@@ -240,7 +277,7 @@ router.post("/givenAllAnswersTags", async (req, res) => {
         const questions = [];
 
         for (i in answers) {
-            const question = await Question.find();
+            const question = await Question.find({ _id: answers[i].questionid });
             questions.push(question);
         }
         const tags = [];
@@ -428,6 +465,20 @@ router.post("/points", async (req, res) => {
         res.json({ "points": answers.length * 5 });
     }
     catch (e) {
+        console.log(e.message);
+        res.status(400).send("Internal Server Error");
+    }
+})
+
+
+router.post("/deleteans/:id", async(req, res)=>{
+    try{
+        await Answer.deleteOne({_id : req.params.id});
+
+        res.json({"status":"deleted"})
+    }
+    catch(e)
+    {
         console.log(e.message);
         res.status(400).send("Internal Server Error");
     }

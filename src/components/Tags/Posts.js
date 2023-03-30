@@ -91,7 +91,7 @@ export default function Posts({ posts }) {
                                                                         <span className="question-tags">frontend</span>
                                                                         <span className="question-tags">development</span>
                                                                     </div> */}
-                                <div className='mt-3'>{question.tags.split(" ").map(tag => <span className='question-tags' Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;">{tag}</span>)}</div>
+                                <div className='mt-3'>{question.tags.split(" ").map(tag => <NavLink to={{ pathname: `/questionOntags/${tag.toLowerCase()}` }} className='question-tags' Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;">{tag}</NavLink>)}</div>
                                 <div className="author">
                                     {/* <small> asked {question.date.slice(0, 10)} at {question.date.slice(12, 16)} </small>
                                                                         <div className="author-details">

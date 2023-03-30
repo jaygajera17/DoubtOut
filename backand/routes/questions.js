@@ -63,6 +63,7 @@ router.post('/fetchQueById/:id', async (req, res) => {
     try {
 
         let question = await Question.findOne({ _id: req.params.id });
+        
         // question=question[0]
 
         if (!question) {
@@ -101,6 +102,7 @@ router.post('/deleteque/:id', async(req, res)=>{
     try{
 
         let deletequestion = await Question.findByIdAndDelete(req.params.id);
+        await Answer.deleteMany({questionid : req.params.id});
         res.json({status:"deleted"});
         
     }

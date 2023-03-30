@@ -16,6 +16,7 @@ export default function Analysis() {
     const [questions, setQuestions] = useState([]);
     const [Tags, setTags] = useState([]);
     const [count, setCount] = useState([]);
+    const [queLen, setQueLen] = useState(0);
 
     useEffect(() => {
         fetch(`http://localhost:5000/api/question/fetchUserQuestions/${localStorage.getItem("username")}`, {
@@ -35,12 +36,15 @@ export default function Analysis() {
         const cnt = [];
 
         if (filters.startDate && filters.endDate) {
+            let cnt = 0;
             questions.map(question => {
                 // console.log(question.date.substring(0, 10));
-                if (question.date.substring(0, 10) >= filters.startDate && question.date.substring(0, 10) <= filters.endDate)
+                if (question.date.substring(0, 10) >= filters.startDate && question.date.substring(0, 10) <= filters.endDate) {
+                    cnt++;
                     question.tags.split(" ").map(tag => {
                         freqOfTags[tag] = 0;
                     })
+                }
             })
 
             questions.map(question => {
@@ -49,6 +53,8 @@ export default function Analysis() {
                         freqOfTags[tag] = freqOfTags[tag] + 1;
                     })
             })
+
+            setQueLen(cnt);
         }
         else {
             questions.map(question =>
@@ -62,6 +68,7 @@ export default function Analysis() {
                     freqOfTags[tag] = freqOfTags[tag] + 1;
                 })
             )
+            setQueLen(questions.length);
         }
 
         // console.log(freqOfTags);
@@ -80,6 +87,8 @@ export default function Analysis() {
     const [acceptedansweredQues, setAcceptedAnsweredQues] = useState([]);
     const [AcAnsTags, setAcAnsTags] = useState([]);
     const [AcAnscount, setAcAnsCount] = useState([]);
+    const [actAnsLen, setactAnsLen] = useState(0);
+
     useEffect(() => {
         fetch(`http://localhost:5000/api/answer/fetchUserAcceptedAnsweredQuestions/${localStorage.getItem("username")}`, {
             method: "POST",
@@ -98,12 +107,15 @@ export default function Analysis() {
         const ac_ans_cnt = [];
 
         if (filters.startDate && filters.endDate) {
+            let cnt = 0;
             acceptedansweredQues.map(ques => {
                 const tags = ques[0].tags;
-                if (ques[0].date.substring(0, 10) >= filters.startDate && ques[0].date.substring(0, 10) <= filters.endDate)
+                if (ques[0].date.substring(0, 10) >= filters.startDate && ques[0].date.substring(0, 10) <= filters.endDate) {
+                    cnt++;
                     tags.split(" ").map(tag =>
                         ac_ans_freqOfTags[tag] = 0
                     )
+                }
             })
 
             acceptedansweredQues.map(ques => {
@@ -113,6 +125,8 @@ export default function Analysis() {
                         ac_ans_freqOfTags[tag] = ac_ans_freqOfTags[tag] + 1
                     )
             })
+
+            setactAnsLen(cnt);
         }
         else {
             acceptedansweredQues.map(ques => {
@@ -128,6 +142,8 @@ export default function Analysis() {
                     ac_ans_freqOfTags[tag] = ac_ans_freqOfTags[tag] + 1
                 )
             })
+
+            setactAnsLen(acceptedansweredQues.length);
         }
 
         for (const i in ac_ans_freqOfTags) {
@@ -144,6 +160,7 @@ export default function Analysis() {
     const [answeredQues, setAnsweredQues] = useState([]);
     const [AnsTags, setAnsTags] = useState([]);
     const [Anscount, setAnsCount] = useState([]);
+    const [ansLen, setansLen] = useState(0);
     useEffect(() => {
         fetch(`http://localhost:5000/api/answer/fetchUserAnsweredQuestions/${localStorage.getItem("username")}`, {
             method: "POST",
@@ -162,12 +179,15 @@ export default function Analysis() {
         const ans_cnt = [];
 
         if (filters.startDate && filters.endDate) {
+            let cnt = 0;
             answeredQues.map(ques => {
                 const tags = ques[0].tags;
-                if (ques[0].date.substring(0, 10) >= filters.startDate && ques[0].date.substring(0, 10) <= filters.endDate)
+                if (ques[0].date.substring(0, 10) >= filters.startDate && ques[0].date.substring(0, 10) <= filters.endDate) {
+                    cnt++;
                     tags.split(" ").map(tag =>
                         ans_freqOfTags[tag] = 0
                     )
+                }
             })
 
             answeredQues.map(ques => {
@@ -177,6 +197,8 @@ export default function Analysis() {
                         ans_freqOfTags[tag] = ans_freqOfTags[tag] + 1
                     )
             })
+
+            setansLen(cnt);
         }
         else {
             answeredQues.map(ques => {
@@ -193,6 +215,7 @@ export default function Analysis() {
                 )
             })
 
+            setansLen(answeredQues.length);
         }
 
         for (const i in ans_freqOfTags) {
@@ -223,11 +246,11 @@ export default function Analysis() {
                     </div>
                     <div className="charts">
                         <div className="first_row">
-                            <Chart title={"Total " + questions.length + " questions asked by you & used tags as follows"} count={count} Tags={Tags} />
-                            <Chart title={"Total " + answeredQues.length + " answers given by you & used tags as follows"} count={Anscount} Tags={AnsTags} />
+                            <Chart title={"Total " + queLen + " questions asked by you & used tags as follows"} count={count} Tags={Tags} />
+                            <Chart title={"Total " + ansLen + " answers given by you & used tags as follows"} count={Anscount} Tags={AnsTags} />
                         </div>
                         <div className="last_chart">
-                            <Chart title={"Your total " + acceptedansweredQues.length + " answers acceted & used tags as follows"} count={AcAnscount} Tags={AcAnsTags} />
+                            <Chart title={"Your total " + actAnsLen + " answers acceted & used tags as follows"} count={AcAnscount} Tags={AcAnsTags} />
                         </div>
                     </div>
 
