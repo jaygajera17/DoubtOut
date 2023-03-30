@@ -14,23 +14,33 @@ var mydiv = {
 };
 export default function AdminUser() {
   const [users, setUsers] = useState([])
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate()
 
   const fetchUsers = async () => {
-    await fetch('http://localhost:5000/api/admin/users', {
+    const response = await fetch('http://localhost:5000/api/admin/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => setUsers(data))
-  }
+    });
+    const data = await response.json()
+    setUsers(data)
+    setFilteredUsers(data)
+  };
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    const filteredData = users.filter((user) => {
+      return user.username.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+    setFilteredUsers(filteredData);
+  };
+
 
   const deleteUser = async (id) => {
     const response = axios.delete(`http://localhost:5000/api/admin/deleteUser/${id}`, {
@@ -55,6 +65,16 @@ export default function AdminUser() {
     <div className='container' Style="background-color:#f8f9f9; height:100%; margin-top:20vh; z-index:1;">
       <AdminSidebar />
       <div Style="display:block">
+      <div class="input-group">
+      <div class="form-outline">
+        <input type="text" className='form-control' placeholder="Search From UserName" name="search" onChange={handleSearch} />
+        </div>
+        <button id="search-button" type="button" class="btn btn-primary">
+    <i class="fa fa-search"></i>
+  </button>
+  </div>
+  
+
         
         {/* {fetchUsers} */}
         {/* <button onClick={fetchUsers}>Fetch Users</button> */}
@@ -69,7 +89,7 @@ export default function AdminUser() {
         </table>
 
         <div>
-          {users.map((user) => {
+          {filteredUsers.map((user) => {
             return (
               <div>
                 <table className="table table-bordered">

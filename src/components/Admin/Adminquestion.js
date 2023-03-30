@@ -27,6 +27,8 @@ export default function Adminquestion() {
      // for pagination in questions in profile
      const [postPerPage] = useState(4);
      const [currentPage, setcurrentPage] = useState(1);
+     const [filteredQue, setFilteredQue] = useState([]);
+     const [searchQuery, setSearchQuery] = useState("");
 
      const indexOfLastPost = currentPage * postPerPage;
      const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -42,9 +44,10 @@ export default function Adminquestion() {
             },
             body: JSON.stringify({ startDate: filters.startDate, endDate: filters.endDate, tags: filters.tags })
 
-        }).then(response => {
-            return response.json();
-        }).then(data => setQuestions(data));
+        });
+        const data = await response.json();
+        setQuestions(data);
+        setFilteredQue(data);
     };
     useEffect(() => {
         fetch(`http://localhost:5000/api/question/usedtags`, {
@@ -139,6 +142,15 @@ export default function Adminquestion() {
         fetchVotes();
         fetchAllQuestions();
     }, [])
+
+    const searchHandler = (searchQuery) => {
+        setSearchQuery(searchQuery.target.value);
+        const filteredData = questions.filter((question) => {
+            return question.title.toLowerCase().includes(searchQuery.target.value.toLowerCase());
+        });
+        setFilteredQue(filteredData);
+    };
+
    
     return (
         <>
@@ -148,7 +160,7 @@ export default function Adminquestion() {
             
            
             <br></br>
-            {/* sidebar overflow occur */}
+
         {/* <div style={{ marginTop: '10px', marginLeft: '50px' }}> */}
             <div className='filters_menu'>
                     <strong Style="display:inline">Find All questions between : </strong>
@@ -162,10 +174,17 @@ export default function Adminquestion() {
                     </select>
                 </div>
                 {/* </div> */}
-            
+            <div class="input-group">
+      <div class="form-outline">
+        <input type="text" Style="display:inline" className='form-control' placeholder="Search From Que. Title" name="search" onChange={searchHandler} />
+        </div>
+        <button id="search-button" type="button" class="btn btn-primary">
+    <i class="fa fa-search"></i>
+  </button>
+  </div>
            <ul>
 
-{questions.map(question => (
+{filteredQue.map(question => (
 
     <div class="card mt-1">
 
