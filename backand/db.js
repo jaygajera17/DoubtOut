@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoURI = "mongodb+srv://darshitbhuva9330:Bhuva2002@cluster0.rzduo6z.mongodb.net/DoubtOut";
+const mongoURI = "mongodb+srv://jay_gajera:Happy108@cluster0.pv37rdy.mongodb.net/Doubtout";
 
 const connectToMongo = () =>{
     mongoose.connect(process.env.mongoURI || mongoURI, ()=>{
