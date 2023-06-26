@@ -1,3 +1,6 @@
+## Take a Look
+Link 👉 https://doubtout.netlify.app/
+
 # Features
 ### User side
 - ask the question
@@ -12,34 +15,28 @@
 - whole system analysis
 
 ## Technologies
-- MERN Stack
-- Bootstrap, Material UI
+![MIT License](https://img.shields.io/badge/-MongoDB-green)
+![GPLv3 License](https://img.shields.io/badge/-React-blue)
+![GPLv3 License](https://img.shields.io/badge/-JavaScript-yellow)
+![GPLv3 License](https://img.shields.io/badge/-Node.js-yellowgreen)
 
 
 ## How To Run ?
 **for frontend** <br>
-(1) 
 ```sh
   npm i
-```
-(2) 
-```sh
   npm start
 ```
 
+
 **for backend** <br>
-(1) 
+ 
 ```sh
  cd backend 
-```
-(2) 
-```sh
-  npm i
-```
-(3) 
-```sh
+ npm i
  nodemon ./index.js
 ```
+
 
 ## Links
 - 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗽𝗿𝗼𝗷𝗲𝗰𝘁 𝘃𝗶𝗱𝗲𝗼 𝗪𝗼𝗿𝗸𝗶𝗻𝗴 𝗗𝗲𝗺𝗼 + 𝘀𝘁𝗲𝗽 𝗯𝘆 𝘀𝘁𝗲𝗽 𝗲𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻 𝗹𝗶𝗻𝗸 ::---  [  click here  ](https://youtu.be/YsdHKjxX9v0) [![youtube][youtube-shield]][youtube-url]
